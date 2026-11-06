@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Silow — for insurance operations</title>
-<!-- rev:ins-2026-11-06a -->
+<!-- rev:ins-2026-11-06b -->
 <style>
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Regular.otf") format("opentype"); font-weight:400; font-display:swap; }
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Medium.otf") format("opentype"); font-weight:500; font-display:swap; }
@@ -321,6 +321,23 @@
   .faq.three .q{ font-size:clamp(17px,1.4vw,21px); }
   .faq.three .a{ font-size:15px; }
 
+
+  /* push-button flow */
+  .steps.five{ grid-template-columns:repeat(5,1fr); max-width:1480px; margin-top:52px; }
+  .steps.five > div{ padding:26px 22px 28px; }
+  .btnchip{ display:inline-flex; align-items:center; padding:9px 16px; border-radius:999px; background:var(--ink); color:#fff; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:13.5px; letter-spacing:.04em; white-space:nowrap; }
+  .btnchip.auto{ background:#fff; color:var(--accent); border:1px solid var(--accent); }
+  .steps.five .t{ margin-top:20px; font-size:clamp(20px,1.6vw,26px); }
+  .opts .t + .w{ margin-top:22px; }
+  /* one-month timeline on the finale */
+  .month{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:42px; max-width:1100px; width:100%; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.16); border-radius:14px; overflow:hidden; text-align:left; }
+  .month > div{ background:rgba(16,23,54,.72); padding:22px 24px 24px; }
+  .month .n{ font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#9DB2FF; }
+  .month .t{ margin-top:10px; font-size:clamp(18px,1.45vw,22px); line-height:1.35; color:#F5F5F2; }
+  @media (max-width:900px){
+    .steps.five{ grid-template-columns:1fr; }
+    .month{ grid-template-columns:1fr; }
+  }
   @media (max-width:900px){
     .flow{ grid-template-columns:1fr; gap:10px; }
     .flow .arr{ transform:rotate(90deg); height:30px; }
@@ -342,7 +359,7 @@
   <img src="./assets/logo-upd.svg" alt="Silow">
   <span class="r">silow.ai · insurance</span>
 </div>
-<div class="counter" id="counter">01 / 19</div>
+<div class="counter" id="counter">01 / 13</div>
 
 <main id="deck">
 
@@ -353,14 +370,6 @@
     <h1 class="rise in d2" style="font-size:clamp(54px,5.4vw,96px); max-width:none;">Everyone bought AI.<br>Nobody can say <em>where it helped.</em></h1>
     <p class="body rise in d3">Silow records how work actually happens — and turns it into <b>a ranked plan of what to automate</b>, then the agents that do it.<br><b>Installed and run entirely inside your infrastructure.</b></p>
     <div class="scroll-hint">↓</div>
-  </section>
-
-  <!-- 02 · recorder -->
-  <section class="tight">
-    <div class="eyebrow rise">The product</div>
-    <h2 class="rise d1">A tiny recorder.<br><em>An enormous dataset.</em></h2>
-    <p class="body rise d2">One small app per machine maps the workweek — apps, documents, waits.<br><b>Runs on macOS, Windows and Linux.</b></p>
-    <div class="frame recording rise d3"><img src="./assets/product-recording.png" alt="The Silow recorder capturing a workday"></div>
   </section>
 
   <!-- 03 · where it helps — insurance -->
@@ -380,21 +389,55 @@
     <div class="roles-foot rise d3">One recording — <b>every team</b>. Then agents that run on <b>your own data</b>.</div>
   </section>
 
-  <!-- 04 · sprint -->
+  <!-- 02 · recorder -->
+  <section class="tight">
+    <div class="eyebrow rise">The product</div>
+    <h2 class="rise d1">A tiny recorder.<br><em>An enormous dataset.</em></h2>
+    <p class="body rise d2">One small app per machine maps the workweek — apps, documents, waits.<br><b>Runs on macOS, Windows and Linux.</b></p>
+    <div class="frame recording rise d3"><img src="./assets/product-recording.png" alt="The Silow recorder capturing a workday"></div>
+  </section>
+
+  <!-- · how we work: push-button -->
   <section>
-    <div class="eyebrow rise">The sprint <b>·</b> two weeks</div>
-    <h2 class="rise d1">From real work to a ranked plan.</h2>
-    <div class="steps">
-      <div class="rise d1"><div class="n">01</div><div class="t">Silow watches the work</div><div class="b">The repeats, the waits, the steps still done by hand.</div></div>
-      <div class="rise d1"><div class="n">02</div><div class="t">You get a ranked plan</div><div class="b">What to automate first, and the hours it gives back.</div></div>
-      <div class="rise d2"><div class="n">03</div><div class="t">We build the agents</div><div class="b">From observed procedures — with your sign-off.</div></div>
-      <div class="rise d3"><div class="n">04</div><div class="t">We measure the effect</div><div class="b">Adoption and hours — by trace, not by survey.</div></div>
+    <div class="eyebrow rise">How we work</div>
+    <h2 class="rise d1">Every step is <em>a button.</em></h2>
+    <p class="body rise d2">No interviews, no specs, no integrations to wire. Your people keep working — the pipeline does the rest.</p>
+    <div class="steps five">
+      <div class="rise d1"><span class="btnchip">▶&nbsp; Install</span><div class="t">Your IT runs one command</div><div class="b">The platform comes up on your servers. An acceptance script confirms every stage.</div></div>
+      <div class="rise d1"><span class="btnchip">●&nbsp; Start recording</span><div class="t">People click start</div><div class="b">One-minute install per machine. Nothing else about their day changes.</div></div>
+      <div class="rise d2"><span class="btnchip auto">↻&nbsp; Automatic</span><div class="t">Processing runs every day</div><div class="b">Redaction, screen understanding, task building — inside your perimeter.</div></div>
+      <div class="rise d2"><span class="btnchip auto">✉&nbsp; Every week</span><div class="t">Reports arrive</div><div class="b">Personal, team and company reports — and the ranked plan of what to automate.</div></div>
+      <div class="rise d3"><span class="btnchip">✓&nbsp; Approve &amp; launch</span><div class="t">Agents go live on your sign-off</div><div class="b">We build each agent from the observed procedure. Your owner approves — it runs.</div></div>
+    </div>
+  </section>
+
+  <!-- 12 · Dubai -->
+  <section>
+    <div class="split">
+      <div>
+        <div class="eyebrow rise">Proof <b>·</b> Law firm <b>·</b> Dubai</div>
+        <h2 class="rise d1">80% fewer <em>manual hours.</em></h2>
+        <p class="body rise d2">One week of recording showed the day buried in assembly — chats, folders, intake, billing packets. Over the next two weeks we built the onboarding and KYC agent. <b>Lawyers keep every decision.</b></p>
+        <div class="texture rise d3" style="text-align:left;">Founder-reported client result <b>·</b> not a guarantee</div>
+      </div>
+      <div class="frame illus rise d2"><img src="./assets/illus-dubai.svg" alt="Law firm transformation"></div>
+    </div>
+  </section>
+
+  <!-- · three questions bridge -->
+  <section>
+    <div class="eyebrow rise">Before anything runs</div>
+    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">Three questions<br><em>every carrier asks.</em></h2>
+    <div class="opts rise d2">
+      <div><div class="n">01</div><div class="t">Can our team install it ourselves?</div><div class="w">Inside your infrastructure, documented and tested.</div></div>
+      <div><div class="n">02</div><div class="t">What happens to PII and PHI?</div><div class="w">Masked before anything is analysed or stored.</div></div>
+      <div><div class="n">03</div><div class="t">Does anything leave our perimeter?</div><div class="w">Not to Silow — ever. You choose where models run.</div></div>
     </div>
   </section>
 
   <!-- 05 · deployment inside the perimeter -->
   <section>
-    <div class="eyebrow rise">Deployment</div>
+    <div class="eyebrow rise">Question 01 <b>·</b> Install</div>
     <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">It runs inside your walls.<br><em>Your team installs it.</em></h2>
     <div class="perimeter rise d2">
       <span class="tag">Your perimeter</span>
@@ -411,7 +454,7 @@
 
   <!-- 06 · what the infra team gets -->
   <section>
-    <div class="eyebrow rise">For your infrastructure team</div>
+    <div class="eyebrow rise">Question 01 <b>·</b> For your infrastructure team</div>
     <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">Self-hosted.<br><em>Documented. Tested.</em></h2>
     <div class="safety rise d2">
       <div class="grid">
@@ -428,7 +471,7 @@
 
   <!-- 07 · privacy pipeline -->
   <section class="tight">
-    <div class="eyebrow rise">Privacy first</div>
+    <div class="eyebrow rise">Question 02 <b>·</b> PII &amp; PHI</div>
     <h2 class="rise d1">A screenshot goes in.<br><em>An anonymized pattern comes out.</em></h2>
     <p class="body rise d2">Silow is not productivity monitoring. No human watches a video of the workday. An automated pipeline turns screenshots into redacted, structured workflow patterns.</p>
     <div class="steps">
@@ -443,7 +486,7 @@
   <section>
     <div class="sec-split">
       <div>
-        <div class="eyebrow rise">Your data. Your rules.</div>
+        <div class="eyebrow rise">Question 02 <b>·</b> Your data, your rules</div>
         <h2 class="rise d1">Encrypted.<br><em>PII &amp; PHI stripped.</em></h2>
         <p class="body rise d2">What remains is the shape of the work — not the contents of a claim file or a medical record.</p>
         <div class="safety rise d2">
@@ -462,20 +505,9 @@
     </div>
   </section>
 
-  <!-- 09 · HIPAA proof -->
-  <section>
-    <div class="eyebrow rise">Case 01 <b>·</b> US insurance-claims operation <b>·</b> HIPAA</div>
-    <h2 class="rise d1">HIPAA is solved.<br><em>In production.</em></h2>
-    <p class="body rise d2">Medical documents and claim decisions, every day. Silow runs <b>100% on-prem</b>, on their model provider of choice — and is mapping the claims workflow to automate it end to end.</p>
-    <div class="stats rise d2" style="margin-top:46px;">
-      <div class="stat"><div class="stat-num" style="font-size:clamp(90px,9vw,160px);">200</div><div class="stat-label">people in the rollout — it <b>started with 10</b>.</div></div>
-      <div class="stat"><div class="stat-num" style="font-size:clamp(90px,9vw,160px);">100<small>%</small></div><div class="stat-label"><b>on-prem</b>, inside their own infrastructure.</div></div>
-    </div>
-  </section>
-
   <!-- 10 · three ways to run the models -->
   <section>
-    <div class="eyebrow rise">Where the models run</div>
+    <div class="eyebrow rise">Question 03 <b>·</b> Your perimeter</div>
     <h2 class="rise d1" style="font-size:clamp(40px,4.4vw,72px);">Three ways to run processing.<br><em>You choose.</em></h2>
     <div class="opts rise d2">
       <div>
@@ -502,117 +534,32 @@
     </div>
   </section>
 
-  <!-- 11 · proof divider -->
+  <!-- 09 · HIPAA proof -->
   <section>
-    <div class="eyebrow rise">More proof</div>
-    <h2 class="rise d1">Other teams already <em>know their number.</em></h2>
-    <p class="body rise d2">Anonymized, as agreed with every client. Measured, as always.</p>
-  </section>
-
-  <!-- 12 · Dubai -->
-  <section>
-    <div class="split">
-      <div>
-        <div class="eyebrow rise">Case 02 <b>·</b> Law firm <b>·</b> Dubai</div>
-        <h2 class="rise d1">80% fewer <em>manual hours.</em></h2>
-        <p class="body rise d2">One week of recording showed the day buried in assembly — chats, folders, intake, billing packets. Over the next two weeks we built the onboarding and KYC agent. <b>Lawyers keep every decision.</b></p>
-        <div class="texture rise d3" style="text-align:left;">Founder-reported client result <b>·</b> not a guarantee</div>
-      </div>
-      <div class="frame illus rise d2"><img src="./assets/illus-dubai.svg" alt="Law firm transformation"></div>
+    <div class="eyebrow rise">All three, already answered <b>·</b> US insurance-claims operation</div>
+    <h2 class="rise d1">HIPAA is solved.<br><em>In production.</em></h2>
+    <p class="body rise d2">Medical documents and claim decisions, every day. Silow runs <b>100% on-prem</b>, on their model provider of choice — and is mapping the claims workflow to automate it end to end.</p>
+    <div class="stats rise d2" style="margin-top:46px;">
+      <div class="stat"><div class="stat-num" style="font-size:clamp(90px,9vw,160px);">200</div><div class="stat-label">people in the rollout — it <b>started with 10</b>.</div></div>
+      <div class="stat"><div class="stat-num" style="font-size:clamp(90px,9vw,160px);">100<small>%</small></div><div class="stat-label"><b>on-prem</b>, inside their own infrastructure.</div></div>
     </div>
   </section>
 
-  <!-- 13 · MGL numbers -->
-  <section>
-    <div class="eyebrow rise">Case 03 <b>·</b> Legal company <b>·</b> Licensing <b>·</b> what the recording showed</div>
-    <div class="stats">
-      <div class="stat rise d1"><div class="stat-num">6.4<small>×</small></div><div class="stat-label">longer waits when work needs another person — <b>7.0 vs 1.1 days</b> median.</div></div>
-      <div class="stat rise d2"><div class="stat-num">14.9<small>%</small></div><div class="stat-label">real AI adoption, by trace. Their telemetry said <b>11.7%</b> — and missed one person by <b>7×</b>.</div></div>
-      <div class="stat rise d3"><div class="stat-num">84<small>%</small></div><div class="stat-label">of marketing&rsquo;s AI time came from <b>one person</b>. Team range: 44% → 4%.</div></div>
-    </div>
-  </section>
-
-  <!-- 14 · MGL outcome -->
-  <section>
-    <div class="eyebrow rise">Case 03 <b>·</b> What changed</div>
-    <h2 class="rise d1">Only the human work<br><em>stays human.</em></h2>
-    <p class="body rise d2">Useful adoption grew from <b>~5% of the company to 85%</b> — agents per team, shared memory, shared rules.<br>Up to <b>27 hours back</b>, per person per week.</p>
-    <div class="ceo-quote rise d3">&laquo;The efficiency layer is a solved problem for us — give us the strategic one.&raquo; <b>&mdash;&nbsp;CEO</b></div>
-  </section>
-
-  <!-- 15 · Yango quote -->
-  <section>
-    <div class="eyebrow rise">Case 04 <b>·</b> Mobility &amp; delivery <b>·</b> 30+ countries</div>
-    <p class="quote rise d1">&ldquo;In a couple of days Silow showed me where my team&rsquo;s week actually goes… 5–8 hours a week to start.&rdquo;</p>
-    <div class="quote-by rise d2">Ops lead <b>·</b> mobility &amp; delivery</div>
-  </section>
-
-  <!-- 16 · pilot -->
-  <section>
-    <div class="eyebrow rise">How we start</div>
-    <h2 class="rise d1">A focus group of 20–50.<br><em>Clear boundaries.</em></h2>
-    <p class="body rise d2">Not a company-wide install. One department, selected roles, two weeks to the first ranked plan — then you decide what to automate and where to expand.</p>
-    <div class="safety rise d2">
-      <div class="grid">
-        <div class="item">Selected roles only — e.g. strategic operations first.</div>
-        <div class="item">Company-managed devices or your VDI — no personal laptops.</div>
-        <div class="item">Remote-desktop workflows tested before rollout.</div>
-        <div class="item">Weekly review: useful, wrong, or needs calibration.</div>
-        <div class="item">Personal weekly reports for every participant.</div>
-        <div class="item">No scorecards, no rankings, no reporting on individuals.</div>
-      </div>
-      <div class="foot">Week 1 — <b>first results</b> · Week 2 — <b>ranked plan</b> · then agents</div>
-    </div>
-  </section>
-
-  <!-- 17 · pricing -->
-  <section>
-    <div class="eyebrow rise">Pricing</div>
-    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">One license.<br><em>Processing at cost.</em></h2>
-    <div class="price2">
-      <div class="card rise d2">
-        <div class="pk">Silow license</div>
-        <div class="pn">$49<small> / user / month</small></div>
-        <div class="pd">Recorder, platform, redaction, personal and team reports, the ranked plan, chat with your data over MCP. <b>Self-hosted in your infrastructure.</b></div>
-      </div>
-      <div class="card rise d3">
-        <div class="pk">Processing · paid to your provider, no markup</div>
-        <table class="rates">
-          <tr><td>Redaction <span class="s">PII &amp; PHI masking</span></td><td>$0.20 / recorded hour</td></tr>
-          <tr><td>Screen understanding <span class="s">captures → work steps</span></td><td>$0.20 / recorded hour</td></tr>
-          <tr><td>Task building <span class="s">steps → tasks and processes</span></td><td>$0.40 / user / day</td></tr>
-          <tr><td>Reports <span class="s">personal + team, depends on pipeline</span></td><td>≈ $1 / user / week</td></tr>
-          <tr class="total"><td>Upper bound, 8 recorded hours × 21 days <span class="s">via an API provider · lower on your own GPUs</span></td><td>≈ $80 / user / mo</td></tr>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- 18 · FAQ -->
-  <section class="tight">
-    <div class="eyebrow rise">FAQ</div>
-    <h2 class="rise d1" style="font-size:clamp(40px,4.4vw,72px);">Questions, <em>answered.</em></h2>
-    <div class="faq three rise d2">
-      <div><div class="q">Can our team install it without you?</div><div class="a">Yes. One container stack, an install README and an acceptance script that verifies every stage. We join the install call if you want us there.</div></div>
-      <div><div class="q">Does any screenshot or video leave our perimeter?</div><div class="a">Not to Silow — ever. On your own or cloud GPUs, nothing leaves at all. With an inference provider, data is processed under zero data retention.</div></div>
-      <div><div class="q">How is PHI handled? Workers&rsquo; comp files?</div><div class="a">Redaction runs first and masks PII and PHI before anything is analysed or stored. We already run this on-prem in a HIPAA claims environment.</div></div>
-      <div><div class="q">What hardware do we need?</div><div class="a">A Linux server with Docker for the platform. GPUs only if you run the models in-house — we size them with your infrastructure team.</div></div>
-      <div><div class="q">Which models?</div><div class="a">Open-source models on your GPUs, or frontier models from OpenAI, Anthropic or Gemini under ZDR. You choose per stage.</div></div>
-      <div><div class="q">Who sees the data?</div><div class="a">Only people you authorise, through your SSO. Reports show workflows, not individual scorecards. Every access is logged.</div></div>
-      <div><div class="q">Is it productivity monitoring?</div><div class="a">No. No keystrokes, no message content, no rankings, no human playback of anyone&rsquo;s day.</div></div>
-      <div><div class="q">Remote desktops and VDI?</div><div class="a">Supported. If the work happens in a remote session, we test that exact setup before rollout.</div></div>
-      <div><div class="q">What does it run on?</div><div class="a">macOS, Windows and Linux. One-minute install, 1–2% CPU. No connectors, no workflow changes.</div></div>
-    </div>
-  </section>
-
-  <!-- 19 · finale -->
+  <!-- · finale: one month -->
   <section class="scene-slide">
     <div class="scene" id="us-scene-b" aria-hidden="true"></div>
     <div class="scene-shade"></div>
     <div class="content">
-      <h2 class="rise in">Let&rsquo;s map your first team.</h2>
-      <a class="btn rise in d1" href="https://cal.com/silow-ai/silow-demo">Book a 20-minute call →</a>
-      <div class="contacts rise in d2"><a href="mailto:nikita@silow.ai">nikita@silow.ai</a> · <a href="https://silow.ai">silow.ai</a></div>
+      <div class="eyebrow rise in">Next step</div>
+      <h2 class="rise in" style="font-size:clamp(52px,5.6vw,96px);">Start with one month.</h2>
+      <p class="body rise in d1">You choose the team. You choose how many people.</p>
+      <div class="month rise in d2">
+        <div><div class="n">Week 1</div><div class="t">Installed, recording, first personal reports</div></div>
+        <div><div class="n">Week 2</div><div class="t">The team map and the ranked plan</div></div>
+        <div><div class="n">Weeks 3–4</div><div class="t">First agents built — live on your sign-off</div></div>
+      </div>
+      <a class="btn rise in d3" href="https://cal.com/silow-ai/silow-demo">Book a 20-minute call →</a>
+      <div class="contacts rise in d3"><a href="mailto:nikita@silow.ai">nikita@silow.ai</a> · <a href="https://silow.ai">silow.ai</a></div>
     </div>
   </section>
 
