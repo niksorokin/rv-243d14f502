@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Silow — for insurance operations</title>
-<!-- rev:ins-2026-11-06d -->
+<!-- rev:ins-2026-11-06e -->
 <style>
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Regular.otf") format("opentype"); font-weight:400; font-display:swap; }
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Medium.otf") format("opentype"); font-weight:500; font-display:swap; }
@@ -323,6 +323,46 @@
 
 
 
+
+  /* interactive platform slide */
+  section.platform-slide{ padding:9vh 48px 7.5vh; justify-content:flex-start; }
+  .pf-head{ text-align:center; }
+  .pf-head .eyebrow{ margin-bottom:16px; }
+  .pf-head h2{ font-size:clamp(34px,3.4vw,56px); max-width:none; }
+  .app{ margin-top:2.6vh; width:min(1460px,100%); flex:1 1 auto; min-height:0; display:flex; flex-direction:column; border:1px solid var(--line-2); border-radius:16px; overflow:hidden; background:#fff; box-shadow:0 1px 2px rgba(14,14,12,.05), 0 40px 90px -40px rgba(14,14,12,.35); text-align:left; }
+  .app-bar{ height:44px; flex:none; display:flex; align-items:center; gap:16px; padding:0 16px; background:#F6F6F4; border-bottom:1px solid var(--line); }
+  .app-bar .dots{ display:flex; gap:7px; }
+  .app-bar .dots i{ width:11px; height:11px; border-radius:50%; background:#DADAD7; display:block; }
+  .app-title{ font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:13px; letter-spacing:.08em; color:var(--mute); }
+  .app-title b{ color:var(--accent); font-weight:400; }
+  .app-badge{ margin-left:auto; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); border:1px solid var(--line-2); border-radius:999px; padding:5px 11px; }
+  .app-body{ flex:1 1 auto; min-height:0; display:grid; grid-template-columns:260px 1fr; }
+  .app-side{ border-right:1px solid var(--line); padding:20px 14px; display:flex; flex-direction:column; gap:6px; background:#FBFBFA; overflow:auto; }
+  .side-k{ font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); padding:0 10px 6px; }
+  .side-i{ all:unset; cursor:pointer; display:flex; gap:11px; align-items:flex-start; padding:11px 10px; border-radius:10px; transition:background .2s var(--ease); }
+  .side-i:hover{ background:#F1F1EF; }
+  .side-i.on{ background:#fff; box-shadow:0 0 0 1px var(--line-2), 0 6px 16px -10px rgba(14,14,12,.25); }
+  .side-i .ic{ width:24px; height:24px; flex:none; border-radius:7px; display:grid; place-items:center; font-size:13px; background:#EEF1FF; color:var(--accent); }
+  .side-i b{ display:block; font-size:14.5px; font-weight:500; color:var(--ink); letter-spacing:-.005em; }
+  .side-i small{ display:block; margin-top:3px; font-size:12.5px; color:var(--mute); }
+  .side-l{ list-style:none; margin:0; padding:0 10px; display:flex; flex-direction:column; gap:9px; }
+  .side-l li{ font-size:13.5px; color:var(--ink-2); display:flex; gap:9px; align-items:baseline; }
+  .side-l li::before{ content:""; width:5px; height:5px; border-radius:50%; background:var(--accent); flex:none; transform:translateY(-2px); }
+  .side-foot{ margin-top:auto; padding:12px 10px 2px; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); }
+  .app-main{ position:relative; min-height:0; background:#fff; }
+  .app-main iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; display:block; background:#fff; }
+  .app-hint{ position:absolute; right:18px; bottom:16px; pointer-events:none; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#fff; background:rgba(14,14,12,.78); border-radius:999px; padding:8px 14px; transition:opacity .5s; }
+  .app-hint.gone{ opacity:0; }
+  @media (max-width:900px){
+    section.platform-slide{ padding:9vh 14px 4vh; }
+    .app{ height:78vh; flex:none; }
+    .app-body{ grid-template-columns:1fr; grid-template-rows:auto 1fr; }
+    .app-side{ flex-direction:row; overflow-x:auto; padding:10px; border-right:0; border-bottom:1px solid var(--line); }
+    .side-k, .side-l, .side-foot{ display:none; }
+    .side-i{ flex:none; }
+    .side-i small{ display:none; }
+    .app-badge{ display:none; }
+  }
   /* example-report visuals */
   .exfig{ margin:0; }
   .exfig .frame img{ display:block; width:100%; height:auto; }
@@ -369,7 +409,7 @@
   <img src="./assets/logo-upd.svg" alt="Silow">
   <span class="r">silow.ai · insurance</span>
 </div>
-<div class="counter" id="counter">01 / 17</div>
+<div class="counter" id="counter">01 / 14</div>
 
 <main id="deck">
 
@@ -407,47 +447,38 @@
     <div class="frame recording rise d3"><img src="./assets/product-recording.png" alt="The Silow recorder capturing a workday"></div>
   </section>
 
-  <!-- · we track everything -->
-  <section class="tight">
-    <div class="eyebrow rise">What Silow sees</div>
-    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">Every app. Every task.<br><em>Every minute.</em></h2>
-    <p class="body rise d2">Not a survey, not interviews — the actual work, tracked across every tool people use.</p>
-    <figure class="exfig rise d3"><div class="frame"><img src="./assets/ex-t-time.jpg" alt="Team report: where the team spends time, by tool"></div><div class="excap">Example report <b>·</b> fictional sample company</div></figure>
-  </section>
-
-  <!-- · personal report -->
-  <section>
-    <div class="split ex">
-      <div>
-        <div class="eyebrow rise">Every person</div>
-        <h2 class="rise d1">A map of <em>their own week.</em></h2>
-        <p class="body rise d2">Real minutes per task, per app, per handoff — and where AI can take part of it. <b>Every participant gets their own report.</b></p>
-      </div>
-      <figure class="exfig rise d2"><div class="frame"><img src="./assets/ex-p-hero.jpg" alt="Personal report: the map of two working days"></div><div class="excap">Example report <b>·</b> fictional sample company</div></figure>
+  <!-- · the platform, live (interactive) -->
+  <section class="platform-slide">
+    <div class="pf-head">
+      <div class="eyebrow rise">The platform <b>·</b> scroll it</div>
+      <h2 class="rise d1">Every app. Every task. <em>Every minute.</em></h2>
     </div>
-  </section>
-
-  <!-- · team report -->
-  <section>
-    <div class="split ex">
-      <div>
-        <div class="eyebrow rise">Every team</div>
-        <h2 class="rise d1">One map <em>for the whole team.</em></h2>
-        <p class="body rise d2">Who works on what, where the same work is done twice, and where it waits between people.</p>
+    <div class="app rise d2">
+      <div class="app-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="app-title">Silow <b>·</b> Sample company</span>
+        <span class="app-badge">Example data · fictional</span>
       </div>
-      <figure class="exfig rise d2"><div class="frame"><img src="./assets/ex-t-profiles.jpg" alt="Team report: working profiles side by side"></div><div class="excap">Example report <b>·</b> fictional sample company</div></figure>
-    </div>
-  </section>
-
-  <!-- · ranked plan -->
-  <section>
-    <div class="split ex">
-      <div>
-        <div class="eyebrow rise">Then</div>
-        <h2 class="rise d1">A ranked plan of <em>what to automate first.</em></h2>
-        <p class="body rise d2">Every idea tied to a real workflow, sized in hours, sorted by impact and effort. <b>Then we build the agents — live on your sign-off.</b></p>
+      <div class="app-body">
+        <aside class="app-side">
+          <div class="side-k">Reports</div>
+          <button class="side-i on" data-src="platform/team/"><span class="ic">▦</span><span><b>Team week</b><small>6 people · time, overlap, plan</small></span></button>
+          <button class="side-i" data-src="platform/daniel/"><span class="ic">◐</span><span><b>Daniel · Ops &amp; Product</b><small>Personal report</small></span></button>
+          <button class="side-i" data-src="platform/omar/"><span class="ic">◐</span><span><b>Omar · Regional Ops</b><small>Personal report</small></span></button>
+          <div class="side-k" style="margin-top:22px;">Inside every report</div>
+          <ul class="side-l">
+            <li>Where time goes, by app</li>
+            <li>Tasks, handoffs, waits</li>
+            <li>What AI can take</li>
+            <li>Ranked plan to automate</li>
+          </ul>
+          <div class="side-foot">Runs in your infrastructure</div>
+        </aside>
+        <div class="app-main">
+          <iframe id="pf-frame" title="Silow example report" loading="lazy" data-src="platform/team/"></iframe>
+          <div class="app-hint">Scroll inside ↓</div>
+        </div>
       </div>
-      <figure class="exfig rise d2"><div class="frame"><img src="./assets/ex-t-priority.jpg" alt="Rollout priority: impact versus effort"></div><div class="excap">Example report <b>·</b> fictional sample company</div></figure>
     </div>
   </section>
 
@@ -667,6 +698,21 @@
   });
 </script>
 
+
+<script>
+  (function(){
+    const fr=document.getElementById('pf-frame'); if(!fr) return;
+    const hint=document.querySelector('.app-hint');
+    const load=src=>{ fr.src=src; };
+    // load the first report when the slide comes near
+    const sec=fr.closest('section');
+    new IntersectionObserver((es,o)=>{ if(es[0].isIntersecting){ load(fr.dataset.src); o.disconnect(); } },{root:document.getElementById('deck'),rootMargin:'100% 0px'}).observe(sec);
+    document.querySelectorAll('.side-i').forEach(b=>b.addEventListener('click',()=>{
+      document.querySelectorAll('.side-i').forEach(x=>x.classList.toggle('on',x===b)); load(b.dataset.src);
+    }));
+    fr.addEventListener('load',()=>{ try{ fr.contentWindow.addEventListener('scroll',()=>hint&&hint.classList.add('gone'),{once:true,passive:true}); }catch(e){} });
+  })();
+</script>
 <!-- Unicorn Studio scenes (same animation as the main site) -->
 <script>
   (function () {
