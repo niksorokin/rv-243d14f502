@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Silow · Harbor Mutual (sample)</title>
+<link rel="icon" href="./silow-mark.svg" type="image/svg+xml">
+<style>
+@font-face{ font-family:"Inter"; src:url("./inter.woff2") format("woff2"); font-weight:100 900; font-display:swap; }
+:root{
+  --font:"Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --backdrop: radial-gradient(1100px 520px at 78% -8%, #e7eeff 0%, rgba(231,238,255,0) 60%),
+    radial-gradient(900px 600px at -10% 110%, #c5d3f6 0%, rgba(197,211,246,0) 60%),
+    linear-gradient(155deg, #b4c7f1 0%, #95afe9 48%, #a8bdee 100%);
+  --win:#eeeff4; --win-2:#ebecf2;
+  --sheet:#fefefd; --sheet-2:#f4f4f6; --sheet-3:#ececf0;
+  --line:rgba(22,24,44,.085); --line-2:rgba(22,24,44,.13); --line-3:rgba(22,24,44,.05);
+  --t1:#1b1c22; --t2:#4a4b56; --t3:#74757f; --t4:#a7a8b2;
+  --hover:rgba(22,24,44,.045); --sel:rgba(22,24,44,.075);
+  --accent:#3a5bcc; --accent-soft:#e9eefc; --accent-ink:#2b45a3;
+  --green:#2f9461; --green-soft:#e3f3ea; --amber:#c4820c; --amber-soft:#fbf3df; --amber-ink:#8a5a06; --amber-line:rgba(184,122,12,.22);
+  --red:#d2453d;
+  --solid:#17171c;
+  --shadow-sheet:0 0 0 1px rgba(22,24,44,.05), 0 1px 2px rgba(22,24,44,.04), 0 6px 18px rgba(22,24,44,.035);
+  --shadow-card:0 0 0 1px rgba(22,24,44,.075), 0 1px 3px rgba(22,24,44,.05);
+  --soft-card:0 0 0 1px rgba(22,24,44,.06), 0 1px 2px rgba(22,24,44,.03), 0 8px 24px -12px rgba(22,24,44,.14);
+  --shadow-float:0 0 0 1px rgba(22,24,44,.06), 0 24px 48px -12px rgba(22,24,44,.22), 0 4px 12px rgba(22,24,44,.06);
+  --shadow-win:0 30px 80px rgba(20,35,90,.28), 0 0 0 1px rgba(255,255,255,.35);
+  --glass:rgba(254,254,253,.86);
+  --tile:rgba(255,255,255,.62);
+  --calm:linear(0,.006,.025 2.8%,.101 6.1%,.539 18.9%,.721 25.3%,.849 31.5%,.937 38.1%,.968 41.8%,.991 45.7%,1.006 50.1%,1.015 55%,1.017 63.9%,1.001 85.9%,1);
+  --out:cubic-bezier(.2,.8,.2,1);
+}
+*{ box-sizing:border-box; }
+html,body{ margin:0; height:100%; }
+body{ font-family:var(--font); font-size:13.5px; color:var(--t1); background:var(--backdrop); -webkit-font-smoothing:antialiased; font-feature-settings:"cv11","ss03"; overflow:hidden; }
+button{ font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; }
+.num{ font-variant-numeric:tabular-nums; }
+
+.stage{ height:100dvh; padding:14px 16px 16px; display:flex; flex-direction:column; }
+body.embed .stage{ padding:10px; }
+.win{ flex:1; min-height:0; display:flex; flex-direction:column; border-radius:14px; overflow:hidden; box-shadow:var(--shadow-win); background:linear-gradient(180deg,var(--win) 0%,var(--win-2) 100%); }
+.topbar{ height:44px; flex:none; display:flex; align-items:center; padding:0 12px 0 16px; gap:10px; }
+.lights{ display:flex; gap:8px; margin-right:6px; }
+.lights i{ width:12px; height:12px; border-radius:50%; background:#ff5f57; box-shadow:inset 0 0 0 .5px rgba(0,0,0,.12); }
+.lights i:nth-child(2){ background:#febc2e; } .lights i:nth-child(3){ background:#28c840; }
+.tb-mid{ flex:1; display:flex; justify-content:center; }
+.addr{ height:28px; min-width:320px; border-radius:8px; background:rgba(255,255,255,.55); display:flex; align-items:center; justify-content:center; gap:7px; font-size:12.5px; color:var(--t3); padding:0 14px; }
+.addr svg{ color:var(--green); }
+.tb-r{ display:flex; gap:6px; align-items:center; }
+.chip-s{ height:24px; border-radius:999px; padding:0 10px; display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--t2); background:rgba(255,255,255,.55); }
+.chip-s i{ width:6px; height:6px; border-radius:50%; background:var(--green); }
+.wbody{ flex:1; min-height:0; display:flex; padding:0 8px 8px 0; }
+
+/* sidebar */
+.side{ width:248px; flex:none; display:flex; flex-direction:column; padding:4px 8px 8px 10px; min-height:0; }
+.brand{ display:flex; align-items:center; gap:9px; height:40px; padding:0 6px; }
+.brand img{ width:26px; height:26px; border-radius:7px; background:#fff; box-shadow:var(--shadow-card); padding:3px; }
+.brand b{ font-size:15px; font-weight:600; letter-spacing:-.01em; }
+.brand small{ margin-left:auto; font-size:11.5px; color:var(--t3); }
+.find{ margin:8px 0 10px; height:34px; border-radius:10px; background:rgba(255,255,255,.5); box-shadow:inset 0 0 0 1px var(--line-3); display:flex; align-items:center; gap:8px; padding:0 10px; color:var(--t3); font-size:13px; }
+.find kbd{ margin-left:auto; }
+kbd{ font:500 10.5px/1 var(--font); padding:3px 5px; border-radius:4px; background:rgba(255,255,255,.6); color:var(--t3); }
+.side-scroll{ flex:1; min-height:0; overflow:auto; scrollbar-width:none; }
+.nav{ height:31px; display:flex; align-items:center; gap:10px; padding:0 9px; border-radius:8px; font-size:13.5px; color:var(--t1); width:100%; text-align:left; transition:background .08s; }
+.nav svg{ color:var(--t2); flex:none; }
+.nav:hover{ background:var(--hover); }
+.nav.on{ background:rgba(255,255,255,.82); box-shadow:0 0 0 .5px rgba(20,20,40,.07), 0 1px 2px rgba(20,20,40,.09); font-weight:500; }
+.nav .cnt{ margin-left:auto; font-size:12px; color:var(--t3); }
+.nav .dot{ margin-left:auto; width:7px; height:7px; border-radius:50%; background:var(--amber); }
+.sh{ font-size:12px; font-weight:600; color:var(--t3); padding:16px 9px 6px; display:flex; align-items:center; }
+.sh span{ margin-left:auto; font-weight:500; color:var(--t4); }
+.sw{ width:10px; height:10px; border-radius:3px; flex:none; }
+.side-foot{ flex:none; display:flex; align-items:center; gap:9px; padding:10px 6px 2px; border-top:1px solid var(--line-3); }
+.av{ width:26px; height:26px; border-radius:50%; display:grid; place-items:center; font-size:10.5px; font-weight:600; flex:none; }
+.side-foot .who{ font-size:13px; } .side-foot .who small{ display:block; font-size:11.5px; color:var(--t3); }
+
+/* sheet */
+.sheet{ flex:1; min-width:0; min-height:0; background:var(--sheet); border-radius:10px; box-shadow:var(--shadow-sheet); display:flex; flex-direction:column; position:relative; overflow:hidden; }
+.shead{ height:52px; flex:none; display:flex; align-items:center; gap:8px; padding:0 14px 0 20px; border-bottom:1px solid var(--line-3); }
+.crumb{ display:flex; align-items:center; gap:7px; font-size:13px; color:var(--t3); }
+.crumb b{ color:var(--t1); font-weight:600; }
+.shead .sp{ flex:1; }
+.btn{ height:30px; border-radius:8px; padding:0 12px; display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:500; box-shadow:0 0 0 1px var(--line-2); background:var(--sheet); transition:background .1s; white-space:nowrap; }
+.btn:hover{ background:var(--sheet-2); }
+.btn.solid{ background:var(--solid); color:#fff; box-shadow:none; }
+.btn.solid:hover{ background:#2a2a31; }
+.btn.ghost{ box-shadow:none; color:var(--t2); }
+.btn.ghost:hover{ background:var(--hover); }
+.btn:active{ transform:scale(.97); }
+.seg{ display:inline-flex; background:var(--sheet-2); border-radius:9px; padding:2px; gap:2px; }
+.seg button{ height:26px; padding:0 11px; border-radius:7px; font-size:12.5px; color:var(--t2); }
+.seg button.on{ background:var(--sheet); color:var(--t1); font-weight:500; box-shadow:var(--shadow-card); }
+.sbody{ flex:1; min-height:0; overflow:auto; scroll-behavior:smooth; }
+.page{ max-width:1080px; margin:0 auto; padding:26px 40px 64px; }
+.view{ display:none; animation:vin .32s var(--calm); }
+.view.on{ display:block; }
+@keyframes vin{ from{ opacity:0; transform:translateY(6px); } }
+
+h1{ font-size:28px; line-height:34px; font-weight:650; letter-spacing:-.022em; margin:0; }
+.sub{ margin-top:6px; color:var(--t3); font-size:14px; line-height:21px; max-width:720px; }
+h3{ font-size:15px; font-weight:600; letter-spacing:-.01em; margin:0; }
+.sec{ margin-top:30px; }
+.sec-h{ display:flex; align-items:baseline; gap:10px; margin-bottom:12px; }
+.sec-h small{ color:var(--t3); font-size:12.5px; }
+.sec-h .r{ margin-left:auto; }
+
+.stats{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; margin-top:22px; }
+.stat{ padding:14px 16px; border-radius:14px; background:var(--sheet-2); }
+.stat b{ display:block; font-size:24px; font-weight:600; letter-spacing:-.02em; line-height:30px; }
+.stat small{ font-size:12.5px; color:var(--t3); }
+.stat .d{ font-size:11.5px; color:var(--green); margin-left:4px; font-weight:500; }
+
+.card{ border-radius:16px; background:var(--sheet); box-shadow:var(--soft-card); padding:18px 20px; }
+.grid2{ display:grid; grid-template-columns:1.25fr 1fr; gap:14px; }
+.grid3{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.grid4{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+
+/* bars */
+.bars{ display:flex; flex-direction:column; gap:11px; }
+.bar{ display:grid; grid-template-columns:170px 1fr 62px; gap:12px; align-items:center; font-size:13px; }
+.bar .n{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.bar .n small{ display:block; font-size:11.5px; color:var(--t3); }
+.track{ height:10px; border-radius:6px; background:var(--sheet-2); overflow:hidden; display:flex; }
+.track i{ display:block; height:100%; background:#c9cfe0; }
+.track i.ai{ background:var(--accent); }
+.bar .v{ text-align:right; color:var(--t2); font-variant-numeric:tabular-nums; }
+.legend{ display:flex; gap:14px; font-size:12px; color:var(--t3); margin-top:12px; }
+.legend i{ display:inline-block; width:9px; height:9px; border-radius:3px; margin-right:6px; vertical-align:-1px; }
+
+/* stacked category bar */
+.stack{ display:flex; height:34px; border-radius:10px; overflow:hidden; gap:2px; margin-top:4px; }
+.stack div{ display:flex; align-items:center; padding:0 10px; font-size:12px; color:#fff; white-space:nowrap; overflow:hidden; }
+.cats{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px 18px; margin-top:14px; }
+.cat{ display:flex; gap:8px; align-items:baseline; font-size:12.5px; color:var(--t2); }
+.cat i{ width:9px; height:9px; border-radius:3px; flex:none; }
+.cat b{ margin-left:auto; color:var(--t1); font-weight:500; font-variant-numeric:tabular-nums; }
+
+/* team tiles */
+.team{ padding:16px 18px; border-radius:16px; background:var(--sheet); box-shadow:var(--soft-card); text-align:left; transition:box-shadow .15s; display:block; width:100%; }
+.team:hover{ box-shadow:0 0 0 1px rgba(22,24,44,.08), 0 14px 28px -14px rgba(22,24,44,.25); }
+.team .tt{ display:flex; align-items:center; gap:8px; font-weight:600; font-size:14px; }
+.team .meta{ font-size:12px; color:var(--t3); margin-top:3px; }
+.team .row{ display:flex; justify-content:space-between; margin-top:14px; font-size:12.5px; color:var(--t2); }
+.team .row b{ color:var(--t1); font-weight:600; font-variant-numeric:tabular-nums; }
+.mini{ height:6px; border-radius:4px; background:var(--sheet-2); margin-top:12px; overflow:hidden; display:flex; }
+.mini i{ display:block; background:var(--accent); }
+
+/* tables / lists */
+.list{ border-radius:14px; box-shadow:var(--soft-card); overflow:hidden; background:var(--sheet); }
+.li{ display:grid; grid-template-columns:28px 1fr 120px 110px 92px 20px; gap:14px; align-items:center; padding:13px 18px; border-top:1px solid var(--line-3); text-align:left; width:100%; transition:background .08s; }
+.li:first-child{ border-top:0; }
+.li:hover{ background:var(--sheet-2); }
+.li .rk{ width:24px; height:24px; border-radius:8px; background:var(--sheet-2); display:grid; place-items:center; font-size:12px; font-weight:600; color:var(--t2); }
+.li .tl{ font-weight:500; font-size:13.5px; }
+.li .tl small{ display:block; font-weight:400; color:var(--t3); font-size:12px; margin-top:2px; }
+.li .h{ font-weight:600; font-variant-numeric:tabular-nums; }
+.li .h small{ font-weight:400; color:var(--t3); font-size:11.5px; }
+.tag{ display:inline-flex; align-items:center; gap:5px; height:22px; padding:0 8px; border-radius:6px; font-size:11.5px; font-weight:500; background:var(--sheet-2); color:var(--t2); white-space:nowrap; }
+.tag.blue{ background:var(--accent-soft); color:var(--accent-ink); }
+.tag.green{ background:var(--green-soft); color:var(--green); }
+.tag.amber{ background:var(--amber-soft); color:var(--amber-ink); }
+.chev{ color:var(--t4); }
+
+/* matrix */
+.matrix{ display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto; gap:10px; }
+.q{ border-radius:14px; background:var(--sheet-2); padding:14px 16px; min-height:120px; }
+.q.hot{ background:var(--accent-soft); }
+.q h4{ margin:0 0 10px; font-size:12.5px; font-weight:600; color:var(--t2); }
+.q.hot h4{ color:var(--accent-ink); }
+.pills{ display:flex; flex-wrap:wrap; gap:6px; }
+.pill2{ height:26px; padding:0 10px; border-radius:999px; background:var(--sheet); box-shadow:var(--shadow-card); font-size:12px; display:inline-flex; align-items:center; gap:6px; }
+.pill2 b{ font-weight:600; color:var(--accent); }
+
+/* process */
+.proc{ display:flex; align-items:stretch; gap:0; overflow-x:auto; padding-bottom:4px; }
+.step{ flex:1 0 170px; position:relative; padding:14px 14px 14px; border-radius:14px; background:var(--sheet); box-shadow:var(--soft-card); margin-right:26px; }
+.step:last-child{ margin-right:0; }
+.step::after{ content:""; position:absolute; right:-20px; top:50%; width:14px; height:1.5px; background:var(--t4); }
+.step:last-child::after{ display:none; }
+.step .k{ font-size:11.5px; color:var(--t3); }
+.step .t{ font-weight:600; margin-top:4px; font-size:13.5px; line-height:18px; }
+.step .tools{ font-size:12px; color:var(--t3); margin-top:6px; }
+.step .m{ display:flex; justify-content:space-between; align-items:center; margin-top:12px; font-size:12.5px; }
+.step .m b{ font-variant-numeric:tabular-nums; }
+.step.human{ background:var(--amber-soft); box-shadow:inset 0 0 0 1px var(--amber-line); }
+
+/* person */
+.phead{ display:flex; align-items:center; gap:14px; }
+.phead .av{ width:48px; height:48px; font-size:16px; }
+.tl-row{ display:grid; grid-template-columns:60px 1fr; gap:10px; align-items:center; font-size:12px; color:var(--t3); margin-top:8px; }
+.tline{ display:flex; height:22px; border-radius:6px; overflow:hidden; background:var(--sheet-2); }
+.tline i{ display:block; height:100%; }
+.rec{ display:flex; gap:12px; padding:13px 0; border-top:1px solid var(--line-3); }
+.rec:first-of-type{ border-top:0; }
+.rec .ic{ width:30px; height:30px; border-radius:9px; background:var(--accent-soft); color:var(--accent); display:grid; place-items:center; flex:none; }
+.rec b{ font-weight:500; } .rec small{ display:block; color:var(--t3); font-size:12px; margin-top:2px; }
+.rec .h{ margin-left:auto; font-weight:600; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.know{ display:flex; flex-wrap:wrap; gap:6px; }
+
+/* agents */
+.agent{ display:grid; grid-template-columns:40px 1fr auto; gap:14px; align-items:start; padding:16px 18px; border-radius:16px; background:var(--sheet); box-shadow:var(--soft-card); margin-bottom:12px; }
+.agent .ai-ic{ width:40px; height:40px; border-radius:11px; background:var(--sheet-2); display:grid; place-items:center; color:var(--t2); box-shadow:inset 0 0 0 1px var(--line); }
+.runs{ display:flex; gap:6px; margin-top:10px; flex-wrap:wrap; }
+.run{ height:24px; padding:0 9px; border-radius:6px; background:var(--sheet-2); font-size:11.5px; color:var(--t2); display:inline-flex; align-items:center; gap:5px; }
+.run.ok i{ width:6px; height:6px; border-radius:50%; background:var(--green); }
+.run.wait{ background:var(--amber-soft); color:var(--amber-ink); }
+.run.wait i{ width:6px; height:6px; border-radius:50%; background:var(--amber); }
+.approve{ margin-top:12px; border-radius:12px; background:var(--amber-soft); box-shadow:inset 0 0 0 1px var(--amber-line); padding:12px 14px; display:flex; align-items:center; gap:12px; font-size:13px; }
+.approve .tx{ flex:1; } .approve .tx small{ display:block; color:var(--amber-ink); font-size:12px; margin-top:2px; }
+.done{ color:var(--green); font-weight:500; display:inline-flex; gap:6px; align-items:center; }
+
+/* privacy */
+.kv{ display:grid; grid-template-columns:1fr auto; gap:0; }
+.kv > div{ padding:12px 0; border-top:1px solid var(--line-3); font-size:13px; }
+.kv > div:nth-child(-n+2){ border-top:0; }
+.kv .k small{ display:block; font-size:12px; color:var(--t3); margin-top:2px; }
+.kv .v{ text-align:right; }
+.perim{ border-radius:16px; border:1.5px dashed rgba(58,91,204,.45); padding:22px 18px 18px; position:relative; }
+.perim .lab{ position:absolute; top:-10px; left:16px; background:var(--sheet); padding:0 8px; font-size:12px; font-weight:600; color:var(--accent); }
+.pflow{ display:grid; grid-template-columns:1fr 24px 1fr 24px 1fr; align-items:center; }
+.pnode{ border-radius:12px; background:var(--sheet-2); padding:12px 14px; font-size:12.5px; color:var(--t2); }
+.pnode b{ display:block; color:var(--t1); font-size:13px; margin-bottom:3px; }
+.parr{ text-align:center; color:var(--t4); }
+.checks{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.chk{ display:flex; gap:8px; align-items:center; font-size:12.5px; padding:9px 11px; border-radius:10px; background:var(--green-soft); color:#1f6b45; }
+.log{ font-size:12.5px; }
+.log div{ display:grid; grid-template-columns:120px 150px 1fr; gap:10px; padding:8px 0; border-top:1px solid var(--line-3); color:var(--t2); }
+.log div:first-child{ border-top:0; }
+.log span:first-child{ color:var(--t3); font-variant-numeric:tabular-nums; }
+
+/* overlay (idea detail) */
+.ov{ position:absolute; top:62px; right:10px; bottom:10px; width:380px; border-radius:14px; background:var(--glass); backdrop-filter:blur(28px) saturate(1.5); -webkit-backdrop-filter:blur(28px) saturate(1.5); box-shadow:var(--shadow-float); display:flex; flex-direction:column; transform:translateX(16px); opacity:0; pointer-events:none; transition:transform .3s var(--calm), opacity .2s var(--out); z-index:20; }
+.ov.on{ transform:none; opacity:1; pointer-events:auto; }
+.ov-h{ display:flex; align-items:center; gap:8px; padding:14px 16px 10px; }
+.ov-h .x{ margin-left:auto; width:26px; height:26px; border-radius:7px; display:grid; place-items:center; color:var(--t3); }
+.ov-h .x:hover{ background:var(--hover); }
+.ov-b{ flex:1; overflow:auto; padding:0 18px 18px; }
+.ov-b h2{ font-size:18px; line-height:24px; letter-spacing:-.015em; margin:4px 0 6px; }
+.ov-b p{ font-size:13px; line-height:20px; color:var(--t2); margin:6px 0; }
+.ov-b .lbl{ font-size:12px; font-weight:600; color:var(--t3); margin-top:16px; }
+.ov-b ol{ margin:6px 0 0; padding-left:18px; font-size:13px; line-height:20px; color:var(--t2); }
+.ev{ display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:8px; }
+.ev div{ background:var(--sheet-2); border-radius:10px; padding:9px 10px; font-size:11.5px; color:var(--t3); }
+.ev b{ display:block; font-size:16px; color:var(--t1); font-weight:600; }
+.ov-f{ padding:12px 16px; border-top:1px solid var(--line-3); display:flex; gap:8px; align-items:center; }
+.ov-f small{ color:var(--t3); font-size:12px; flex:1; }
+
+/* ask */
+.ask{ max-width:720px; margin:0 auto; padding:40px 24px 30px; display:flex; flex-direction:column; min-height:100%; }
+.ask-hero{ text-align:center; margin-top:4vh; }
+.ask-hero img{ width:46px; height:46px; border-radius:12px; background:#fff; box-shadow:var(--shadow-card); padding:6px; }
+.ask-hero h1{ margin-top:14px; font-size:26px; }
+.msgs{ display:flex; flex-direction:column; gap:18px; margin-top:20px; }
+.msg{ display:flex; gap:12px; font-size:14px; line-height:22px; animation:vin .3s var(--calm); }
+.msg.me{ justify-content:flex-end; }
+.msg.me .bub{ background:var(--sheet-2); border-radius:14px; padding:9px 14px; max-width:80%; }
+.msg .lg{ width:28px; height:28px; border-radius:8px; background:var(--solid); display:grid; place-items:center; flex:none; }
+.msg .lg img{ width:18px; height:18px; filter:invert(1); }
+.msg .ans{ flex:1; color:var(--t1); }
+.msg .ans .src{ margin-top:8px; display:flex; gap:6px; flex-wrap:wrap; }
+.msg .ans ul{ margin:6px 0; padding-left:18px; }
+.composer{ margin-top:auto; padding-top:20px; }
+.comp{ border-radius:14px; background:var(--sheet); box-shadow:0 0 0 1px var(--line-2), 0 8px 24px -12px rgba(22,24,44,.25); display:flex; align-items:center; gap:10px; padding:8px 8px 8px 16px; }
+.comp input{ flex:1; border:0; outline:0; font:inherit; font-size:14px; background:none; color:var(--t1); }
+.send{ width:32px; height:32px; border-radius:50%; background:var(--solid); color:#fff; display:grid; place-items:center; }
+.sugs{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:12px; }
+.sug{ height:32px; padding:0 13px; border-radius:999px; box-shadow:0 0 0 1px var(--line-2); font-size:13px; background:var(--sheet); }
+.sug:hover{ background:var(--sheet-2); }
+.who-sees{ text-align:center; font-size:12px; color:var(--t3); margin-top:8px; }
+
+.foot-note{ margin-top:34px; font-size:12px; color:var(--t4); }
+.toast{ position:absolute; left:50%; bottom:18px; transform:translate(-50%,12px); background:#1f2027; color:#f4f4f7; padding:10px 16px; border-radius:10px; font-size:13px; opacity:0; transition:all .3s var(--calm); pointer-events:none; z-index:30; }
+.toast.on{ opacity:1; transform:translate(-50%,0); }
+
+@media (max-width:900px){
+  .stage{ padding:6px; } .side{ display:none; } .wbody{ padding:0 6px 6px 6px; }
+  .page{ padding:20px 18px 48px; }
+  .stats{ grid-template-columns:repeat(2,1fr); }
+  .grid2,.grid3,.grid4,.matrix,.checks{ grid-template-columns:1fr; }
+  .li{ grid-template-columns:24px 1fr 70px; } .li > :nth-child(4), .li > :nth-child(5), .li > :nth-child(6){ display:none; }
+  .bar{ grid-template-columns:110px 1fr 50px; }
+  .addr{ min-width:0; } .tb-r{ display:none; }
+  .ov{ width:auto; left:10px; }
+  .pflow{ grid-template-columns:1fr; } .parr{ transform:rotate(90deg); }
+  .mnav{ display:flex !important; }
+  .agent{ grid-template-columns:36px minmax(0,1fr); } .agent > div:last-child{ display:none; }
+  .approve{ flex-wrap:wrap; } .approve .tx{ flex-basis:100%; }
+  .phead{ flex-wrap:wrap; } .phead .tag{ margin-left:0 !important; }
+  .kv .v .tag{ white-space:normal; height:auto; padding:3px 8px; text-align:right; }
+  .kv > div{ min-width:0; }
+  .log div{ grid-template-columns:1fr; gap:2px; }
+  .page *{ min-width:0; }
+  #period, .crumb span{ display:none; } .shead{ padding:0 10px 0 16px; }
+}
+.mnav{ display:none; gap:6px; overflow-x:auto; padding:8px 12px; border-bottom:1px solid var(--line-3); scrollbar-width:none; flex:none; }
+.mnav button{ flex:none; height:28px; padding:0 11px; border-radius:999px; background:var(--sheet-2); font-size:12.5px; }
+.mnav button.on{ background:var(--solid); color:#fff; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-flow" viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="15" y="15" width="6" height="6" rx="1.5"/><path d="M9 6h5a3 3 0 0 1 3 3v6"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4M9 14h.01M15 14h.01"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
+  </defs>
+</svg>
+
+<div class="stage">
+<div class="win">
+  <div class="topbar">
+    <div class="lights"><i></i><i></i><i></i></div>
+    <div class="tb-mid"><div class="addr"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><use href="#i-lock"/></svg>silow.harbormutual.internal</div></div>
+    <div class="tb-r"><span class="chip-s"><i></i>On-prem · inside your network</span><span class="chip-s">Sample data · fictional</span></div>
+  </div>
+  <div class="wbody">
+    <aside class="side">
+      <div class="brand"><img src="./silow-logo.svg" alt=""><b>silow</b><small>Harbor Mutual</small></div>
+      <div class="find"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><use href="#i-search"/></svg>Search or ask<kbd>⌘K</kbd></div>
+      <div class="side-scroll">
+        <button class="nav on" data-v="overview"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><use href="#i-home"/></svg>Overview</button>
+        <button class="nav" data-v="teams"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><use href="#i-users"/></svg>Teams<span class="cnt">4</span></button>
+        <button class="nav" data-v="person"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><use href="#i-user"/></svg>People<span class="cnt">32</span></button>
+        <button class="nav" data-v="processes"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><use href="#i-flow"/></svg>Processes<span class="cnt">18</span></button>
+        <button class="nav" data-v="plan"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><use href="#i-list"/></svg>Automation plan<span class="cnt">146</span></button>
+        <button class="nav" data-v="agents"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><use href="#i-bot"/></svg>Agents<span class="dot" id="agent-dot"></span></button>
+        <button class="nav" data-v="ask"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chat"/></svg>Ask Silow</button>
+        <button class="nav" data-v="privacy"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><use href="#i-shield"/></svg>Privacy &amp; deployment</button>
+        <div class="sh">Teams in the pilot<span>32 people</span></div>
+        <button class="nav" data-v="teams" data-team="sops"><span class="sw" style="background:linear-gradient(135deg,#cdd8f6,#2f4a9e)"></span>Strategic operations<span class="cnt">8</span></button>
+        <button class="nav" data-v="teams" data-team="fin"><span class="sw" style="background:linear-gradient(135deg,#c8e6da,#1d6b53)"></span>Finance operations<span class="cnt">7</span></button>
+        <button class="nav" data-v="teams" data-team="intake"><span class="sw" style="background:linear-gradient(135deg,#f5d5c9,#9a4430)"></span>Claims intake<span class="cnt">10</span></button>
+        <button class="nav" data-v="teams" data-team="qa"><span class="sw" style="background:linear-gradient(135deg,#d8cff6,#4f3ea3)"></span>Claims testing<span class="cnt">7</span></button>
+      </div>
+      <div class="side-foot"><span class="av" style="background:#dfe4f6;color:#3b4c8e">JR</span><span class="who">Jordan Reyes<small>SVP Strategic Operations</small></span></div>
+    </aside>
+
+    <main class="sheet">
+      <div class="shead">
+        <div class="crumb"><span>Harbor Mutual</span><span>/</span><b id="crumb">Overview</b></div>
+        <span class="sp"></span>
+        <div class="seg" id="period"><button>Week 1</button><button class="on">Week 2</button><button>Month</button></div>
+        <button class="btn ghost" data-go="ask"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><use href="#i-chat"/></svg>Ask</button>
+      </div>
+      <div class="mnav" id="mnav"></div>
+      <div class="sbody" id="sbody">
+
+<!-- OVERVIEW -->
+<section class="view on" id="v-overview"><div class="page">
+  <h1>Where the work actually goes</h1>
+  <div class="sub">32 people across 4 teams, recorded for two weeks. Every app, every task, every handoff — redacted and processed inside your network.</div>
+  <div class="stats">
+    <div class="stat"><b class="num">2,412</b><small>hours recorded</small></div>
+    <div class="stat"><b class="num">1,864</b><small>tasks found</small></div>
+    <div class="stat"><b class="num">41</b><small>apps in use</small></div>
+    <div class="stat"><b class="num">18</b><small>repeating processes</small></div>
+    <div class="stat"><b class="num">~410 h</b><small>per week AI can take</small></div>
+  </div>
+
+  <div class="sec card">
+    <div class="sec-h"><h3>What the time is spent on</h3><small>all teams · week 2</small></div>
+    <div class="stack" id="catbar"></div>
+    <div class="cats" id="catlegend"></div>
+  </div>
+
+  <div class="sec grid2">
+    <div class="card">
+      <div class="sec-h"><h3>Time by app</h3><small>hours per week</small></div>
+      <div class="bars" id="appbars"></div>
+      <div class="legend"><span><i style="background:#c9cfe0"></i>Human work</span><span><i style="background:var(--accent)"></i>AI can take</span></div>
+    </div>
+    <div class="card">
+      <div class="sec-h"><h3>Top automation candidates</h3><button class="btn ghost r" data-go="plan" style="height:26px">All 146<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><use href="#i-chev"/></svg></button></div>
+      <div id="topideas"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h"><h3>Teams</h3><small>click a team for its report</small></div>
+    <div class="grid4" id="teamtiles"></div>
+  </div>
+  <div class="foot-note">Sample company and data are fictional. Screens show the Silow platform as deployed on-prem.</div>
+</div></section>
+
+<!-- TEAMS -->
+<section class="view" id="v-teams"><div class="page">
+  <div class="seg" id="teamseg" style="margin-bottom:18px"></div>
+  <h1 id="t-title"></h1>
+  <div class="sub" id="t-sub"></div>
+  <div class="stats" id="t-stats"></div>
+  <div class="sec grid2">
+    <div class="card"><div class="sec-h"><h3>Where the team spends time</h3><small>hours per week</small></div><div class="bars" id="t-bars"></div>
+      <div class="legend"><span><i style="background:#c9cfe0"></i>Human work</span><span><i style="background:var(--accent)"></i>AI can take</span></div></div>
+    <div class="card"><div class="sec-h"><h3>What repeats across the team</h3></div><div id="t-repeats"></div></div>
+  </div>
+  <div class="sec card"><div class="sec-h"><h3>Handoffs and waits</h3><small>where work sits between people</small></div><div class="bars" id="t-waits"></div></div>
+</div></section>
+
+<!-- PERSON -->
+<section class="view" id="v-person"><div class="page">
+  <div class="seg" id="pseg" style="margin-bottom:18px"></div>
+  <div class="phead"><span class="av" id="p-av"></span><div><h1 id="p-name"></h1><div class="sub" id="p-role" style="margin-top:2px"></div></div><span class="tag" style="margin-left:auto"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><use href="#i-lock"/></svg>Personal report · visible to this person</span></div>
+  <div class="stats" id="p-stats"></div>
+  <div class="sec card">
+    <div class="sec-h"><h3>Their week, hour by hour</h3><small>Mon – Fri · colors = work type</small></div>
+    <div id="p-tl"></div>
+    <div class="cats" id="p-leg"></div>
+  </div>
+  <div class="sec grid2">
+    <div class="card"><div class="sec-h"><h3>Top recommendations</h3><small>minutes saved per week</small></div><div id="p-recs"></div></div>
+    <div class="card"><div class="sec-h"><h3>What this person knows</h3><small>from their real work</small></div><div class="know" id="p-know"></div>
+      <div class="sec-h" style="margin-top:22px"><h3>Where the hours went</h3></div><div class="bars" id="p-bars"></div></div>
+  </div>
+</div></section>
+
+<!-- PROCESSES -->
+<section class="view" id="v-processes"><div class="page">
+  <h1>Processes, step by step</h1>
+  <div class="sub">Built from what people actually did — not from interviews. Time per run, who does it, which tools, and where AI can take the load. Amber steps stay human.</div>
+  <div id="procs"></div>
+</div></section>
+
+<!-- PLAN -->
+<section class="view" id="v-plan"><div class="page">
+  <h1>Automation plan</h1>
+  <div class="sub">Every idea is tied to a real workflow, sized in hours, and sorted by impact and effort. Approve one and we build the agent.</div>
+  <div class="sec grid2" style="margin-top:22px">
+    <div class="matrix" id="matrix"></div>
+    <div class="card"><div class="sec-h"><h3>If you take the top five</h3></div>
+      <div class="stats" style="grid-template-columns:1fr 1fr;margin-top:0"><div class="stat"><b class="num">~161 h</b><small>back per week</small></div><div class="stat"><b class="num">4</b><small>teams affected</small></div></div>
+      <p style="font-size:13px;line-height:20px;color:var(--t2);margin:14px 0 0">Estimated from recorded hours on each workflow. Every agent keeps a named person on the consequential step — payments, reserves, customer messages.</p>
+    </div>
+  </div>
+  <div class="sec"><div class="sec-h"><h3>Ranked by hours back</h3><small>click an idea for evidence</small></div><div class="list" id="ideas"></div></div>
+</div></section>
+
+<!-- AGENTS -->
+<section class="view" id="v-agents"><div class="page">
+  <h1>Agents</h1>
+  <div class="sub">Built from the observed procedure, running inside your perimeter. Nothing consequential happens without a named owner's approval.</div>
+  <div class="sec" id="agents"></div>
+</div></section>
+
+<!-- ASK -->
+<section class="view" id="v-ask"><div class="ask">
+  <div class="ask-hero" id="askhero"><img src="./silow-logo.svg" alt=""><h1>Ask about your company’s work</h1><div class="sub" style="margin:6px auto 0">Answers come from your own recorded work — not a model’s memory.</div></div>
+  <div class="msgs" id="msgs"></div>
+  <div class="composer">
+    <div class="sugs" id="sugs"></div>
+    <div class="comp" style="margin-top:14px"><input id="q" placeholder="Ask Silow about the pilot…" autocomplete="off"><button class="send" id="send"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><use href="#i-up"/></svg></button></div>
+    <div class="who-sees">Runs on your models, inside your network · only pilot admins see this chat</div>
+  </div>
+</div></section>
+
+<!-- PRIVACY -->
+<section class="view" id="v-privacy"><div class="page">
+  <h1>Privacy &amp; deployment</h1>
+  <div class="sub">Everything runs on Harbor Mutual infrastructure. Screenshots and video never reach Silow.</div>
+  <div class="sec perim"><span class="lab">Harbor Mutual perimeter</span>
+    <div class="pflow">
+      <div class="pnode"><b>32 workstations</b>Silow recorder · VDI and managed laptops</div><div class="parr">→</div>
+      <div class="pnode"><b>silow-01 · your servers</b>Ingest · encrypted storage · redaction · processing · reports</div><div class="parr">→</div>
+      <div class="pnode"><b>Your GPUs</b>Open-source models · no external calls</div>
+    </div>
+  </div>
+  <div class="sec grid2">
+    <div class="card"><div class="sec-h"><h3>Data handling</h3></div>
+      <div class="kv">
+        <div class="k">PII &amp; PHI redaction<small>masked before any analysis or storage</small></div><div class="v"><span class="tag green">On</span></div>
+        <div class="k">Raw screenshots<small>deleted as soon as redaction is done</small></div><div class="v"><span class="tag green">Not retained</span></div>
+        <div class="k">Encryption<small>in transit and at rest</small></div><div class="v"><span class="tag green">On</span></div>
+        <div class="k">Derived data retention<small>set by your admins</small></div><div class="v"><span class="tag">90 days</span></div>
+        <div class="k">Keystrokes, message content, mic<small>product boundaries</small></div><div class="v"><span class="tag">Never captured</span></div>
+        <div class="k">Individual scoring<small>reports describe work, not workers</small></div><div class="v"><span class="tag">Off by design</span></div>
+      </div>
+    </div>
+    <div class="card"><div class="sec-h"><h3>Access</h3></div>
+      <div class="kv">
+        <div class="k">Sign-in<small>through your identity provider</small></div><div class="v"><span class="tag">SSO · SAML</span></div>
+        <div class="k">Personal reports<small>each person sees their own</small></div><div class="v"><span class="tag">Owner only</span></div>
+        <div class="k">Team reports<small>aggregated, min. 5 people</small></div><div class="v"><span class="tag">Pilot admins</span></div>
+        <div class="k">Silow staff access<small>to raw or derived data</small></div><div class="v"><span class="tag">None</span></div>
+      </div>
+      <div class="sec-h" style="margin-top:20px"><h3>Acceptance checks</h3><small>run after install</small></div>
+      <div class="checks">
+        <div class="chk"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-check"/></svg>Health</div>
+        <div class="chk"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-check"/></svg>Capture upload</div>
+        <div class="chk"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-check"/></svg>Redaction</div>
+        <div class="chk"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-check"/></svg>Screen → steps</div>
+        <div class="chk"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-check"/></svg>Steps → tasks</div>
+        <div class="chk"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><use href="#i-check"/></svg>Weekly reports</div>
+      </div>
+    </div>
+  </div>
+  <div class="sec card"><div class="sec-h"><h3>Audit log</h3><small>who accessed what, and when</small></div>
+    <div class="log">
+      <div><span>Nov 6 · 09:12</span><span>Jordan Reyes</span><span>Opened team report · Strategic operations · week 2</span></div>
+      <div><span>Nov 6 · 08:40</span><span>System</span><span>Weekly reports generated · 32 personal, 4 team</span></div>
+      <div><span>Nov 5 · 17:03</span><span>Ana Brooks (IT)</span><span>Retention changed: derived data 120 → 90 days</span></div>
+      <div><span>Nov 5 · 11:26</span><span>Priya Shah</span><span>Approved run · Loss-ratio pack agent · sent to SVP</span></div>
+      <div><span>Nov 4 · 09:00</span><span>Ana Brooks (IT)</span><span>Acceptance script · 6 / 6 stages passed</span></div>
+    </div>
+  </div>
+</div></section>
+
+      </div>
+      <aside class="ov" id="ov">
+        <div class="ov-h"><span class="tag blue" id="ov-type">Agent</span><span class="tag" id="ov-team"></span><button class="x" id="ov-x"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><use href="#i-x"/></svg></button></div>
+        <div class="ov-b" id="ov-b"></div>
+        <div class="ov-f"><small id="ov-note">A named owner approves every consequential step.</small><button class="btn solid" id="ov-go">Approve to build</button></div>
+      </aside>
+      <div class="toast" id="toast"></div>
+    </main>
+  </div>
+</div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+if(new URLSearchParams(location.search).has('embed')) document.body.classList.add('embed');
+const C={recon:'#3a5bcc',rekey:'#6f86dd',docs:'#e08a6d',test:'#8b78d6',mail:'#9aa3b8',meet:'#c4c9d6',decide:'#d9a03a'};
+const CATN={recon:'Reporting & reconciliation',rekey:'Re-keying between systems',docs:'Chasing documents',test:'Manual test runs',mail:'Email & coordination',meet:'Meetings',decide:'Decisions & judgment'};
+const CAT=[['recon',22],['rekey',17],['docs',15],['test',11],['mail',16],['meet',10],['decide',9]];
+const APPS=[['Excel','spreadsheets & trackers',318,46],['Outlook','email, attachments',262,31],['ClaimCenter','claims system',241,38],['Teams','chat & calls',176,18],['Policy admin','legacy core system',149,41],['SharePoint','folders & docs',121,44],['Power BI','dashboards',88,35],['Test manager','test cases & runs',84,57]];
+const IDEAS=[
+ {id:'fnol',t:'Match FNOL attachments to the right claim',team:'Claims intake',h:44,p:10,type:'Agent',q:'hot',st:'Proposed',ev:[212,61,10],why:'Every incoming email with attachments is opened, downloaded, renamed and uploaded to the claim by hand — 6–9 minutes each, ~380 a week.',steps:['Read new emails in the shared intake mailbox','Match sender, policy and claim number','Rename and attach documents to the claim','Flag anything it can’t match for a person'],human:'A claims specialist confirms unmatched documents.'},
+ {id:'qa',t:'Run claims regression scenarios automatically',team:'Claims testing',h:38,p:7,type:'Agent',q:'hot',st:'Proposed',ev:[96,44,7],why:'The same 140 test scenarios are keyed into a test environment by hand before every release.',steps:['Load the scenario set from the test manager','Enter each test claim in the test environment','Compare payout and reserve results','Log results and open a ticket on mismatch'],human:'The QA lead signs off the release.'},
+ {id:'loss',t:'Build the weekly loss-ratio pack',team:'Strategic operations',h:31,p:6,type:'Agent',q:'hot',st:'Live',ev:[54,26,6],why:'Six people export from the claims system, clean in Excel, reconcile with the ledger and rebuild the same slides every Monday.',steps:['Export claims and premium data','Reconcile with the general ledger','Refresh the dashboard and the deck','Draft the summary for the SVP'],human:'An analyst approves before it goes to the SVP.'},
+ {id:'rekey',t:'Stop re-keying policy data into trackers',team:'Finance operations',h:26,p:7,type:'Bot',q:'hard',st:'Proposed',ev:[132,38,7],why:'Policy changes are copied from the legacy policy system into four Excel trackers by hand.',steps:['Watch for policy changes','Update the four trackers','Highlight conflicts for review'],human:'Finance ops reviews conflicts.'},
+ {id:'chase',t:'Chase missing claim documents',team:'Claims intake',h:22,p:9,type:'Agent',q:'hot',st:'Proposed',ev:[88,29,9],why:'Specialists check daily which claims are missing documents and write the same follow-up emails.',steps:['Find claims with missing documents','Draft the follow-up in your template','Send after approval, track replies'],human:'A specialist approves every outgoing email.'},
+ {id:'inv',t:'Three-way match for vendor invoices',team:'Finance operations',h:17,p:5,type:'Agent',q:'hard',st:'Proposed',ev:[61,19,5],why:'Invoices, purchase orders and receipts are compared line by line in Excel.',steps:['Read invoice and PO','Match against receipts','Queue exceptions'],human:'Payment approval stays with finance.'},
+ {id:'res',t:'Summarise reserve changes for the ops review',team:'Strategic operations',h:9,p:5,type:'Skill',q:'easy',st:'Proposed',ev:[22,11,5],why:'Reserve movements are pulled into a weekly note by hand.',steps:['Pull reserve changes','Group by line of business','Draft the note'],human:'The ops lead edits and sends.'},
+ {id:'brief',t:'Monday briefing for the SVP',team:'Strategic operations',h:6,p:3,type:'Bot',q:'easy',st:'Proposed',ev:[14,8,3],why:'Three people assemble status from five sources every Monday.',steps:['Collect status from trackers','Summarise changes','Post to Teams'],human:'Reviewed before posting.'}
+];
+const TEAMS={
+ sops:{n:'Strategic operations',c:'#2f4a9e',s:'#cdd8f6',ppl:8,h:612,tasks:431,ai:38,apps:[['Excel',148,44],['Power BI',72,35],['Outlook',64,28],['ClaimCenter',51,40],['Teams',46,15]],rep:[['Weekly loss-ratio pack','6 people · every Monday · 4.4 h each'],['Reserve change note','5 people · weekly · 1.8 h'],['Status from five trackers','3 people · Monday · 2 h']],waits:[['Finance sign-off on the pack',2.6],['Data request to claims',1.9],['SVP review',0.8]]},
+ fin:{n:'Finance operations',c:'#1d6b53',s:'#c8e6da',ppl:7,h:531,tasks:388,ai:41,apps:[['Excel',131,48],['Policy admin',84,45],['Outlook',58,30],['SharePoint',39,40],['Power BI',16,30]],rep:[['Re-keying policy changes','7 people · daily · 45 min'],['Invoice three-way match','5 people · daily · 30 min'],['Month-end reconciliation','4 people · monthly · 2 days']],waits:[['Missing PO from operations',3.4],['Approval from controller',1.7],['Vendor clarification',1.1]]},
+ intake:{n:'Claims intake',c:'#9a4430',s:'#f5d5c9',ppl:10,h:762,tasks:671,ai:46,apps:[['Outlook',121,42],['ClaimCenter',138,37],['SharePoint',64,50],['Acrobat',52,44],['Teams',41,16]],rep:[['Attachments to the right claim','10 people · ~380 emails a week'],['Missing-document follow-ups','9 people · daily'],['Re-typing first notice of loss','6 people · daily']],waits:[['Waiting for claimant documents',4.8],['Adjuster assignment',1.2],['Coverage check',0.9]]},
+ qa:{n:'Claims testing',c:'#4f3ea3',s:'#d8cff6',ppl:7,h:507,tasks:374,ai:52,apps:[['Test manager',84,57],['ClaimCenter',52,55],['Excel',39,40],['Jira',33,20],['Teams',24,12]],rep:[['Regression scenarios by hand','7 people · every release · 140 cases'],['Logging results in two places','7 people · daily'],['Test data setup','4 people · weekly']],waits:[['Environment availability',2.2],['Fix from development',3.1],['Release sign-off',0.6]]}
+};
+const PEOPLE={
+ priya:{n:'Priya Shah',r:'Senior analyst · Strategic operations',av:['#dfe4f6','#3b4c8e','PS'],h:76,t:58,apps:14,ai:'34%',week:[['recon',3],['mail',1],['meet',1],['recon',2],['decide',1]],bars:[['Loss-ratio pack',9.2],['Reserve analysis',6.1],['Data requests to claims',4.4],['Meetings',4.0],['SVP updates',2.3]],recs:[['Let the loss-ratio agent build Monday’s pack',260,'Agent · live'],['One query instead of 3 exports from ClaimCenter',75,'Skill'],['Auto-draft the reserve note',55,'Skill']],know:['Loss-ratio methodology','Reserve adequacy','ClaimCenter exports','Power BI model','GL reconciliation']},
+ maya:{n:'Maya Chen',r:'Claims specialist · Claims intake',av:['#f3dfd8','#8c4b38','MC'],h:79,t:142,apps:11,ai:'48%',week:[['docs',2],['rekey',2],['mail',2],['docs',1],['decide',1]],bars:[['Attachments to claims',11.4],['Missing-document emails',7.2],['Re-typing FNOL',5.5],['Coverage questions',3.1],['Team chat',2.6]],recs:[['FNOL attachment matcher',310,'Agent'],['Missing-document chaser drafts',180,'Agent'],['Template for coverage questions',40,'Skill']],know:['Workers’ comp intake','Medical bill coding','Coverage rules by state','ClaimCenter workflows']},
+ tom:{n:'Tom Becker',r:'QA lead · Claims testing',av:['#dbeedf','#2f6b43','TB'],h:74,t:96,apps:9,ai:'55%',week:[['test',3],['rekey',1],['test',2],['meet',1],['mail',1]],bars:[['Regression runs',14.6],['Logging results',4.9],['Test data setup',3.8],['Release meetings',3.0],['Defect triage',2.4]],recs:[['Automated regression runner',420,'Agent'],['Log results once, sync to Jira',95,'Bot'],['Generate test data from templates',70,'Skill']],know:['Payout calculation edge cases','Reserve rules','Release checklist','Test environment setup']}
+};
+const PROCS=[
+ {n:'Weekly loss-ratio pack',meta:'Strategic operations · 6 people · every Monday · 4.4 h per run',s:[['Export claims & premiums','ClaimCenter · Excel','35m','80%'],['Clean and merge','Excel','90m','85%'],['Reconcile with ledger','Excel · GL','70m','70%'],['Refresh dashboard & deck','Power BI · PowerPoint','45m','75%'],['Approve & send to SVP','Outlook','15m','human']]},
+ {n:'FNOL document intake',meta:'Claims intake · 10 people · ~380 emails a week · 7 min each',s:[['Open intake email','Outlook','1m','90%'],['Download & rename attachments','Outlook · Acrobat','2m','95%'],['Find the claim','ClaimCenter','2m','85%'],['Upload & tag documents','ClaimCenter · SharePoint','2m','90%'],['Resolve unmatched','ClaimCenter','—','human']]},
+ {n:'Claims regression testing',meta:'Claims testing · 7 people · every release · 140 scenarios',s:[['Pick scenario set','Test manager','20m','70%'],['Enter test claims','ClaimCenter (test)','9h','90%'],['Check payouts & reserves','ClaimCenter · Excel','5h','80%'],['Log results twice','Test manager · Jira','2h','95%'],['Release sign-off','Teams','30m','human']]}
+];
+const AGENTS=[
+ {id:'loss',n:'Loss-ratio pack',own:'Owner · Priya Shah',st:'Live',d:'Builds Monday’s loss-ratio pack from ClaimCenter and the ledger. Drafts the SVP summary.',runs:[['ok','Oct 27 · sent'],['ok','Nov 3 · sent'],['wait','Nov 10 · ready for review']],ap:'Nov 10 pack is ready · 14 slides, 3 flagged variances'},
+ {id:'fnol',n:'FNOL attachment matcher',own:'Owner · Maya Chen',st:'In build',d:'Matches incoming attachments to claims in the intake mailbox. Unmatched items go to a person.',runs:[['ok','Shadow mode · 212 emails'],['ok','Match rate 93%']],ap:null},
+ {id:'qa',n:'Regression runner',own:'Owner · Tom Becker',st:'Proposed',d:'Runs the 140 regression scenarios in the test environment and logs results once.',runs:[],ap:null}
+];
+const ANS={
+ 'Where did Strategic operations spend last week?':`<b>612 hours across 8 people.</b> The largest blocks:<ul><li>Excel — 148 h, mostly the Monday loss-ratio pack and reserve analysis</li><li>Power BI — 72 h refreshing the same dashboards</li><li>Outlook — 64 h, largely data requests to claims</li></ul>About 38% of it is work AI can take.`,
+ 'What should we automate first?':`Start with <b>FNOL attachment matching</b> (~44 h/week, 10 people) and the <b>regression runner</b> (~38 h/week). Both are high impact and low effort — no new integrations, same apps people use today.`,
+ 'Is any PHI stored?':`<b>No raw screenshots are kept.</b> Redaction runs first and masks PII and PHI before anything is analysed or stored; the raw image is deleted as soon as redaction is done. Everything runs on your servers.`,
+ 'Where does work wait between people?':`The longest waits: <b>claimant documents in intake (4.8 days)</b>, missing POs in finance (3.4 days) and fixes from development in testing (3.1 days).`
+};
+const pad=n=>n.toLocaleString('en-US');
+const ic=(id,s=15,w=1.8)=>`<svg width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"><use href="#i-${id}"/></svg>`;
+function bars(el,rows,max){ el.innerHTML=rows.map(([n,sub,h,ai])=>{const w=h/max*100;return `<div class="bar"><div class="n">${n}${sub?`<small>${sub}</small>`:''}</div><div class="track"><i style="width:${w*(1-ai/100)}%"></i><i class="ai" style="width:${w*ai/100}%"></i></div><div class="v">${h} h</div></div>`}).join(''); }
+// overview
+$('#catbar').innerHTML=CAT.map(([k,v])=>`<div style="flex:${v};background:${C[k]}">${v}%</div>`).join('');
+$('#catlegend').innerHTML=CAT.map(([k,v])=>`<div class="cat"><i style="background:${C[k]}"></i>${CATN[k]}<b>${v}%</b></div>`).join('');
+bars($('#appbars'),APPS,320);
+$('#topideas').innerHTML=IDEAS.slice(0,4).map((x,i)=>`<button class="rec" style="width:100%;text-align:left" data-idea="${x.id}"><span class="ic">${ic('zap',15)}</span><span><b>${x.t}</b><small>${x.team} · ${x.p} people</small></span><span class="h">${x.h} h/wk</span></button>`).join('');
+$('#teamtiles').innerHTML=Object.entries(TEAMS).map(([k,t])=>`<button class="team" data-v="teams" data-team="${k}"><div class="tt"><span class="sw" style="background:linear-gradient(135deg,${t.s},${t.c})"></span>${t.n}</div><div class="meta">${t.ppl} people · ${t.h} h recorded</div><div class="row"><span>AI can take</span><b>${t.ai}%</b></div><div class="mini"><i style="width:${t.ai}%"></i></div></button>`).join('');
+// teams
+$('#teamseg').innerHTML=Object.entries(TEAMS).map(([k,t])=>`<button data-team="${k}">${t.n}</button>`).join('');
+function showTeam(k){ const t=TEAMS[k];
+  $$('#teamseg button').forEach(b=>b.classList.toggle('on',b.dataset.team===k));
+  $('#t-title').textContent=t.n; $('#t-sub').textContent=`${t.ppl} people · week 2 · team report. Aggregated — no individual scores.`;
+  $('#t-stats').innerHTML=[[pad(t.h),'hours recorded'],[pad(t.tasks),'tasks'],[t.ppl,'people'],[t.ai+'%','AI can take'],[Math.round(t.h*t.ai/100/2)+' h','back per week']].map(([b,s])=>`<div class="stat"><b class="num">${b}</b><small>${s}</small></div>`).join('');
+  bars($('#t-bars'),t.apps.map(([n,h,a])=>[n,'',h,a]),Math.max(...t.apps.map(a=>a[1])));
+  $('#t-repeats').innerHTML=t.rep.map(([a,b])=>`<div class="rec"><span class="ic">${ic('flow',15)}</span><span><b>${a}</b><small>${b}</small></span></div>`).join('');
+  $('#t-waits').innerHTML=t.waits.map(([n,d])=>`<div class="bar"><div class="n">${n}</div><div class="track"><i style="width:${d/5*100}%;background:var(--amber)"></i></div><div class="v">${d} days</div></div>`).join('');
+}
+// people
+$('#pseg').innerHTML=Object.entries(PEOPLE).map(([k,p])=>`<button data-p="${k}">${p.n}</button>`).join('');
+function showPerson(k){ const p=PEOPLE[k];
+  $$('#pseg button').forEach(b=>b.classList.toggle('on',b.dataset.p===k));
+  const a=$('#p-av'); a.style.background=p.av[0]; a.style.color=p.av[1]; a.textContent=p.av[2];
+  $('#p-name').textContent=p.n; $('#p-role').textContent=p.r+' · two weeks recorded';
+  $('#p-stats').innerHTML=[[p.h+' h','recorded'],[p.t,'tasks'],[p.apps,'apps'],[10,'days'],[p.ai,'AI can take']].map(([b,s])=>`<div class="stat"><b class="num">${b}</b><small>${s}</small></div>`).join('');
+  const days=['Mon','Tue','Wed','Thu','Fri'];
+  const seed=[...k].reduce((a,c)=>a+c.charCodeAt(0),0);
+  $('#p-tl').innerHTML=days.map((d,i)=>{ let segs=[],rest=100; const pool=p.week.map(w=>w[0]); 
+    for(let j=0;j<7;j++){ const kk=pool[(i+j+seed)%pool.length]; const w=j<6?Math.max(6,Math.round(((seed*(i+3)*(j+5))%17)+7)):rest; const ww=Math.min(w,rest); rest-=ww; segs.push(`<i style="width:${ww}%;background:${C[kk]}" title="${CATN[kk]}"></i>`); if(rest<=0)break;}
+    return `<div class="tl-row"><span>${d}</span><div class="tline">${segs.join('')}</div></div>`}).join('');
+  const used=[...new Set(p.week.map(w=>w[0]))];
+  $('#p-leg').innerHTML=used.map(k=>`<div class="cat"><i style="background:${C[k]}"></i>${CATN[k]}</div>`).join('');
+  $('#p-recs').innerHTML=p.recs.map(([a,m,t])=>`<div class="rec"><span class="ic">${ic('zap',15)}</span><span><b>${a}</b><small>${t}</small></span><span class="h">${m} min</span></div>`).join('');
+  $('#p-know').innerHTML=p.know.map(x=>`<span class="tag">${x}</span>`).join('');
+  bars($('#p-bars'),p.bars.map(([n,h])=>[n,'',h,0]),Math.max(...p.bars.map(b=>b[1])));
+}
+// processes
+$('#procs').innerHTML=PROCS.map(pr=>`<div class="sec"><div class="sec-h"><h3>${pr.n}</h3><small>${pr.meta}</small></div><div class="proc">${pr.s.map((s,i)=>`<div class="step ${s[3]==='human'?'human':''}"><div class="k">Step ${i+1}</div><div class="t">${s[0]}</div><div class="tools">${s[1]}</div><div class="m"><b>${s[2]}</b>${s[3]==='human'?'<span class="tag amber">Human</span>':`<span class="tag blue">AI ${s[3]}</span>`}</div></div>`).join('')}</div></div>`).join('');
+// plan
+const Q={hot:['Easy · high impact','Start here'],hard:['Harder · high impact',''],easy:['Easy · smaller impact',''],low:['Later','']};
+$('#matrix').innerHTML=['hot','hard','easy','low'].map(q=>`<div class="q ${q==='hot'?'hot':''}"><h4>${Q[q][0]}</h4><div class="pills">${IDEAS.filter(x=>x.q===q).map(x=>`<button class="pill2" data-idea="${x.id}"><b>${x.h}h</b>${x.t.split(' ').slice(0,3).join(' ')}…</button>`).join('')||'<span style="font-size:12px;color:var(--t3)">Library · 138 more ideas</span>'}</div></div>`).join('');
+function stTag(s){ return s==='Live'?'<span class="tag green">Live</span>':s==='Approved'||s==='In build'?'<span class="tag blue">'+s+'</span>':'<span class="tag">Proposed</span>'; }
+function renderIdeas(){ $('#ideas').innerHTML=IDEAS.map((x,i)=>`<button class="li" data-idea="${x.id}"><span class="rk">${i+1}</span><span class="tl">${x.t}<small>${x.team} · ${x.p} people</small></span><span class="h">${x.h} h<small> / week</small></span><span><span class="tag">${x.type}</span></span><span>${stTag(x.st)}</span><span class="chev">${ic('chev',14,2)}</span></button>`).join(''); }
+renderIdeas();
+// agents
+function renderAgents(){ $('#agents').innerHTML=AGENTS.map(a=>`<div class="agent"><span class="ai-ic">${ic('bot',18,1.7)}</span><div><div style="display:flex;gap:8px;align-items:center"><h3>${a.n}</h3>${stTag(a.st)}</div><div style="font-size:12.5px;color:var(--t3);margin-top:3px">${a.own}</div><p style="margin:8px 0 0;font-size:13px;line-height:20px;color:var(--t2)">${a.d}</p>
+  ${a.runs.length?`<div class="runs">${a.runs.map(([k,t])=>`<span class="run ${k}"><i></i>${t}</span>`).join('')}</div>`:''}
+  ${a.ap?`<div class="approve" id="ap-${a.id}"><div class="tx"><b>Needs approval</b><small>${a.ap}</small></div><button class="btn">Review</button><button class="btn solid" data-approve="${a.id}">Approve &amp; send</button></div>`:''}
+  </div><div>${a.st==='Proposed'?`<button class="btn" data-idea="${a.id}">See evidence</button>`:''}</div></div>`).join(''); }
+renderAgents();
+// overlay
+let cur=null;
+function openIdea(id){ const x=IDEAS.find(i=>i.id===id); if(!x) return; cur=x;
+  $('#ov-type').textContent=x.type; $('#ov-team').textContent=x.team;
+  $('#ov-b').innerHTML=`<h2>${x.t}</h2><p>${x.why}</p><div class="lbl">Evidence from recordings</div><div class="ev"><div><b>${x.ev[0]}</b>sessions</div><div><b>${x.ev[1]} h</b>recorded</div><div><b>${x.ev[2]}</b>people</div></div>
+  <div class="lbl">Estimated time back</div><p style="font-size:22px;font-weight:600;color:var(--t1);margin:4px 0">${x.h} h <span style="font-size:13px;font-weight:400;color:var(--t3)">per week</span></p>
+  <div class="lbl">What the ${x.type.toLowerCase()} does</div><ol>${x.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+  <div class="lbl">Stays human</div><p>${x.human}</p>`;
+  const b=$('#ov-go'); b.disabled=false;
+  if(x.st==='Proposed'){ b.textContent='Approve to build'; b.className='btn solid'; } else { b.textContent=x.st; b.className='btn'; }
+  $('#ov').classList.add('on'); }
+$('#ov-x').onclick=()=>$('#ov').classList.remove('on');
+$('#ov-go').onclick=()=>{ if(!cur||cur.st!=='Proposed') return; cur.st='Approved'; const a=AGENTS.find(a=>a.id===cur.id); if(a) a.st='In build'; renderIdeas(); renderAgents(); openIdea(cur.id); toast(`Approved · we start building “${cur.t}”`); };
+function toast(t){ const el=$('#toast'); el.textContent=t; el.classList.add('on'); clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('on'),2400); }
+// ask
+$('#sugs').innerHTML=Object.keys(ANS).map(q=>`<button class="sug">${q}</button>`).join('');
+function ask(q){ if(!q.trim()) return; $('#askhero').style.display='none';
+  const m=$('#msgs'); m.insertAdjacentHTML('beforeend',`<div class="msg me"><div class="bub">${q.replace(/</g,'&lt;')}</div></div>`);
+  const a=ANS[q]||`In this sample I can answer a few questions — try one of the suggestions below. In your deployment Silow answers from your own recorded work, on your models.`;
+  setTimeout(()=>{ m.insertAdjacentHTML('beforeend',`<div class="msg"><span class="lg"><img src="./silow-mark.svg" alt=""></span><div class="ans">${a}<div class="src"><span class="tag">${ic('file',12,2)}Team reports · week 2</span><span class="tag">${ic('lock',12,2)}On-prem</span></div></div></div>`); $('#sbody').scrollTop=1e6; },450);
+  $('#q').value=''; }
+$('#send').onclick=()=>ask($('#q').value); $('#q').addEventListener('keydown',e=>{ if(e.key==='Enter') ask($('#q').value); });
+// routing
+const NAMES={overview:'Overview',teams:'Teams',person:'People',processes:'Processes',plan:'Automation plan',agents:'Agents',ask:'Ask Silow',privacy:'Privacy & deployment'};
+$('#mnav').innerHTML=Object.entries(NAMES).map(([k,n])=>`<button data-v="${k}">${n}</button>`).join('');
+function go(v,opt={}){ $$('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  $$('.side .nav').forEach(n=>n.classList.toggle('on',n.dataset.v===v && (v!=='teams' || !n.dataset.team || n.dataset.team===opt.team)));
+  if(v==='teams'){ const sideNav=$$('.side .nav[data-v="teams"]'); sideNav.forEach(n=>n.classList.toggle('on', opt.team? n.dataset.team===opt.team : !n.dataset.team)); }
+  $$('#mnav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  $('#crumb').textContent=v==='teams'&&opt.team?TEAMS[opt.team].n:NAMES[v];
+  if(v==='teams') showTeam(opt.team||'sops'); if(v==='person') showPerson(opt.p||'priya');
+  $('#ov').classList.remove('on'); $('#sbody').scrollTop=0; }
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-idea],[data-v],[data-go],[data-team],[data-p],[data-approve],.sug,#period button'); if(!t) return;
+  if(t.matches('#period button')){ $$('#period button').forEach(b=>b.classList.toggle('on',b===t)); return; }
+  if(t.classList.contains('sug')) return ask(t.textContent);
+  if(t.dataset.approve){ const a=AGENTS.find(x=>x.id===t.dataset.approve); a.runs[a.runs.length-1]=['ok','Nov 10 · sent']; a.ap=null; renderAgents(); $('#agent-dot').style.display='none'; toast('Approved · pack sent to Jordan Reyes'); return; }
+  if(t.dataset.idea) return openIdea(t.dataset.idea);
+  if(t.dataset.go) return go(t.dataset.go);
+  if(t.dataset.v) return go(t.dataset.v,{team:t.dataset.team});
+  if(t.closest('#teamseg')){ showTeam(t.dataset.team); $('#crumb').textContent=TEAMS[t.dataset.team].n; return; }
+  if(t.closest('#pseg')) return showPerson(t.dataset.p);
+});
+addEventListener('keydown',e=>{ if(e.key==='Escape') $('#ov').classList.remove('on'); });
+const h=location.hash.slice(1); if(NAMES[h]) go(h);
+if(document.body.classList.contains('embed')) addEventListener('keydown',e=>{ if(e.target.closest&&e.target.closest('input')) return; if(['PageDown','PageUp','ArrowLeft','ArrowRight'].includes(e.key)){ e.preventDefault(); parent.postMessage({silowDeckKey:e.key},'*'); } });
+</script>
+</body>
+</html>
