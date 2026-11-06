@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Silow — for insurance operations</title>
+<!-- rev:ins-2026-11-06a -->
+<style>
+  @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Regular.otf") format("opentype"); font-weight:400; font-display:swap; }
+  @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Medium.otf") format("opentype"); font-weight:500; font-display:swap; }
+  @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-SemiBold.otf") format("opentype"); font-weight:600; font-display:swap; }
+  @font-face { font-family:"Suisse Intl Mono"; src:url("./fonts/SuisseIntlMono-Regular.otf") format("opentype"); font-weight:400; font-display:swap; }
+
+  :root{
+    --ink:#0E0E0C;
+    --ink-2:#2C2B27;
+    --mute:#6B6A66;
+    --faint:#9A9A95;
+    --paper:#FFFFFF;
+    --paper-2:#F1F1EF;
+    --accent:#3B5BFF;
+    --line:#E8E8E6;
+    --line-2:#DADAD7;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; height:100%; }
+  body{
+    font-family:"Suisse Intl", -apple-system, "SF Pro Display", "Helvetica Neue", Inter, sans-serif;
+    background:var(--paper); color:var(--ink);
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+
+  main{ height:100vh; overflow-y:auto; scroll-snap-type:y mandatory; }
+  section{
+    min-height:100vh; scroll-snap-align:start; scroll-snap-stop:always;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:7vh 48px; position:relative;
+    border-bottom:1px solid var(--line);
+    background:var(--paper);
+  }
+  /* landing side rails */
+  section::before, section::after{
+    content:""; position:absolute; top:0; bottom:0; width:1px; background:var(--line);
+    pointer-events:none;
+  }
+  section::before{ left:max(28px, calc(50% - 760px)); }
+  section::after{ right:max(28px, calc(50% - 760px)); }
+
+  /* animated scene slides (opener + finale) */
+  section.scene-slide{ background:#101736; color:#F5F5F2; border-bottom:none; overflow:hidden; }
+  section.scene-slide::before, section.scene-slide::after{ display:none; }
+  section.scene-slide .body{ color:rgba(245,245,242,.78); }
+  section.scene-slide .body b{ color:#fff; }
+  section.scene-slide .eyebrow{ color:rgba(255,255,255,.65); }
+  .scene{ position:absolute; inset:0; z-index:0; }
+  .scene-shade{ position:absolute; inset:0; z-index:1; background:radial-gradient(120% 105% at 50% 45%, rgba(10,14,36,.1), rgba(10,14,36,.55)); }
+  section.scene-slide > .content{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; }
+
+  /* landing mono label with blue dot */
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:"Suisse Intl Mono", ui-monospace, monospace;
+    font-size:15px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--mute); margin-bottom:36px;
+  }
+  .eyebrow::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--accent); flex:none; }
+
+  h1,h2{ margin:0; font-weight:400; letter-spacing:-0.03em; line-height:1.02; }
+  h1{ font-size:clamp(72px, 8.2vw, 144px); max-width:14ch; }
+  h2{ font-size:clamp(56px, 6.4vw, 108px); max-width:16ch; }
+  em{ font-style:normal; }
+  h1 em, h2 em{ color:var(--accent); }
+  .scene-slide h1 em, .scene-slide h2 em{ color:#9DB2FF; }
+
+  .body{
+    margin:38px auto 0; max-width:820px;
+    font-size:clamp(21px, 1.85vw, 29px); line-height:1.5; color:var(--mute);
+    letter-spacing:-0.008em;
+  }
+  .body b{ color:var(--ink); font-weight:500; }
+
+  /* framed imagery */
+  .frame{
+    border:1px solid var(--line); border-radius:16px; overflow:hidden; background:#fff;
+    box-shadow:0 1px 2px rgba(14,14,12,.04), 0 24px 60px -28px rgba(14,14,12,.22);
+  }
+  .frame img{ display:block; width:100%; height:auto; }
+  .frame.center{ margin-top:36px; max-width:960px; width:100%; }
+  .frame.small{ max-width:700px; }
+  .frame.center img{ max-height:30vh; object-fit:contain; }
+  .frame.illus img{ max-height:46vh; object-fit:contain; }
+  .frame.recording{ display:inline-block; width:auto; max-width:94vw; margin-top:26px; }
+  .frame.recording img{ height:47vh; width:auto; max-width:100%; }
+
+  /* hero stream band (landing animation) */
+  .stream-band{ width:100vw; margin-left:calc(50% - 50vw); height:clamp(200px,25vh,290px); margin-bottom:4vh; }
+  .stream-band canvas{ width:100%; height:100%; display:block; }
+
+  /* compact slide variant */
+  .tight{ padding-top:4vh; padding-bottom:4vh; }
+  .tight .eyebrow{ margin-bottom:22px; }
+  .tight .body{ margin-top:24px; max-width:1240px; }
+
+  /* split layout */
+  .split{
+    display:grid; grid-template-columns:1fr 1.02fr; gap:clamp(44px,5vw,88px);
+    align-items:center; max-width:1400px; width:100%; text-align:left;
+  }
+  .split .eyebrow{ margin-bottom:26px; }
+  .split h2{ font-size:clamp(40px, 4.4vw, 72px); }
+  .split .body{ margin:26px 0 0; max-width:600px; }
+
+  /* steps — landing hairline grid */
+  .steps{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    gap:1px; background:var(--line); border:1px solid var(--line);
+    max-width:1440px; width:100%; margin-top:60px; text-align:left;
+  }
+  .steps > div{ background:#fff; padding:28px 26px 30px; }
+  .steps .n{ font-family:"Suisse Intl Mono", ui-monospace, monospace; font-size:15px; letter-spacing:.06em; color:var(--accent); }
+  .steps .t{ margin-top:14px; font-size:clamp(22px,1.85vw,29px); font-weight:500; letter-spacing:-0.015em; line-height:1.2; }
+  .steps .b{ margin-top:10px; font-size:clamp(17px,1.35vw,20px); line-height:1.45; color:var(--mute); }
+
+  /* safety card — landing gradient card */
+  .safety{
+    margin-top:52px; max-width:1240px; width:100%; text-align:left;
+    background:#fff;
+    border:1px solid var(--line); border-radius:16px; padding:36px 40px;
+  }
+  .safety .grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px 44px; }
+  .safety .item{
+    display:flex; gap:12px; align-items:baseline;
+    font-size:clamp(18px,1.45vw,22px); line-height:1.4; color:var(--ink-2);
+  }
+  .safety .item::before{ content:""; flex:none; width:6px; height:6px; border-radius:50%; background:var(--accent); transform:translateY(-2px); }
+  .safety .foot{
+    margin-top:26px; padding-top:18px; border-top:1px solid var(--line-2);
+    font-family:"Suisse Intl Mono", ui-monospace, monospace; font-size:14px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--mute);
+  }
+  .safety .foot b{ color:var(--accent); font-weight:400; }
+
+  /* use-case rows */
+  .ucs{ display:flex; flex-direction:column; gap:30px; margin-top:40px; max-width:640px; text-align:left; }
+  .uc .k{
+    display:inline-flex; align-items:center; gap:9px;
+    font-family:"Suisse Intl Mono", ui-monospace, monospace; font-size:14px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--accent);
+  }
+  .uc .k::before{ content:""; width:5px; height:5px; border-radius:50%; background:var(--accent); }
+  .uc .v{ margin-top:9px; font-size:clamp(19px,1.55vw,24px); line-height:1.42; color:var(--mute); }
+  .uc .v b{ color:var(--ink); font-weight:500; }
+
+  /* big stat rows */
+  .stats{ display:flex; gap:clamp(48px,6.5vw,110px); align-items:flex-start; justify-content:center; margin-top:6px; }
+  .stat{ max-width:370px; }
+  .stat-num{ font-size:clamp(120px, 12vw, 210px); font-weight:400; letter-spacing:-0.04em; line-height:.95; }
+  .stat-num small{ font-size:.46em; letter-spacing:-0.02em; }
+  .stat-label{ margin-top:18px; font-size:clamp(19px,1.55vw,24px); line-height:1.42; color:var(--mute); }
+  .stat-label b{ color:var(--ink); font-weight:500; }
+
+  /* pricing pair — parallel hairline cards */
+  .price-row{ display:flex; gap:22px; justify-content:center; align-items:stretch; margin-top:54px; width:100%; max-width:1240px; }
+  .price-card{
+    flex:1 1 0; border:1px solid var(--line); border-radius:18px; background:#fff;
+    padding:42px 34px 38px; display:flex; flex-direction:column; align-items:center;
+  }
+  .price-card .pk{
+    font-family:"Suisse Intl Mono", ui-monospace, monospace; font-size:14px;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--accent); white-space:nowrap;
+  }
+  .price-card .pn{
+    margin-top:24px; font-size:clamp(64px,5.2vw,100px); letter-spacing:-0.04em; line-height:.95; white-space:nowrap;
+  }
+  .price-card .pn small{ font-size:.42em; letter-spacing:-0.02em; color:var(--mute); }
+  .price-card .pd{ margin-top:22px; font-size:clamp(17px,1.3vw,20px); line-height:1.45; color:var(--mute); max-width:30ch; }
+  .price-card .pd b{ color:var(--ink); font-weight:500; }
+  .price-row.solo .price-card{ flex:0 1 auto; width:min(600px,100%); }
+
+  .quote{ margin:0; max-width:1100px; font-size:clamp(38px, 4.4vw, 68px); font-weight:400; letter-spacing:-0.025em; line-height:1.12; }
+  .quote-by{ margin-top:32px; font-family:"Suisse Intl Mono", ui-monospace, monospace; font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); }
+  .quote-by b{ color:var(--accent); font-weight:400; }
+
+  .ceo-quote{ margin-top:48px; max-width:860px; font-size:clamp(20px,1.6vw,26px); line-height:1.45; color:var(--mute); }
+  .ceo-quote b{ color:var(--ink); font-weight:500; }
+
+  .texture{
+    margin-top:44px; font-family:"Suisse Intl Mono", ui-monospace, monospace;
+    font-size:clamp(16px,1.3vw,19px); letter-spacing:.1em; color:var(--faint); text-transform:uppercase;
+  }
+  .texture b{ color:var(--accent); font-weight:400; }
+
+  /* where-it-helps grid */
+  .roles{ margin-top:52px; display:grid; grid-template-columns:repeat(4,1fr); width:100%; max-width:1440px; border-top:1px solid var(--line); border-left:1px solid var(--line); }
+  .roles > div{ border-right:1px solid var(--line); border-bottom:1px solid var(--line); padding:26px 24px; text-align:left; }
+  .roles .r{ font-size:clamp(19px,1.55vw,23px); font-weight:500; letter-spacing:-0.01em; }
+  .roles .d{ margin-top:8px; font-size:15px; line-height:1.45; color:var(--mute); }
+  .roles-foot{ margin-top:34px; font-size:clamp(20px,1.7vw,26px); letter-spacing:-0.01em; }
+
+  /* faq grid */
+  .faq{ margin-top:52px; display:grid; grid-template-columns:1fr 1fr; width:100%; max-width:1360px; border-top:1px solid var(--line); border-left:1px solid var(--line); text-align:left; }
+  .faq > div{ border-right:1px solid var(--line); border-bottom:1px solid var(--line); padding:26px 28px; }
+  .faq .q{ font-size:clamp(19px,1.6vw,23px); font-weight:500; letter-spacing:-0.01em; }
+  .faq .a{ margin-top:10px; font-size:15.5px; line-height:1.5; color:var(--mute); }
+
+  /* chips */
+  .chips{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:44px; }
+  .chip{
+    display:inline-flex; align-items:center; gap:10px;
+    border:1px solid var(--line-2); border-radius:999px; padding:13px 24px;
+    font-family:"Suisse Intl Mono", ui-monospace, monospace; font-size:15px; letter-spacing:.04em; color:var(--mute);
+    background:#fff;
+  }
+  .chip img{ width:19px; height:19px; display:block; }
+
+  /* buttons */
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; margin-top:46px;
+    background:#F5F5F2; color:#0a1024; text-decoration:none;
+    font-size:23px; font-weight:500; letter-spacing:-0.01em;
+    padding:19px 46px; border-radius:999px;
+    transition:background .25s var(--ease), transform .3s var(--ease);
+  }
+  .btn:hover{ background:#fff; transform:scale(1.02); }
+  .contacts{ margin-top:30px; font-family:"Suisse Intl Mono", ui-monospace, monospace; font-size:17px; letter-spacing:.08em; color:rgba(245,245,242,.65); }
+  .contacts a{ color:rgba(245,245,242,.95); text-decoration:none; }
+
+  /* conveyor */
+  .band{ display:flex; gap:18px; justify-content:center; margin-top:46px; max-width:1320px; width:100%; }
+  .band figure{ margin:0; flex:1 1 0; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--paper-2); box-shadow:0 1px 2px rgba(14,14,12,.04), 0 14px 34px -18px rgba(14,14,12,.2); }
+  .band figure:nth-child(2n){ transform:translateY(12px); }
+  .band img{ display:block; width:100%; height:180px; object-fit:cover; }
+
+  /* chrome */
+  .top{
+    position:fixed; top:0; left:0; right:0; z-index:10;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 34px; pointer-events:none;
+  }
+  .top img{ width:26px; height:26px; display:block; }
+  .top .r{ font-family:"Suisse Intl Mono", ui-monospace, monospace; font-size:13px; letter-spacing:.14em; color:var(--faint); text-transform:uppercase; }
+  .top.on-scene .r{ color:rgba(255,255,255,.6); }
+  .counter{
+    position:fixed; right:34px; bottom:26px; z-index:10;
+    font-family:"Suisse Intl Mono", ui-monospace, monospace; font-size:13px; letter-spacing:.16em; color:var(--faint);
+  }
+
+  /* entrance — landing rise */
+  .rise{ opacity:0; transform:translateY(16px); transition:opacity .9s var(--ease), transform .9s var(--ease); }
+  .rise.in{ opacity:1; transform:none; }
+  .d1{ transition-delay:.05s } .d2{ transition-delay:.15s } .d3{ transition-delay:.25s }
+
+  .scroll-hint{ position:absolute; bottom:34px; left:50%; transform:translateX(-50%); color:var(--faint); font-size:24px; animation:bob 2.2s ease-in-out infinite; z-index:2; }
+  .scene-slide .scroll-hint{ color:rgba(255,255,255,.55); }
+  @keyframes bob{ 0%,100%{ transform:translate(-50%,0) } 50%{ transform:translate(-50%,8px) } }
+
+  @media (max-width:900px){
+    .stats{ flex-direction:column; gap:44px; align-items:center; }
+    .price-row{ flex-direction:column; align-items:center; }
+    .price-row .price-card{ width:min(600px,100%); flex:none; }
+    .split{ grid-template-columns:1fr; text-align:center; }
+    .split .body{ margin-left:auto; margin-right:auto; }
+    .ucs{ margin-left:auto; margin-right:auto; text-align:left; }
+    .steps{ grid-template-columns:repeat(2,1fr); }
+    .safety .grid{ grid-template-columns:1fr; }
+    section{ padding:9vh 26px; }
+    section::before, section::after{ display:none; }
+    .band figure:nth-child(4), .band figure:nth-child(5){ display:none; }
+    .frame.recording{ width:100%; }
+    .frame.recording img{ height:auto; width:100%; }
+  }
+
+  /* ===== insurance draft additions ===== */
+  .perimeter{ margin-top:52px; width:100%; max-width:1400px; border:1.5px dashed var(--accent); border-radius:22px; padding:44px 34px 34px; position:relative; }
+  .perimeter .tag{ position:absolute; top:-12px; left:34px; background:#fff; padding:0 12px; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+  .flow{ display:grid; grid-template-columns:1fr 46px 1.25fr 46px 1fr; align-items:stretch; text-align:left; }
+  .flow .node{ border:1px solid var(--line-2); border-radius:16px; background:#fff; padding:26px 26px 28px; }
+  .flow .node .k{ font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); }
+  .flow .node .t{ margin-top:12px; font-size:clamp(22px,1.9vw,30px); font-weight:500; letter-spacing:-0.015em; line-height:1.15; }
+  .flow .node .b{ margin-top:12px; font-size:clamp(16px,1.25vw,19px); line-height:1.5; color:var(--mute); }
+  .flow .arr{ display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:26px; }
+  .perimeter .note{ margin-top:26px; text-align:left; font-size:clamp(17px,1.35vw,21px); color:var(--mute); }
+  .perimeter .note b{ color:var(--ink); font-weight:500; }
+
+  .sec-split{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(40px,4.5vw,80px); align-items:center; max-width:1420px; width:100%; text-align:left; }
+  .sec-split h2{ font-size:clamp(44px,4.8vw,80px); }
+  .sec-split .body{ margin:22px 0 0; max-width:600px; }
+  .sec-split .safety{ margin-top:34px; padding:28px 30px; }
+  .sec-split .safety .grid{ gap:14px 30px; }
+  .sec-split .safety .item{ font-size:clamp(16px,1.25vw,19px); }
+  .sec-split .frame img{ max-height:58vh; object-fit:cover; }
+
+  .opts{ margin-top:52px; display:grid; grid-template-columns:repeat(3,1fr); width:100%; max-width:1440px; border-top:1px solid var(--line); border-left:1px solid var(--line); text-align:left; }
+  .opts > div{ border-right:1px solid var(--line); border-bottom:1px solid var(--line); padding:30px 30px 32px; display:flex; flex-direction:column; }
+  .opts .n{ font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:15px; color:var(--accent); letter-spacing:.06em; }
+  .opts .t{ margin-top:14px; font-size:clamp(22px,1.9vw,30px); font-weight:500; letter-spacing:-0.015em; line-height:1.15; }
+  .opts .ex{ margin-top:10px; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:13.5px; letter-spacing:.06em; color:var(--faint); text-transform:uppercase; }
+  .opts .b{ margin-top:16px; font-size:clamp(16px,1.25vw,19px); line-height:1.5; color:var(--mute); }
+  .opts .b b{ color:var(--ink); font-weight:500; }
+  .opts .w{ margin-top:auto; padding-top:20px; font-size:clamp(15px,1.15vw,17px); color:var(--ink-2); }
+  .opts .w::before{ content:"→ "; color:var(--accent); }
+
+  .price2{ display:grid; grid-template-columns:1fr 1.25fr; gap:22px; margin-top:50px; width:100%; max-width:1300px; text-align:left; }
+  .price2 .card{ border:1px solid var(--line); border-radius:18px; background:#fff; padding:36px 34px; }
+  .price2 .pk{ font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+  .price2 .pn{ margin-top:20px; font-size:clamp(64px,5.6vw,104px); letter-spacing:-0.04em; line-height:.95; white-space:nowrap; }
+  .price2 .pn small{ font-size:.36em; letter-spacing:-0.01em; color:var(--mute); }
+  .price2 .pd{ margin-top:20px; font-size:clamp(16px,1.25vw,19px); line-height:1.5; color:var(--mute); }
+  .price2 .pd b{ color:var(--ink); font-weight:500; }
+  .rates{ margin-top:18px; width:100%; border-collapse:collapse; font-size:clamp(16px,1.25vw,19px); }
+  .rates td{ padding:11px 0; border-bottom:1px solid var(--line); color:var(--ink-2); }
+  .rates td:last-child{ text-align:right; font-family:"Suisse Intl Mono",ui-monospace,monospace; color:var(--ink); white-space:nowrap; padding-left:18px; }
+  .rates tr.total td{ border-bottom:none; padding-top:16px; font-weight:500; color:var(--ink); }
+  .rates tr.total td:last-child{ color:var(--accent); }
+  .rates .s{ display:block; font-size:.82em; color:var(--faint); margin-top:2px; }
+
+  .faq.three{ grid-template-columns:repeat(3,1fr); max-width:1440px; }
+  .faq.three > div{ padding:22px 24px; }
+  .faq.three .q{ font-size:clamp(17px,1.4vw,21px); }
+  .faq.three .a{ font-size:15px; }
+
+  @media (max-width:900px){
+    .flow{ grid-template-columns:1fr; gap:10px; }
+    .flow .arr{ transform:rotate(90deg); height:30px; }
+    .sec-split{ grid-template-columns:1fr; }
+    .opts{ grid-template-columns:1fr; }
+    .price2{ grid-template-columns:1fr; }
+    .faq, .faq.three{ grid-template-columns:1fr; }
+    .roles{ grid-template-columns:1fr 1fr; }
+    .eyebrow{ flex-wrap:wrap; justify-content:center; text-align:center; line-height:1.6; letter-spacing:.12em; font-size:13px; }
+    .price2 .pn{ font-size:56px; white-space:normal; }
+    .price2 .card{ padding:28px 22px; }
+    .rates td:last-child{ white-space:normal; font-size:14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top" id="topbar">
+  <img src="./assets/logo-upd.svg" alt="Silow">
+  <span class="r">silow.ai · insurance</span>
+</div>
+<div class="counter" id="counter">01 / 19</div>
+
+<main id="deck">
+
+  <!-- 01 · opener -->
+  <section>
+    <div class="stream-band rise in" aria-hidden="true"><canvas id="stream-canvas"></canvas></div>
+    <div class="eyebrow rise in d1">Silow <b>·</b> for insurance operations</div>
+    <h1 class="rise in d2" style="font-size:clamp(54px,5.4vw,96px); max-width:none;">Everyone bought AI.<br>Nobody can say <em>where it helped.</em></h1>
+    <p class="body rise in d3">Silow records how work actually happens — and turns it into <b>a ranked plan of what to automate</b>, then the agents that do it.<br><b>Installed and run entirely inside your infrastructure.</b></p>
+    <div class="scroll-hint">↓</div>
+  </section>
+
+  <!-- 02 · recorder -->
+  <section class="tight">
+    <div class="eyebrow rise">The product</div>
+    <h2 class="rise d1">A tiny recorder.<br><em>An enormous dataset.</em></h2>
+    <p class="body rise d2">One small app per machine maps the workweek — apps, documents, waits.<br><b>Runs on macOS, Windows and Linux.</b></p>
+    <div class="frame recording rise d3"><img src="./assets/product-recording.png" alt="The Silow recorder capturing a workday"></div>
+  </section>
+
+  <!-- 03 · where it helps — insurance -->
+  <section>
+    <div class="eyebrow rise">Where it helps</div>
+    <h2 class="rise d1" style="font-size:clamp(40px,4.4vw,72px);">Insurance runs on manual work<br><em>between systems.</em></h2>
+    <div class="roles rise d2">
+      <div><div class="r">Strategic &amp; finance ops</div><div class="d">Reconciliations, month-end packs, reports rebuilt by hand in Excel.</div></div>
+      <div><div class="r">Integrations</div><div class="d">Data re-keyed between legacy systems. Manual uploads that should be pipes.</div></div>
+      <div><div class="r">Claims intake</div><div class="d">Documents collected, chased and matched to the right file.</div></div>
+      <div><div class="r">Claims testing</div><div class="d">The same test scenarios, run by hand, release after release.</div></div>
+      <div><div class="r">Workers&rsquo; comp</div><div class="d">Medical bills, case notes, status updates across portals.</div></div>
+      <div><div class="r">Underwriting</div><div class="d">Submissions triaged and re-typed before anyone decides.</div></div>
+      <div><div class="r">Policy servicing</div><div class="d">Endorsements, renewals, copy-paste from email into the core system.</div></div>
+      <div><div class="r">Agency &amp; broker ops</div><div class="d">Quotes, follow-ups and CRM hygiene done one tab at a time.</div></div>
+    </div>
+    <div class="roles-foot rise d3">One recording — <b>every team</b>. Then agents that run on <b>your own data</b>.</div>
+  </section>
+
+  <!-- 04 · sprint -->
+  <section>
+    <div class="eyebrow rise">The sprint <b>·</b> two weeks</div>
+    <h2 class="rise d1">From real work to a ranked plan.</h2>
+    <div class="steps">
+      <div class="rise d1"><div class="n">01</div><div class="t">Silow watches the work</div><div class="b">The repeats, the waits, the steps still done by hand.</div></div>
+      <div class="rise d1"><div class="n">02</div><div class="t">You get a ranked plan</div><div class="b">What to automate first, and the hours it gives back.</div></div>
+      <div class="rise d2"><div class="n">03</div><div class="t">We build the agents</div><div class="b">From observed procedures — with your sign-off.</div></div>
+      <div class="rise d3"><div class="n">04</div><div class="t">We measure the effect</div><div class="b">Adoption and hours — by trace, not by survey.</div></div>
+    </div>
+  </section>
+
+  <!-- 05 · deployment inside the perimeter -->
+  <section>
+    <div class="eyebrow rise">Deployment</div>
+    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">It runs inside your walls.<br><em>Your team installs it.</em></h2>
+    <div class="perimeter rise d2">
+      <span class="tag">Your perimeter</span>
+      <div class="flow">
+        <div class="node"><div class="k">01 · Workstations</div><div class="t">Silow recorder</div><div class="b">Company-managed machines or your VDI. Captures the work surface.</div></div>
+        <div class="arr">→</div>
+        <div class="node"><div class="k">02 · Your servers</div><div class="t">The Silow platform</div><div class="b">Ingest, encrypted storage, redaction, processing, reports — one container stack on your infrastructure.</div></div>
+        <div class="arr">→</div>
+        <div class="node"><div class="k">03 · Your models</div><div class="t">Your compute</div><div class="b">Your GPUs, your cloud account — or a zero-data-retention provider you choose.</div></div>
+      </div>
+      <div class="note">Screenshots and video <b>never reach Silow</b>. We don&rsquo;t access, receive or store your raw work data.</div>
+    </div>
+  </section>
+
+  <!-- 06 · what the infra team gets -->
+  <section>
+    <div class="eyebrow rise">For your infrastructure team</div>
+    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">Self-hosted.<br><em>Documented. Tested.</em></h2>
+    <div class="safety rise d2">
+      <div class="grid">
+        <div class="item">One Docker Compose package — deployed by your team, on your servers.</div>
+        <div class="item">An install README, written for infrastructure teams.</div>
+        <div class="item">An acceptance script that checks every stage end to end — capture to report.</div>
+        <div class="item">SSO &amp; SAML through your own identity provider.</div>
+        <div class="item">Audit logs: what was accessed, by whom, and when.</div>
+        <div class="item">Platform tailored to each client and deployed into their environment — we stay on call for the install.</div>
+      </div>
+      <div class="foot">Already running on-prem <b>·</b> at a 200-person US claims operation</div>
+    </div>
+  </section>
+
+  <!-- 07 · privacy pipeline -->
+  <section class="tight">
+    <div class="eyebrow rise">Privacy first</div>
+    <h2 class="rise d1">A screenshot goes in.<br><em>An anonymized pattern comes out.</em></h2>
+    <p class="body rise d2">Silow is not productivity monitoring. No human watches a video of the workday. An automated pipeline turns screenshots into redacted, structured workflow patterns.</p>
+    <div class="steps">
+      <div class="rise d1"><div class="n">01</div><div class="t">Capture</div><div class="b">A lightweight app captures the work surface at intervals.</div></div>
+      <div class="rise d1"><div class="n">02</div><div class="t">Redact</div><div class="b">PII and PHI are masked by our own redaction model — before any analysis.</div></div>
+      <div class="rise d2"><div class="n">03</div><div class="t">Extract</div><div class="b">Redacted activity becomes process steps. The raw screenshot is deleted once redaction is done.</div></div>
+      <div class="rise d3"><div class="n">04</div><div class="t">Report</div><div class="b">Leaders see workflows and automation opportunities — not people.</div></div>
+    </div>
+  </section>
+
+  <!-- 08 · encrypted layer (from the law-firm deck) -->
+  <section>
+    <div class="sec-split">
+      <div>
+        <div class="eyebrow rise">Your data. Your rules.</div>
+        <h2 class="rise d1">Encrypted.<br><em>PII &amp; PHI stripped.</em></h2>
+        <p class="body rise d2">What remains is the shape of the work — not the contents of a claim file or a medical record.</p>
+        <div class="safety rise d2">
+          <div class="grid">
+            <div class="item">Encrypted in transit and at rest</div>
+            <div class="item">PII &amp; PHI masked before storage</div>
+            <div class="item">No keystroke logging</div>
+            <div class="item">No private message content</div>
+            <div class="item">No individual scoring</div>
+            <div class="item">Retention and deletion set by you</div>
+          </div>
+          <div class="foot">About the work, not the worker <b>·</b> HIPAA <b>·</b> GDPR <b>·</b> deletion on request</div>
+        </div>
+      </div>
+      <figure class="rise d3" style="margin:0;"><div class="frame"><img src="./assets/pii-stripped.jpg" alt="A real capture after redaction: every personal and client field masked"></div><figcaption class="texture" style="margin-top:18px;text-align:left;">A real capture <b>·</b> after redaction <b>·</b> every client field masked</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 09 · HIPAA proof -->
+  <section>
+    <div class="eyebrow rise">Case 01 <b>·</b> US insurance-claims operation <b>·</b> HIPAA</div>
+    <h2 class="rise d1">HIPAA is solved.<br><em>In production.</em></h2>
+    <p class="body rise d2">Medical documents and claim decisions, every day. Silow runs <b>100% on-prem</b>, on their model provider of choice — and is mapping the claims workflow to automate it end to end.</p>
+    <div class="stats rise d2" style="margin-top:46px;">
+      <div class="stat"><div class="stat-num" style="font-size:clamp(90px,9vw,160px);">200</div><div class="stat-label">people in the rollout — it <b>started with 10</b>.</div></div>
+      <div class="stat"><div class="stat-num" style="font-size:clamp(90px,9vw,160px);">100<small>%</small></div><div class="stat-label"><b>on-prem</b>, inside their own infrastructure.</div></div>
+    </div>
+  </section>
+
+  <!-- 10 · three ways to run the models -->
+  <section>
+    <div class="eyebrow rise">Where the models run</div>
+    <h2 class="rise d1" style="font-size:clamp(40px,4.4vw,72px);">Three ways to run processing.<br><em>You choose.</em></h2>
+    <div class="opts rise d2">
+      <div>
+        <div class="n">01</div>
+        <div class="t">Inference provider</div>
+        <div class="ex">OpenAI · Anthropic · Gemini · Fireworks · Baseten</div>
+        <div class="b">Zero-data-retention only. Frontier labs: top up a balance and switch ZDR on. Dedicated inference: <b>a contract or a balance, also ZDR.</b></div>
+        <div class="w">Fastest start. Nothing is retained.</div>
+      </div>
+      <div>
+        <div class="n">02</div>
+        <div class="t">Cloud GPUs in your account</div>
+        <div class="ex">AWS · Google Cloud · OVH</div>
+        <div class="b">You pay for usage; <b>we deploy the models</b> or help your team do it. Committed-spend discounts if you already have them.</div>
+        <div class="w">Data stays in your cloud tenant.</div>
+      </div>
+      <div>
+        <div class="n">03</div>
+        <div class="t">Your own GPUs</div>
+        <div class="ex">On-prem racks</div>
+        <div class="b">Buy the cards, rack them — then <b>you pay for electricity</b>. We size the hardware with your infrastructure team.</div>
+        <div class="w">Nothing ever leaves the building.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · proof divider -->
+  <section>
+    <div class="eyebrow rise">More proof</div>
+    <h2 class="rise d1">Other teams already <em>know their number.</em></h2>
+    <p class="body rise d2">Anonymized, as agreed with every client. Measured, as always.</p>
+  </section>
+
+  <!-- 12 · Dubai -->
+  <section>
+    <div class="split">
+      <div>
+        <div class="eyebrow rise">Case 02 <b>·</b> Law firm <b>·</b> Dubai</div>
+        <h2 class="rise d1">80% fewer <em>manual hours.</em></h2>
+        <p class="body rise d2">One week of recording showed the day buried in assembly — chats, folders, intake, billing packets. Over the next two weeks we built the onboarding and KYC agent. <b>Lawyers keep every decision.</b></p>
+        <div class="texture rise d3" style="text-align:left;">Founder-reported client result <b>·</b> not a guarantee</div>
+      </div>
+      <div class="frame illus rise d2"><img src="./assets/illus-dubai.svg" alt="Law firm transformation"></div>
+    </div>
+  </section>
+
+  <!-- 13 · MGL numbers -->
+  <section>
+    <div class="eyebrow rise">Case 03 <b>·</b> Legal company <b>·</b> Licensing <b>·</b> what the recording showed</div>
+    <div class="stats">
+      <div class="stat rise d1"><div class="stat-num">6.4<small>×</small></div><div class="stat-label">longer waits when work needs another person — <b>7.0 vs 1.1 days</b> median.</div></div>
+      <div class="stat rise d2"><div class="stat-num">14.9<small>%</small></div><div class="stat-label">real AI adoption, by trace. Their telemetry said <b>11.7%</b> — and missed one person by <b>7×</b>.</div></div>
+      <div class="stat rise d3"><div class="stat-num">84<small>%</small></div><div class="stat-label">of marketing&rsquo;s AI time came from <b>one person</b>. Team range: 44% → 4%.</div></div>
+    </div>
+  </section>
+
+  <!-- 14 · MGL outcome -->
+  <section>
+    <div class="eyebrow rise">Case 03 <b>·</b> What changed</div>
+    <h2 class="rise d1">Only the human work<br><em>stays human.</em></h2>
+    <p class="body rise d2">Useful adoption grew from <b>~5% of the company to 85%</b> — agents per team, shared memory, shared rules.<br>Up to <b>27 hours back</b>, per person per week.</p>
+    <div class="ceo-quote rise d3">&laquo;The efficiency layer is a solved problem for us — give us the strategic one.&raquo; <b>&mdash;&nbsp;CEO</b></div>
+  </section>
+
+  <!-- 15 · Yango quote -->
+  <section>
+    <div class="eyebrow rise">Case 04 <b>·</b> Mobility &amp; delivery <b>·</b> 30+ countries</div>
+    <p class="quote rise d1">&ldquo;In a couple of days Silow showed me where my team&rsquo;s week actually goes… 5–8 hours a week to start.&rdquo;</p>
+    <div class="quote-by rise d2">Ops lead <b>·</b> mobility &amp; delivery</div>
+  </section>
+
+  <!-- 16 · pilot -->
+  <section>
+    <div class="eyebrow rise">How we start</div>
+    <h2 class="rise d1">A focus group of 20–50.<br><em>Clear boundaries.</em></h2>
+    <p class="body rise d2">Not a company-wide install. One department, selected roles, two weeks to the first ranked plan — then you decide what to automate and where to expand.</p>
+    <div class="safety rise d2">
+      <div class="grid">
+        <div class="item">Selected roles only — e.g. strategic operations first.</div>
+        <div class="item">Company-managed devices or your VDI — no personal laptops.</div>
+        <div class="item">Remote-desktop workflows tested before rollout.</div>
+        <div class="item">Weekly review: useful, wrong, or needs calibration.</div>
+        <div class="item">Personal weekly reports for every participant.</div>
+        <div class="item">No scorecards, no rankings, no reporting on individuals.</div>
+      </div>
+      <div class="foot">Week 1 — <b>first results</b> · Week 2 — <b>ranked plan</b> · then agents</div>
+    </div>
+  </section>
+
+  <!-- 17 · pricing -->
+  <section>
+    <div class="eyebrow rise">Pricing</div>
+    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">One license.<br><em>Processing at cost.</em></h2>
+    <div class="price2">
+      <div class="card rise d2">
+        <div class="pk">Silow license</div>
+        <div class="pn">$49<small> / user / month</small></div>
+        <div class="pd">Recorder, platform, redaction, personal and team reports, the ranked plan, chat with your data over MCP. <b>Self-hosted in your infrastructure.</b></div>
+      </div>
+      <div class="card rise d3">
+        <div class="pk">Processing · paid to your provider, no markup</div>
+        <table class="rates">
+          <tr><td>Redaction <span class="s">PII &amp; PHI masking</span></td><td>$0.20 / recorded hour</td></tr>
+          <tr><td>Screen understanding <span class="s">captures → work steps</span></td><td>$0.20 / recorded hour</td></tr>
+          <tr><td>Task building <span class="s">steps → tasks and processes</span></td><td>$0.40 / user / day</td></tr>
+          <tr><td>Reports <span class="s">personal + team, depends on pipeline</span></td><td>≈ $1 / user / week</td></tr>
+          <tr class="total"><td>Upper bound, 8 recorded hours × 21 days <span class="s">via an API provider · lower on your own GPUs</span></td><td>≈ $80 / user / mo</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 18 · FAQ -->
+  <section class="tight">
+    <div class="eyebrow rise">FAQ</div>
+    <h2 class="rise d1" style="font-size:clamp(40px,4.4vw,72px);">Questions, <em>answered.</em></h2>
+    <div class="faq three rise d2">
+      <div><div class="q">Can our team install it without you?</div><div class="a">Yes. One container stack, an install README and an acceptance script that verifies every stage. We join the install call if you want us there.</div></div>
+      <div><div class="q">Does any screenshot or video leave our perimeter?</div><div class="a">Not to Silow — ever. On your own or cloud GPUs, nothing leaves at all. With an inference provider, data is processed under zero data retention.</div></div>
+      <div><div class="q">How is PHI handled? Workers&rsquo; comp files?</div><div class="a">Redaction runs first and masks PII and PHI before anything is analysed or stored. We already run this on-prem in a HIPAA claims environment.</div></div>
+      <div><div class="q">What hardware do we need?</div><div class="a">A Linux server with Docker for the platform. GPUs only if you run the models in-house — we size them with your infrastructure team.</div></div>
+      <div><div class="q">Which models?</div><div class="a">Open-source models on your GPUs, or frontier models from OpenAI, Anthropic or Gemini under ZDR. You choose per stage.</div></div>
+      <div><div class="q">Who sees the data?</div><div class="a">Only people you authorise, through your SSO. Reports show workflows, not individual scorecards. Every access is logged.</div></div>
+      <div><div class="q">Is it productivity monitoring?</div><div class="a">No. No keystrokes, no message content, no rankings, no human playback of anyone&rsquo;s day.</div></div>
+      <div><div class="q">Remote desktops and VDI?</div><div class="a">Supported. If the work happens in a remote session, we test that exact setup before rollout.</div></div>
+      <div><div class="q">What does it run on?</div><div class="a">macOS, Windows and Linux. One-minute install, 1–2% CPU. No connectors, no workflow changes.</div></div>
+    </div>
+  </section>
+
+  <!-- 19 · finale -->
+  <section class="scene-slide">
+    <div class="scene" id="us-scene-b" aria-hidden="true"></div>
+    <div class="scene-shade"></div>
+    <div class="content">
+      <h2 class="rise in">Let&rsquo;s map your first team.</h2>
+      <a class="btn rise in d1" href="https://cal.com/silow-ai/silow-demo">Book a 20-minute call →</a>
+      <div class="contacts rise in d2"><a href="mailto:nikita@silow.ai">nikita@silow.ai</a> · <a href="https://silow.ai">silow.ai</a></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const deck = document.getElementById('deck');
+  const slides = [...deck.querySelectorAll('section')];
+  const counter = document.getElementById('counter');
+  const topbar = document.getElementById('topbar');
+  const pad = n => String(n).padStart(2,'0');
+  counter.textContent = '01 / ' + pad(slides.length);
+
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) e.target.querySelectorAll('.rise').forEach(el => el.classList.add('in'));
+  }), { root: deck, threshold: .22 });
+  slides.forEach(s => io.observe(s));
+
+  function cur(){
+    const y = deck.scrollTop + deck.clientHeight * 0.4;
+    let i = 0; slides.forEach((s, k) => { if (s.offsetTop <= y) i = k; });
+    return i;
+  }
+  function syncChrome(){
+    const i = cur();
+    counter.textContent = pad(i+1) + ' / ' + pad(slides.length);
+    const onScene = slides[i].classList.contains('scene-slide');
+    topbar.classList.toggle('on-scene', onScene);
+    counter.style.color = onScene ? 'rgba(255,255,255,.6)' : '';
+  }
+  deck.addEventListener('scroll', syncChrome, { passive:true });
+  syncChrome();
+
+  const go = i => deck.scrollTo({ top: slides[Math.max(0, Math.min(i, slides.length-1))].offsetTop, behavior:'smooth' });
+  addEventListener('keydown', e => {
+    const i = cur();
+    if (['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); go(i+1); }
+    if (['ArrowUp','ArrowLeft','PageUp'].includes(e.key))         { e.preventDefault(); go(i-1); }
+    if (e.key === 'Home') { e.preventDefault(); go(0); }
+    if (e.key === 'End')  { e.preventDefault(); go(slides.length-1); }
+  });
+</script>
+
+<!-- Unicorn Studio scenes (same animation as the main site) -->
+<script>
+  (function () {
+    const s = document.createElement('script');
+    s.src = './assets/unicornStudio.umd.js';
+    s.async = true;
+    s.onload = () => {
+      try {
+        if (!window.UnicornStudio) return;
+        ['us-scene-b'].forEach(id => {
+          window.UnicornStudio.addScene({
+            elementId: id,
+            filePath: './assets/blue-donut.json',
+            fps: 60, scale: 1, dpi: 1.5, lazyLoad: false, production: true,
+            interactivity: { mouse: { disableMobile: true } },
+          });
+        });
+      } catch (e) { /* static background stays */ }
+    };
+    document.head.appendChild(s);
+  })();
+</script>
+
+<!-- Landing hero conveyor animation (Three.js data stream) -->
+<script type="module">
+  import { initDataStream } from './assets/datastream.js';
+  const cv = document.getElementById('stream-canvas');
+  if (cv) {
+    try {
+      initDataStream(cv, [
+        './assets/desk-mac-1.jpg',
+        './assets/desk-win-1.jpg',
+        './assets/desk-mac-2.jpg',
+        './assets/desk-win-2.jpg',
+      ]);
+    } catch (e) { /* static slide stays */ }
+  }
+</script>
+</body>
+</html>
