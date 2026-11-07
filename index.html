@@ -4,8 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Silow — for insurance operations</title>
-<!-- rev:ins-2026-11-06f -->
+<title>Silow — for insurance operations (draft)</title><!-- rev:ins-v6-202611070152 -->
 <style>
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Regular.otf") format("opentype"); font-weight:400; font-display:swap; }
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Medium.otf") format("opentype"); font-weight:500; font-display:swap; }
@@ -407,6 +406,131 @@
     .price2 .card{ padding:28px 22px; }
     .rates td:last-child{ white-space:normal; font-size:14px; }
   }
+
+  /* ===== v6 ===== */
+  .roles .r{ font-size:clamp(20px,1.6vw,27px); }
+  .roles .d{ font-size:clamp(17px,1.3vw,21px); line-height:1.4; }
+  .roles > div{ padding:28px 26px 30px; }
+
+  /* recorder slide */
+  .facts{ display:flex; justify-content:center; margin-top:28px; font-size:clamp(19px,1.6vw,26px); letter-spacing:-0.01em; color:var(--ink); }
+  .facts span{ padding:0 clamp(18px,1.8vw,32px); border-left:1px solid var(--line-2); line-height:1.1; }
+  .facts span:first-child{ border-left:0; }
+  .rec-wrap{ display:flex; align-items:center; justify-content:center; gap:clamp(36px,3.4vw,64px); margin-top:4.2vh; }
+  .rec-wrap .frame.recording{ margin-top:0; position:relative; }
+  .rec-wrap .frame.recording img{ height:44vh; }
+  .rec-wrap .ring{ position:absolute; left:74.3%; top:1.2%; width:26px; height:26px; transform:translate(-50%,-50%); border-radius:50%; box-shadow:0 0 0 2px var(--accent), 0 0 0 7px rgba(59,91,255,.22); pointer-events:none; }
+  .rec-zoom{ margin:0; width:clamp(250px,21vw,380px); text-align:left; flex:none; }
+  .rec-zoom .zf{ border-radius:14px; overflow:hidden; border:1px solid var(--line-2); box-shadow:0 0 0 4px rgba(59,91,255,.10), 0 30px 60px -24px rgba(14,14,12,.40); background:#222; }
+  .rec-zoom img{ display:block; width:100%; height:auto; }
+  .rec-zoom figcaption{ margin-top:16px; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:14px; letter-spacing:.1em; line-height:1.6; text-transform:uppercase; color:var(--mute); }
+  .rec-zoom figcaption b{ color:var(--accent); font-weight:400; }
+
+  /* platform caption */
+  .pf-foot{ margin-top:14px; display:flex; gap:22px; align-items:center; justify-content:center; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--mute); }
+  .pf-foot b{ color:var(--accent); font-weight:400; }
+  .pf-foot .pf-open{ margin-top:0; }
+
+  /* Dubai timeline */
+  .split.dubai{ grid-template-columns:1fr 1fr; }
+  .split.dubai h2{ font-size:clamp(56px,6vw,104px); }
+  .tl{ border-top:1px solid var(--line); }
+  .tl > div{ display:grid; grid-template-columns:clamp(120px,10vw,170px) 1fr; column-gap:24px; padding:clamp(22px,2.6vh,34px) 0; border-bottom:1px solid var(--line); }
+  .tl .k{ grid-row:span 2; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:15px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); padding-top:8px; }
+  .tl .t{ font-size:clamp(24px,2vw,34px); font-weight:500; letter-spacing:-0.02em; line-height:1.15; }
+  .tl .b{ margin-top:8px; font-size:clamp(18px,1.4vw,22px); line-height:1.4; color:var(--mute); }
+  .tl > div:last-child .t{ color:var(--accent); }
+
+  /* three questions */
+  .opts.q3 .t{ font-size:clamp(24px,2.1vw,34px); }
+  .opts.q3 .w{ font-size:clamp(18px,1.4vw,22px); line-height:1.4; padding-top:28px; }
+  .opts.q3 > div{ padding:34px 32px 34px; min-height:clamp(230px,26vh,300px); }
+
+  /* infra split */
+  .sec-split.infra{ grid-template-columns:1.05fr .95fr; }
+  .ticks{ list-style:none; margin:36px 0 0; padding:0; display:flex; flex-direction:column; gap:18px; }
+  .ticks li{ display:flex; gap:14px; align-items:baseline; font-size:clamp(19px,1.55vw,25px); line-height:1.35; color:var(--ink-2); }
+  .ticks li::before{ content:""; flex:none; width:7px; height:7px; border-radius:50%; background:var(--accent); transform:translateY(-3px); }
+  .term{ border:1px solid var(--line-2); border-radius:18px; background:#FBFBFA; padding:26px 30px 24px; font-family:"Suisse Intl Mono",ui-monospace,monospace; box-shadow:0 1px 2px rgba(14,14,12,.04), 0 24px 60px -30px rgba(14,14,12,.22); }
+  .term-h{ display:flex; justify-content:space-between; font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:var(--mute); padding-bottom:14px; border-bottom:1px solid var(--line); margin-bottom:6px; }
+  .term-h span:first-child{ color:var(--ink); }
+  .term-r{ display:flex; gap:16px; align-items:center; padding:clamp(9px,1.3vh,14px) 0; font-size:clamp(18px,1.45vw,23px); color:var(--ink); border-bottom:1px solid var(--line); }
+  .term-r i{ font-style:normal; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; background:#EEF1FF; color:var(--accent); font-size:15px; flex:none; }
+  .term-f{ margin-top:16px; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); }
+  section .sec-split + .texture{ margin-top:40px; }
+
+  /* pipeline visual */
+  .pipe{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); width:100%; max-width:1440px; margin-top:4.2vh; text-align:left; }
+  .pipe > div{ background:#fff; padding:22px 22px 26px; display:flex; flex-direction:column; }
+  .pipe .n{ margin-top:22px; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:15px; letter-spacing:.06em; color:var(--accent); }
+  .pipe .t{ margin-top:8px; font-size:clamp(22px,1.85vw,30px); font-weight:500; letter-spacing:-0.015em; line-height:1.15; }
+  .pipe .b{ margin-top:8px; font-size:clamp(17px,1.3vw,20px); line-height:1.42; color:var(--mute); }
+  .pv{ height:clamp(150px,19vh,210px); border-radius:12px; border:1px solid var(--line-2); background:#FBFBFA; overflow:hidden; font-size:clamp(13px,1vw,16px); }
+  .pv.scr .sb{ height:28px; display:flex; align-items:center; gap:5px; padding:0 10px; background:#F1F1EF; border-bottom:1px solid var(--line); }
+  .pv.scr .sb i{ width:7px; height:7px; border-radius:50%; background:#DADAD7; }
+  .pv.scr .sb span{ margin-left:8px; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:12px; letter-spacing:.04em; color:var(--mute); }
+  .pv .fr{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:0 12px; height:calc((100% - 28px) / 4); border-bottom:1px solid var(--line); }
+  .pv .fr:last-child{ border-bottom:0; }
+  .pv .fr span{ color:var(--faint); }
+  .pv .fr b{ font-weight:500; color:var(--ink); white-space:nowrap; }
+  .tok{ display:inline-flex; align-items:center; height:1.6em; padding:0 .55em; border-radius:6px; background:#E9EDFF; color:var(--accent) !important; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-weight:400 !important; font-size:.86em; letter-spacing:.06em; }
+  .pv.stp{ padding:6px 12px; display:flex; flex-direction:column; }
+  .pv .sr{ display:grid; grid-template-columns:1fr auto auto; gap:10px; align-items:center; flex:1; border-bottom:1px solid var(--line); }
+  .pv .sr span{ color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .pv .sr small{ font-size:.82em; color:var(--faint); }
+  .pv .sr b{ font-family:"Suisse Intl Mono",ui-monospace,monospace; font-weight:400; color:var(--accent); }
+  .pv .del{ flex:1; display:flex; align-items:center; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:.8em; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); text-decoration:line-through; text-decoration-color:var(--line-2); }
+  .pv.rpt{ padding:14px 14px; display:flex; flex-direction:column; justify-content:center; gap:10px; }
+  .pv .rh{ font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:.78em; letter-spacing:.06em; text-transform:uppercase; color:var(--mute); }
+  .pv .rb b{ font-size:2.1em; font-weight:400; letter-spacing:-0.03em; }
+  .pv .rb small{ margin-left:8px; color:var(--mute); }
+  .pv .rt{ height:14px; border-radius:7px; background:var(--paper-2); display:flex; overflow:hidden; }
+  .pv .rt i{ display:block; height:100%; background:#D4D4D0; }
+  .pv .rt i.ai{ background:var(--accent); }
+  .pv .rl{ display:flex; gap:16px; font-size:.82em; color:var(--mute); }
+  .pv .rl i{ display:inline-block; width:9px; height:9px; border-radius:3px; background:#D4D4D0; margin-right:6px; }
+  .pv .rl i.ai{ background:var(--accent); }
+
+  /* what Silow keeps */
+  .keep{ margin:0; }
+  .kcard{ border:1px solid var(--line-2); border-radius:18px; background:#fff; padding:8px 30px 10px; box-shadow:0 1px 2px rgba(14,14,12,.04), 0 24px 60px -30px rgba(14,14,12,.22); }
+  .kh{ display:flex; justify-content:space-between; align-items:center; padding:18px 0 16px; border-bottom:1px solid var(--line-2); }
+  .kh span:first-child{ font-size:clamp(20px,1.6vw,26px); font-weight:500; letter-spacing:-0.015em; }
+  .kh .kt{ font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); }
+  .kr{ display:flex; justify-content:space-between; align-items:center; gap:16px; padding:clamp(11px,1.5vh,16px) 0; border-bottom:1px solid var(--line); font-size:clamp(17px,1.35vw,21px); }
+  .kr:last-child{ border-bottom:0; }
+  .kr span{ color:var(--mute); }
+  .kr b{ font-weight:500; color:var(--ink); }
+  .kr b.gone{ font-weight:400; color:var(--faint); text-decoration:line-through; text-decoration-color:var(--line-2); }
+
+  /* Q3 modes */
+  .opts.modes .w{ font-weight:500; color:var(--ink); font-size:clamp(17px,1.3vw,20px); }
+  .opts.modes .ex{ text-transform:none; letter-spacing:.02em; font-size:14px; }
+
+  /* pricing example */
+  .price2 .card{ display:flex; flex-direction:column; }
+  .pex{ margin-top:22px; width:100%; max-width:1300px; display:flex; justify-content:space-between; align-items:center; gap:24px; border:1px solid var(--line); border-radius:18px; padding:24px 34px; background:var(--paper-2); text-align:left; }
+  .pex .k{ font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); white-space:nowrap; }
+  .pex .v{ font-size:clamp(22px,2vw,32px); letter-spacing:-0.02em; color:var(--ink); }
+  .pex .v i{ font-style:normal; color:var(--faint); padding:0 .2em; }
+
+  @media (max-width:900px){
+    section.tight{ padding-top:9vh; }
+    .facts{ flex-wrap:wrap; gap:10px 0; }
+    .facts span{ padding:0 14px; font-size:18px; }
+    .rec-wrap{ flex-direction:column; gap:22px; width:100%; }
+    .rec-zoom{ width:min(320px,80%); }
+    .split.dubai{ grid-template-columns:1fr; }
+    .tl{ text-align:left; }
+    .tl > div{ grid-template-columns:1fr; }
+    .tl .k{ grid-row:auto; padding:0 0 6px; }
+    .opts.q3 > div{ min-height:0; }
+    .sec-split.infra{ grid-template-columns:1fr; }
+    .pipe{ grid-template-columns:1fr; }
+    .pex{ flex-direction:column; align-items:flex-start; padding:20px 22px; }
+    .pex .k{ white-space:normal; }
+    .pf-foot{ flex-direction:column; gap:8px; }
+  }
 </style>
 </head>
 <body>
@@ -415,7 +539,7 @@
   <img src="./assets/logo-upd.svg" alt="Silow">
   <span class="r">silow.ai · insurance</span>
 </div>
-<div class="counter" id="counter">01 / 14</div>
+<div class="counter" id="counter">01</div>
 
 <main id="deck">
 
@@ -424,119 +548,165 @@
     <div class="stream-band rise in" aria-hidden="true"><canvas id="stream-canvas"></canvas></div>
     <div class="eyebrow rise in d1">Silow <b>·</b> for insurance operations</div>
     <h1 class="rise in d2" style="font-size:clamp(54px,5.4vw,96px); max-width:none;">Everyone bought AI.<br>Nobody can say <em>where it helped.</em></h1>
-    <p class="body rise in d3">Silow records how work actually happens — and turns it into <b>a ranked plan of what to automate</b>, then the agents that do it.<br><b>Installed and run entirely inside your infrastructure.</b></p>
+    <p class="body rise in d3">Silow records every app, task and handoff — and turns it into <b>a ranked plan of what to automate</b>, then the agents that do it.<br><b>Installed and run entirely inside your infrastructure.</b></p>
     <div class="scroll-hint">↓</div>
   </section>
 
-  <!-- 03 · where it helps — insurance -->
+  <!-- 02 · where it helps — insurance -->
   <section>
     <div class="eyebrow rise">Where it helps</div>
-    <h2 class="rise d1" style="font-size:clamp(40px,4.4vw,72px);">Insurance runs on manual work<br><em>between systems.</em></h2>
+    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px); max-width:none;">Insurance runs on manual work<br><em>between systems.</em></h2>
     <div class="roles rise d2">
-      <div><div class="r">Strategic &amp; finance ops</div><div class="d">Reconciliations, month-end packs, reports rebuilt by hand in Excel.</div></div>
-      <div><div class="r">Integrations</div><div class="d">Data re-keyed between legacy systems. Manual uploads that should be pipes.</div></div>
-      <div><div class="r">Claims intake</div><div class="d">Documents collected, chased and matched to the right file.</div></div>
-      <div><div class="r">Claims testing</div><div class="d">The same test scenarios, run by hand, release after release.</div></div>
-      <div><div class="r">Workers&rsquo; comp</div><div class="d">Medical bills, case notes, status updates across portals.</div></div>
-      <div><div class="r">Underwriting</div><div class="d">Submissions triaged and re-typed before anyone decides.</div></div>
-      <div><div class="r">Policy servicing</div><div class="d">Endorsements, renewals, copy-paste from email into the core system.</div></div>
-      <div><div class="r">Agency &amp; broker ops</div><div class="d">Quotes, follow-ups and CRM hygiene done one tab at a time.</div></div>
+      <div><div class="r">Strategic &amp; finance ops</div><div class="d">Month-end packs rebuilt by hand in Excel.</div></div>
+      <div><div class="r">Integrations</div><div class="d">Data re-keyed between legacy systems.</div></div>
+      <div><div class="r">Claims intake</div><div class="d">Documents chased and matched to the file.</div></div>
+      <div><div class="r">Claims testing</div><div class="d">The same test scenarios, run by hand.</div></div>
+      <div><div class="r">Workers&rsquo; comp</div><div class="d">Medical bills and case notes across portals.</div></div>
+      <div><div class="r">Underwriting</div><div class="d">Submissions re-typed before anyone decides.</div></div>
+      <div><div class="r">Policy servicing</div><div class="d">Endorsements copied from email into the core system.</div></div>
+      <div><div class="r">Agency &amp; broker ops</div><div class="d">Quotes and follow-ups, one tab at a time.</div></div>
     </div>
     <div class="roles-foot rise d3">One recording — <b>every team</b>. Then agents that run on <b>your own data</b>.</div>
   </section>
 
-  <!-- 02 · recorder -->
+  <!-- 03 · recorder -->
   <section class="tight">
     <div class="eyebrow rise">The product</div>
-    <h2 class="rise d1">A tiny recorder.<br><em>An enormous dataset.</em></h2>
-    <p class="body rise d2">One small app per machine maps the workweek — apps, documents, waits.<br><b>Runs on macOS, Windows and Linux.</b></p>
-    <div class="frame recording rise d3"><img src="./assets/product-recording.png" alt="The Silow recorder capturing a workday"></div>
+    <h2 class="rise d1" style="font-size:clamp(56px,6vw,104px);">A tiny recorder.<br><em>An enormous dataset.</em></h2>
+    <div class="facts rise d2"><span>macOS · Windows · Linux</span><span>1-minute install</span><span>1–2% CPU</span><span>No connectors</span></div>
+    <div class="rec-wrap rise d3">
+      <div class="frame recording"><img src="./assets/product-recording.png" alt="A workday being recorded by Silow"><span class="ring" aria-hidden="true"></span></div>
+      <figure class="rec-zoom"><div class="zf"><img src="./assets/recorder-menu.jpg" alt="The Silow recorder menu: recording, uploads idle, pause"></div><figcaption>The whole recorder.<br><b>One menu-bar icon.</b></figcaption></figure>
+    </div>
   </section>
 
-  <!-- · the platform, live (interactive) -->
+  <!-- 04 · the platform, live (interactive) -->
   <section class="platform-slide">
     <div class="pf-head">
       <div class="eyebrow rise">The platform <b>·</b> click around</div>
       <h2 class="rise d1">Every app. Every task. <em>Every minute.</em></h2>
     </div>
     <div class="appframe rise d2">
-      <iframe id="pf-frame" title="Silow platform — sample company" data-src="app/?embed=1"></iframe>
+      <iframe id="pf-frame" title="Silow platform — fictional sample company" data-src="app/?embed=1"></iframe>
     </div>
-    <a class="pf-open rise d3" href="app/" target="_blank" rel="noopener">Open the platform full screen ↗</a>
+    <div class="pf-foot rise d3"><span>Harbor Mutual is a fictional sample company <b>·</b> sample data</span><a class="pf-open" href="app/" target="_blank" rel="noopener">Open full screen ↗</a></div>
   </section>
 
-  <!-- 12 · Dubai -->
+  <!-- 05 · Dubai -->
   <section>
-    <div class="split">
+    <div class="split dubai">
       <div>
         <div class="eyebrow rise">Proof <b>·</b> Law firm <b>·</b> Dubai</div>
-        <h2 class="rise d1">80% fewer <em>manual hours.</em></h2>
-        <p class="body rise d2">One week of recording showed the day buried in assembly — chats, folders, intake, billing packets. Over the next two weeks we built the onboarding and KYC agent. <b>Lawyers keep every decision.</b></p>
+        <h2 class="rise d1" style="font-size:clamp(56px,6vw,104px);">80% fewer <em>manual hours.</em></h2>
+        <p class="body rise d2">A firm whose day was buried in assembly work. <b>Lawyers keep every decision.</b></p>
         <div class="texture rise d3" style="text-align:left;">Founder-reported client result <b>·</b> not a guarantee</div>
       </div>
-      <div class="frame illus rise d2"><img src="./assets/illus-dubai.svg" alt="Law firm transformation"></div>
+      <div class="tl rise d2">
+        <div><div class="k">Week 1</div><div class="t">Recorded the real work</div><div class="b">Chats, folders, intake, billing packets.</div></div>
+        <div><div class="k">Weeks 2–3</div><div class="t">Built the onboarding &amp; KYC agent</div><div class="b">From the procedure the recording showed.</div></div>
+        <div><div class="k">Result</div><div class="t">80% fewer manual hours</div><div class="b">The agent assembles. Lawyers decide.</div></div>
+      </div>
     </div>
   </section>
 
-  <!-- · three questions bridge -->
+  <!-- 06 · three questions bridge -->
   <section>
     <div class="eyebrow rise">Before anything runs</div>
-    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">Three questions<br><em>every carrier asks.</em></h2>
-    <div class="opts rise d2">
-      <div><div class="n">01</div><div class="t">Can our team install it ourselves?</div><div class="w">Inside your infrastructure, documented and tested.</div></div>
-      <div><div class="n">02</div><div class="t">What happens to PII and PHI?</div><div class="w">Masked before anything is analysed or stored.</div></div>
-      <div><div class="n">03</div><div class="t">Does anything leave our perimeter?</div><div class="w">Not to Silow — ever. You choose where models run.</div></div>
+    <h2 class="rise d1" style="font-size:clamp(48px,5.2vw,88px);">Three questions<br><em>every carrier asks.</em></h2>
+    <div class="opts q3 rise d2">
+      <div><div class="n">01</div><div class="t">Can our team install it ourselves?</div><div class="w">Yes. One package, a README and an acceptance test.</div></div>
+      <div><div class="n">02</div><div class="t">What happens to PII and PHI?</div><div class="w">Masked by our own model before any analysis.</div></div>
+      <div><div class="n">03</div><div class="t">Does anything leave our perimeter?</div><div class="w">Never to Silow. On your hardware, nothing leaves.</div></div>
     </div>
   </section>
 
-  <!-- 05 · deployment inside the perimeter -->
+  <!-- 07 · Q1 deployment inside the perimeter -->
   <section>
     <div class="eyebrow rise">Question 01 <b>·</b> Install</div>
     <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">It runs inside your walls.<br><em>Your team installs it.</em></h2>
     <div class="perimeter rise d2">
       <span class="tag">Your perimeter</span>
       <div class="flow">
-        <div class="node"><div class="k">01 · Workstations</div><div class="t">Silow recorder</div><div class="b">Company-managed machines or your VDI. Captures the work surface.</div></div>
+        <div class="node"><div class="k">01 · Workstations</div><div class="t">Silow recorder</div><div class="b">Company-managed machines or your VDI.</div></div>
         <div class="arr">→</div>
-        <div class="node"><div class="k">02 · Your servers</div><div class="t">The Silow platform</div><div class="b">Ingest, encrypted storage, redaction, processing, reports — one container stack on your infrastructure.</div></div>
+        <div class="node"><div class="k">02 · Your servers</div><div class="t">The Silow platform</div><div class="b">Ingest, encrypted storage, redaction, processing, reports — one container stack.</div></div>
         <div class="arr">→</div>
-        <div class="node"><div class="k">03 · Your models</div><div class="t">Your compute</div><div class="b">Your GPUs, your cloud account — or a zero-data-retention provider you choose.</div></div>
+        <div class="node"><div class="k">03 · Your compute</div><div class="t">Your models</div><div class="b">On your GPUs or in your own cloud account.</div></div>
       </div>
       <div class="note">Screenshots and video <b>never reach Silow</b>. We don&rsquo;t access, receive or store your raw work data.</div>
     </div>
   </section>
 
-  <!-- 06 · what the infra team gets -->
+  <!-- 08 · Q1 what the infra team gets -->
   <section>
-    <div class="eyebrow rise">Question 01 <b>·</b> For your infrastructure team</div>
-    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">Self-hosted.<br><em>Documented. Tested.</em></h2>
-    <div class="safety rise d2">
-      <div class="grid">
-        <div class="item">One Docker Compose package — deployed by your team, on your servers.</div>
-        <div class="item">An install README, written for infrastructure teams.</div>
-        <div class="item">An acceptance script that checks every stage end to end — capture to report.</div>
-        <div class="item">SSO &amp; SAML through your own identity provider.</div>
-        <div class="item">Audit logs: what was accessed, by whom, and when.</div>
-        <div class="item">Platform tailored to each client and deployed into their environment — we stay on call for the install.</div>
+    <div class="sec-split infra">
+      <div>
+        <div class="eyebrow rise">Question 01 <b>·</b> For your infrastructure team</div>
+        <h2 class="rise d1">Self-hosted.<br><em>Documented. Tested.</em></h2>
+        <ul class="ticks rise d2">
+          <li>One Docker Compose package, deployed by your team</li>
+          <li>An install README written for infrastructure teams</li>
+          <li>SSO &amp; SAML through your identity provider</li>
+          <li>Audit logs: who accessed what, and when</li>
+        </ul>
       </div>
-      <div class="foot">Already running on-prem <b>·</b> at a 200-person US claims operation</div>
+      <div class="term rise d3">
+        <div class="term-h"><span>Acceptance script</span><span>run after install</span></div>
+        <div class="term-r"><i>✓</i>Health</div>
+        <div class="term-r"><i>✓</i>Capture upload</div>
+        <div class="term-r"><i>✓</i>Redaction</div>
+        <div class="term-r"><i>✓</i>Screen → steps</div>
+        <div class="term-r"><i>✓</i>Steps → tasks</div>
+        <div class="term-r"><i>✓</i>Weekly reports</div>
+        <div class="term-f">Every stage checked, capture to report</div>
+      </div>
     </div>
+    <div class="texture rise d3">Already running on-prem <b>·</b> at a 200-person US claims operation</div>
   </section>
 
-  <!-- 07 · privacy pipeline -->
+  <!-- 09 · Q2 privacy pipeline -->
   <section class="tight">
     <div class="eyebrow rise">Question 02 <b>·</b> PII &amp; PHI</div>
-    <h2 class="rise d1">A screenshot goes in.<br><em>An anonymized pattern comes out.</em></h2>
-    <p class="body rise d2">Silow is not productivity monitoring. No human watches a video of the workday. An automated pipeline turns screenshots into redacted, structured workflow patterns.</p>
-    <div class="steps">
-      <div class="rise d1"><div class="n">01</div><div class="t">Capture</div><div class="b">A lightweight app captures the work surface at intervals.</div></div>
-      <div class="rise d1"><div class="n">02</div><div class="t">Redact</div><div class="b">PII and PHI are masked by our own redaction model — before any analysis.</div></div>
-      <div class="rise d2"><div class="n">03</div><div class="t">Extract</div><div class="b">Redacted activity becomes process steps. The raw screenshot is deleted once redaction is done.</div></div>
-      <div class="rise d3"><div class="n">04</div><div class="t">Report</div><div class="b">Leaders see workflows and automation opportunities — not people.</div></div>
+    <h2 class="rise d1" style="font-size:clamp(44px,4.6vw,84px); max-width:none;">A screenshot goes in.<br><em>An anonymized pattern comes out.</em></h2>
+    <p class="body rise d2">No one watches a video of the workday. An automated pipeline does the work.</p>
+    <div class="pipe rise d2">
+      <div>
+        <div class="pv scr"><div class="sb"><i></i><i></i><i></i><span>Claim WC-20418</span></div>
+          <div class="fr"><span>Claimant</span><b>Dana Whitfield</b></div>
+          <div class="fr"><span>Date of birth</span><b>04/12/1979</b></div>
+          <div class="fr"><span>Diagnosis</span><b>Lumbar strain</b></div>
+          <div class="fr"><span>Medical bill</span><b>$1,240.00</b></div></div>
+        <div class="n">01</div><div class="t">Capture</div><div class="b">The work surface, at intervals.</div>
+      </div>
+      <div>
+        <div class="pv scr"><div class="sb"><i></i><i></i><i></i><span>Claim WC-•••••</span></div>
+          <div class="fr"><span>Claimant</span><b class="tok">NAME</b></div>
+          <div class="fr"><span>Date of birth</span><b class="tok">DATE</b></div>
+          <div class="fr"><span>Diagnosis</span><b class="tok">DIAGNOSIS</b></div>
+          <div class="fr"><span>Medical bill</span><b>$1,240.00</b></div></div>
+        <div class="n">02</div><div class="t">Redact</div><div class="b">PII and PHI masked by our own model — before any analysis.</div>
+      </div>
+      <div>
+        <div class="pv stp">
+          <div class="sr"><span>Open the claim</span><small>ClaimCenter</small><b>0:40</b></div>
+          <div class="sr"><span>Attach the medical bill</span><small>ClaimCenter</small><b>2:10</b></div>
+          <div class="sr"><span>Email the adjuster</span><small>Outlook</small><b>1:05</b></div>
+          <div class="del">Raw screenshot · deleted</div></div>
+        <div class="n">03</div><div class="t">Extract</div><div class="b">Becomes process steps. The raw screenshot is deleted.</div>
+      </div>
+      <div>
+        <div class="pv rpt">
+          <div class="rh"><span>Claims intake · document handling</span></div>
+          <div class="rb"><b>44 h</b><small>per week, 10 people</small></div>
+          <div class="rt"><i style="width:22%"></i><i class="ai" style="width:78%"></i></div>
+          <div class="rl"><span><i></i>People</span><span><i class="ai"></i>Agent can take</span></div></div>
+        <div class="n">04</div><div class="t">Report</div><div class="b">Workflows and automation opportunities — not people.</div>
+      </div>
     </div>
+    <div class="excap rise d3" style="text-align:center;">Illustration <b>·</b> fictional claim record</div>
   </section>
 
-  <!-- 08 · encrypted layer (from the law-firm deck) -->
+  <!-- 10 · Q2 encrypted, what is kept -->
   <section>
     <div class="sec-split">
       <div>
@@ -546,97 +716,104 @@
         <div class="safety rise d2">
           <div class="grid">
             <div class="item">Encrypted in transit and at rest</div>
-            <div class="item">PII &amp; PHI masked before storage</div>
+            <div class="item">PII &amp; PHI masked before analysis</div>
+            <div class="item">Raw screenshot deleted after redaction</div>
             <div class="item">No keystroke logging</div>
             <div class="item">No private message content</div>
             <div class="item">No individual scoring</div>
-            <div class="item">Retention and deletion set by you</div>
           </div>
-          <div class="foot">About the work, not the worker <b>·</b> HIPAA <b>·</b> GDPR <b>·</b> deletion on request</div>
+          <div class="foot">About the work <b>·</b> not the worker</div>
         </div>
       </div>
-      <figure class="rise d3" style="margin:0;"><div class="frame"><img src="./assets/pii-stripped.jpg" alt="A real capture after redaction: every personal and client field masked"></div><figcaption class="texture" style="margin-top:18px;text-align:left;">A real capture <b>·</b> after redaction <b>·</b> every client field masked</figcaption></figure>
+      <figure class="keep rise d3">
+        <div class="kcard">
+          <div class="kh"><span>What Silow keeps</span><span class="kt">one process step</span></div>
+          <div class="kr"><span>Team</span><b>Claims intake</b></div>
+          <div class="kr"><span>App</span><b>ClaimCenter</b></div>
+          <div class="kr"><span>Step</span><b>Attach the medical bill</b></div>
+          <div class="kr"><span>Time</span><b>2 min 10 s</b></div>
+          <div class="kr"><span>Claimant</span><b class="tok">NAME</b></div>
+          <div class="kr"><span>Diagnosis</span><b class="tok">DIAGNOSIS</b></div>
+          <div class="kr"><span>Screenshot</span><b class="gone">Deleted after redaction</b></div>
+        </div>
+        <figcaption class="texture" style="margin-top:18px;text-align:left;">Illustration <b>·</b> fictional record</figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- 10 · three ways to run the models -->
+  <!-- 11 · Q3 where models run -->
   <section>
     <div class="eyebrow rise">Question 03 <b>·</b> Your perimeter</div>
-    <h2 class="rise d1" style="font-size:clamp(40px,4.4vw,72px);">Three ways to run processing.<br><em>You choose.</em></h2>
-    <div class="opts rise d2">
+    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px); max-width:none;">Nothing has to leave.<br><em>You choose where models run.</em></h2>
+    <div class="opts modes rise d2">
       <div>
         <div class="n">01</div>
-        <div class="t">Inference provider</div>
-        <div class="ex">OpenAI · Anthropic · Gemini · Fireworks · Baseten</div>
-        <div class="b">Zero-data-retention only. Frontier labs: top up a balance and switch ZDR on. Dedicated inference: <b>a contract or a balance, also ZDR.</b></div>
-        <div class="w">Fastest start. Nothing is retained.</div>
+        <div class="t">Your own GPUs</div>
+        <div class="ex">On-prem racks</div>
+        <div class="b">Buy the cards, rack them — then <b>you pay for electricity</b>. We size the hardware with your infrastructure team.</div>
+        <div class="w">Nothing leaves the building.</div>
       </div>
       <div>
         <div class="n">02</div>
         <div class="t">Cloud GPUs in your account</div>
         <div class="ex">AWS · Google Cloud · OVH</div>
-        <div class="b">You pay for usage; <b>we deploy the models</b> or help your team do it. Committed-spend discounts if you already have them.</div>
-        <div class="w">Data stays in your cloud tenant.</div>
+        <div class="b">You pay for usage; <b>we deploy the models</b> or help your team do it.</div>
+        <div class="w">Nothing leaves your cloud tenant.</div>
       </div>
       <div>
         <div class="n">03</div>
-        <div class="t">Your own GPUs</div>
-        <div class="ex">On-prem racks</div>
-        <div class="b">Buy the cards, rack them — then <b>you pay for electricity</b>. We size the hardware with your infrastructure team.</div>
-        <div class="w">Nothing ever leaves the building.</div>
+        <div class="t">Zero-data-retention provider</div>
+        <div class="ex">OpenAI · Anthropic · Gemini · Fireworks · Baseten</div>
+        <div class="b">Your account, <b>zero data retention switched on</b> — a balance, or a contract for dedicated inference.</div>
+        <div class="w">Fastest start. Sent for processing, never retained.</div>
       </div>
     </div>
   </section>
 
-  <!-- 09 · HIPAA proof -->
+  <!-- 12 · PHI proof -->
   <section>
-    <div class="eyebrow rise">All three, already answered <b>·</b> US insurance-claims operation</div>
-    <h2 class="rise d1">HIPAA is solved.<br><em>In production.</em></h2>
-    <p class="body rise d2">Medical documents and claim decisions, every day. Silow runs <b>100% on-prem</b>, on their model provider of choice — and is mapping the claims workflow to automate it end to end.</p>
+    <div class="eyebrow rise">All three, in production <b>·</b> US insurance-claims operation</div>
+    <h2 class="rise d1">PHI every day.<br><em>In production.</em></h2>
+    <p class="body rise d2">Medical documents, daily. Silow runs <b>inside their infrastructure</b>, on their own model provider.</p>
     <div class="stats rise d2" style="margin-top:46px;">
-      <div class="stat"><div class="stat-num" style="font-size:clamp(90px,9vw,160px);">200</div><div class="stat-label">people in the rollout — it <b>started with 10</b>.</div></div>
-      <div class="stat"><div class="stat-num" style="font-size:clamp(90px,9vw,160px);">100<small>%</small></div><div class="stat-label"><b>on-prem</b>, inside their own infrastructure.</div></div>
+      <div class="stat"><div class="stat-num" style="font-size:clamp(96px,9.4vw,168px);">200</div><div class="stat-label">people in the rollout — it <b>started with 10</b>.</div></div>
+      <div class="stat"><div class="stat-num" style="font-size:clamp(96px,9.4vw,168px);">100<small>%</small></div><div class="stat-label"><b>on-prem</b>, inside their own infrastructure.</div></div>
     </div>
   </section>
 
-  <!-- · pricing -->
+  <!-- 13 · pricing -->
   <section class="tight">
     <div class="eyebrow rise">Pricing</div>
-    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">One license.<br><em>Processing at cost.</em></h2>
+    <h2 class="rise d1" style="font-size:clamp(48px,5.2vw,88px);">One license.<br><em>Processing at cost.</em></h2>
     <div class="price2">
       <div class="card rise d2">
         <div class="pk">Silow license</div>
         <div class="pn">$49<small> / user / month</small></div>
-        <div class="pd">Recorder, platform, redaction, personal and team reports, the ranked plan, chat with your data over MCP. <b>Self-hosted in your infrastructure.</b></div>
+        <div class="pd">Recorder, platform, redaction, personal and team reports, the ranked plan, chat with your data. <b>Self-hosted in your infrastructure.</b></div>
       </div>
       <div class="card rise d3">
-        <div class="pk">Processing · paid to your provider, no markup</div>
+        <div class="pk">Processing · no markup</div>
         <div class="pn">$30–50<small> / user / month</small></div>
-        <div class="pd">Redaction, screen understanding, task building and reports. <b>You pay your inference or compute provider directly</b> — the range depends on where the models run.</div>
-        <table class="rates">
-          <tr><td>Inference provider <span class="s">OpenAI · Anthropic · Gemini · Fireworks · Baseten — ZDR</span></td><td>pay per use</td></tr>
-          <tr><td>Cloud GPUs in your account <span class="s">AWS · Google Cloud · OVH</span></td><td>pay per use</td></tr>
-          <tr><td>Your own GPUs <span class="s">after the hardware</span></td><td>electricity</td></tr>
-        </table>
+        <div class="pd"><b>Paid directly to your provider</b> — inference API or cloud GPUs. The range depends on where models run. On your own GPUs, it&rsquo;s electricity.</div>
       </div>
     </div>
-    <div class="texture rise d3" style="margin-top:34px;">Example <b>·</b> 50 people, one month <b>·</b> $2,450 license + ~$1,500–2,500 processing</div>
+    <div class="pex rise d3"><span class="k">Example · 50 people, one month</span><span class="v">$2,450 license <i>+</i> ~$1,500–2,500 processing</span></div>
   </section>
 
-  <!-- · finale: one month -->
+  <!-- 14 · finale: one month -->
   <section class="scene-slide">
     <div class="scene" id="us-scene-b" aria-hidden="true"></div>
     <div class="scene-shade"></div>
     <div class="content">
       <div class="eyebrow rise in">Next step</div>
-      <h2 class="rise in" style="font-size:clamp(52px,5.6vw,96px);">Start with one month.</h2>
+      <h2 class="rise in" style="font-size:clamp(56px,6vw,104px);">Start with one month.</h2>
       <p class="body rise in d1">You choose the team. You choose how many people.</p>
       <div class="month rise in d2">
         <div><div class="n">Week 1</div><div class="t">Installed, recording, first personal reports</div></div>
         <div><div class="n">Week 2</div><div class="t">The team map and the ranked plan</div></div>
-        <div><div class="n">Weeks 3–4</div><div class="t">First agents built — live on your sign-off</div></div>
+        <div><div class="n">Weeks 3–4</div><div class="t">First agents scoped and approved by you</div></div>
       </div>
-      <a class="btn rise in d3" href="https://cal.com/silow-ai/silow-demo">Book a 20-minute call →</a>
+      <a class="btn rise in d3" href="https://cal.com/silow-ai/silow-demo">Book a 30-minute call →</a>
       <div class="contacts rise in d3"><a href="mailto:nikita@silow.ai">nikita@silow.ai</a> · <a href="https://silow.ai">silow.ai</a></div>
     </div>
   </section>
@@ -645,11 +822,11 @@
 
 <script>
   const deck = document.getElementById('deck');
-  const slides = [...deck.querySelectorAll('section')];
+  const slides = [...deck.querySelectorAll(':scope > section')];
   const counter = document.getElementById('counter');
   const topbar = document.getElementById('topbar');
   const pad = n => String(n).padStart(2,'0');
-  counter.textContent = '01 / ' + pad(slides.length);
+  counter.textContent = '01';
 
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) e.target.querySelectorAll('.rise').forEach(el => el.classList.add('in'));
@@ -663,7 +840,7 @@
   }
   function syncChrome(){
     const i = cur();
-    counter.textContent = pad(i+1) + ' / ' + pad(slides.length);
+    counter.textContent = pad(i+1);
     const onScene = slides[i].classList.contains('scene-slide');
     topbar.classList.toggle('on-scene', onScene);
     counter.style.color = onScene ? 'rgba(255,255,255,.6)' : '';
