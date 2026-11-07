@@ -1071,7 +1071,7 @@ const Hn = dh => (dh/10).toFixed(1);
 const hm = min => { min=Math.round(min); const h=Math.floor(min/60), m=min%60; return h ? `${h}h ${String(m).padStart(2,'0')}m` : `${m}m`; };
 const pct = (a,b,d=0) => b ? (a/b*100).toFixed(d)+'%' : '0%';
 const money = x => '$'+Math.round(x).toLocaleString('en-US');
-const kmoney = x => x>=10000 ? '$'+(x/1000).toFixed(x>=100000?0:1)+'k' : money(x);
+const kmoney = x => x>=1e6 ? '$'+(x/1e6).toFixed(2)+'M' : x>=10000 ? '$'+(x/1000).toFixed(x>=100000?0:1)+'k' : money(x);
 const r5 = x => Math.max(5, Math.round(x/5)*5);
 const delta = (a,b) => { if(!b) return ''; const d=(a-b)/b*100; const s=(d>=0?'+':'')+d.toFixed(1)+'%'; return `<span class="${d>2?'up':d<-2?'down':''}">${s}</span>`; };
 const wk = () => WEEKS[S.wi];
