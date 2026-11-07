@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Silow — for insurance operations (draft)</title><!-- rev:ins-v6-202611070152 -->
+<title>Silow — for insurance operations</title><!-- rev:ins-v7-202611070245 -->
 <style>
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Regular.otf") format("opentype"); font-weight:400; font-display:swap; }
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Medium.otf") format("opentype"); font-weight:500; font-display:swap; }
@@ -431,9 +431,6 @@
   .pf-foot b{ color:var(--accent); font-weight:400; }
   .pf-foot .pf-open{ margin-top:0; }
 
-  /* Dubai timeline */
-  .split.dubai{ grid-template-columns:1fr 1fr; }
-  .split.dubai h2{ font-size:clamp(56px,6vw,104px); }
   .tl{ border-top:1px solid var(--line); }
   .tl > div{ display:grid; grid-template-columns:clamp(120px,10vw,170px) 1fr; column-gap:24px; padding:clamp(22px,2.6vh,34px) 0; border-bottom:1px solid var(--line); }
   .tl .k{ grid-row:span 2; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:15px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); padding-top:8px; }
@@ -520,7 +517,6 @@
     .facts span{ padding:0 14px; font-size:18px; }
     .rec-wrap{ flex-direction:column; gap:22px; width:100%; }
     .rec-zoom{ width:min(320px,80%); }
-    .split.dubai{ grid-template-columns:1fr; }
     .tl{ text-align:left; }
     .tl > div{ grid-template-columns:1fr; }
     .tl .k{ grid-row:auto; padding:0 0 6px; }
@@ -530,6 +526,42 @@
     .pex{ flex-direction:column; align-items:flex-start; padding:20px 22px; }
     .pex .k{ white-space:normal; }
     .pf-foot{ flex-direction:column; gap:8px; }
+  }
+
+  /* ===== v7 ===== */
+  .pipe.five{ grid-template-columns:repeat(5,1fr); max-width:1520px; }
+  .pipe.five > div{ padding:20px 18px 24px; }
+  .pipe.five .t{ font-size:clamp(21px,1.7vw,28px); }
+  .pipe.five .b{ font-size:clamp(17px,1.28vw,20px); }
+  .pv.apv{ padding:12px 14px; display:flex; flex-direction:column; justify-content:space-between; }
+  .pv .ah{ font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:.78em; letter-spacing:.06em; text-transform:uppercase; color:var(--mute); }
+  .pv .ar{ display:flex; justify-content:space-between; gap:8px; padding:6px 0; border-bottom:1px solid var(--line); }
+  .pv .ar span{ color:var(--mute); } .pv .ar b{ font-weight:500; color:var(--ink); white-space:nowrap; }
+  .pv .ab{ display:flex; gap:8px; }
+  .pv .ab span{ flex:1; text-align:center; padding:6px 0; border-radius:8px; border:1px solid var(--line-2); color:var(--ink-2); background:#fff; }
+  .pv .ab span.ok{ background:var(--ink); color:#fff; border-color:var(--ink); }
+
+  .beyond{ margin-top:30px; display:flex; flex-wrap:wrap; gap:12px 0; justify-content:center; align-items:center; font-size:clamp(19px,1.5vw,24px); letter-spacing:-0.01em; color:var(--ink); }
+  .beyond span{ padding:0 clamp(14px,1.4vw,24px); border-left:1px solid var(--line-2); line-height:1.1; }
+  .beyond span.k{ border-left:0; font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:15px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+  .beyond span.k + span{ border-left:0; }
+
+  .sec-split.case{ grid-template-columns:1.1fr .9fr; }
+  .sec-split.case h2{ font-size:clamp(44px,4.6vw,78px); }
+  .sec-split.case .ticks{ margin-top:30px; gap:14px; }
+  .case-stats{ display:flex; flex-direction:column; border-top:1px solid var(--line); }
+  .case-stats .cs{ padding:clamp(22px,3vh,36px) 0; border-bottom:1px solid var(--line); }
+  .case-stats .stat-num{ font-size:clamp(88px,8.4vw,152px); white-space:nowrap; }
+  .case-stats .stat-num .ar{ color:var(--accent); font-size:.55em; padding:0 .12em; vertical-align:.16em; }
+  .case-stats .stat-label{ margin-top:12px; }
+
+  section.scene-slide .body{ margin-top:26px; }
+  @media (max-width:900px){
+    .pipe.five{ grid-template-columns:1fr; }
+    .sec-split.case{ grid-template-columns:1fr; }
+    .case-stats .stat-num{ font-size:76px; }
+    .beyond{ flex-direction:column; gap:10px; }
+    .beyond span{ border-left:0; }
   }
 </style>
 </head>
@@ -543,36 +575,19 @@
 
 <main id="deck">
 
-  <!-- 01 · opener -->
+  <!-- 01 · hello -->
   <section>
     <div class="stream-band rise in" aria-hidden="true"><canvas id="stream-canvas"></canvas></div>
     <div class="eyebrow rise in d1">Silow <b>·</b> for insurance operations</div>
-    <h1 class="rise in d2" style="font-size:clamp(54px,5.4vw,96px); max-width:none;">Everyone bought AI.<br>Nobody can say <em>where it helped.</em></h1>
-    <p class="body rise in d3">Silow records every app, task and handoff — and turns it into <b>a ranked plan of what to automate</b>, then the agents that do it.<br><b>Installed and run entirely inside your infrastructure.</b></p>
+    <h1 class="rise in d2" style="font-size:clamp(54px,5.4vw,96px); max-width:none;">See how work really happens.<br><em>And where AI can help.</em></h1>
+    <p class="body rise in d3">Silow shows what&rsquo;s happening for <b>every employee, every team and the whole company</b> &mdash; and where AI can take work off people&rsquo;s plates. <b>Installed and run inside your infrastructure.</b></p>
     <div class="scroll-hint">↓</div>
   </section>
 
-  <!-- 02 · where it helps — insurance -->
-  <section>
-    <div class="eyebrow rise">Where it helps</div>
-    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px); max-width:none;">Insurance runs on manual work<br><em>between systems.</em></h2>
-    <div class="roles rise d2">
-      <div><div class="r">Strategic &amp; finance ops</div><div class="d">Month-end packs rebuilt by hand in Excel.</div></div>
-      <div><div class="r">Integrations</div><div class="d">Data re-keyed between legacy systems.</div></div>
-      <div><div class="r">Claims intake</div><div class="d">Documents chased and matched to the file.</div></div>
-      <div><div class="r">Claims testing</div><div class="d">The same test scenarios, run by hand.</div></div>
-      <div><div class="r">Workers&rsquo; comp</div><div class="d">Medical bills and case notes across portals.</div></div>
-      <div><div class="r">Underwriting</div><div class="d">Submissions re-typed before anyone decides.</div></div>
-      <div><div class="r">Policy servicing</div><div class="d">Endorsements copied from email into the core system.</div></div>
-      <div><div class="r">Agency &amp; broker ops</div><div class="d">Quotes and follow-ups, one tab at a time.</div></div>
-    </div>
-    <div class="roles-foot rise d3">One recording — <b>every team</b>. Then agents that run on <b>your own data</b>.</div>
-  </section>
-
-  <!-- 03 · recorder -->
+  <!-- 02 · how we do it: the recorder -->
   <section class="tight">
-    <div class="eyebrow rise">The product</div>
-    <h2 class="rise d1" style="font-size:clamp(56px,6vw,104px);">A tiny recorder.<br><em>An enormous dataset.</em></h2>
+    <div class="eyebrow rise">How we do it <b>·</b> the app</div>
+    <h2 class="rise d1" style="font-size:clamp(56px,6vw,104px);">A tiny recorder.<br><em>Every app, every task.</em></h2>
     <div class="facts rise d2"><span>macOS · Windows · Linux</span><span>1-minute install</span><span>1–2% CPU</span><span>No connectors</span></div>
     <div class="rec-wrap rise d3">
       <div class="frame recording"><img src="./assets/product-recording.png" alt="A workday being recorded by Silow"><span class="ring" aria-hidden="true"></span></div>
@@ -580,11 +595,11 @@
     </div>
   </section>
 
-  <!-- 04 · the platform, live (interactive) -->
+  <!-- 03 · what you get: the platform (interactive) -->
   <section class="platform-slide">
     <div class="pf-head">
-      <div class="eyebrow rise">The platform <b>·</b> click around</div>
-      <h2 class="rise d1">Every app. Every task. <em>Every minute.</em></h2>
+      <div class="eyebrow rise">What you get <b>·</b> click around</div>
+      <h2 class="rise d1">People, teams, the company. <em>A plan with ROI. A chat.</em></h2>
     </div>
     <div class="appframe rise d2">
       <iframe id="pf-frame" title="Silow platform — fictional sample company" data-src="app/?embed=1"></iframe>
@@ -592,91 +607,35 @@
     <div class="pf-foot rise d3"><span>Harbor Mutual is a fictional sample company <b>·</b> sample data</span><a class="pf-open" href="app/" target="_blank" rel="noopener">Open full screen ↗</a></div>
   </section>
 
-  <!-- 05 · Dubai -->
+  <!-- 04 · where it is useful -->
   <section>
-    <div class="split dubai">
-      <div>
-        <div class="eyebrow rise">Proof <b>·</b> Law firm <b>·</b> Dubai</div>
-        <h2 class="rise d1" style="font-size:clamp(56px,6vw,104px);">80% fewer <em>manual hours.</em></h2>
-        <p class="body rise d2">A firm whose day was buried in assembly work. <b>Lawyers keep every decision.</b></p>
-        <div class="texture rise d3" style="text-align:left;">Founder-reported client result <b>·</b> not a guarantee</div>
-      </div>
-      <div class="tl rise d2">
-        <div><div class="k">Week 1</div><div class="t">Recorded the real work</div><div class="b">Chats, folders, intake, billing packets.</div></div>
-        <div><div class="k">Weeks 2–3</div><div class="t">Built the onboarding &amp; KYC agent</div><div class="b">From the procedure the recording showed.</div></div>
-        <div><div class="k">Result</div><div class="t">80% fewer manual hours</div><div class="b">The agent assembles. Lawyers decide.</div></div>
-      </div>
+    <div class="eyebrow rise">Where it helps</div>
+    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px); max-width:none;">Anywhere work runs<br><em>between systems.</em></h2>
+    <div class="roles rise d2">
+      <div><div class="r">Claims intake</div><div class="d">Documents chased and matched to the file.</div></div>
+      <div><div class="r">Workers&rsquo; comp</div><div class="d">Medical bills checked across portals.</div></div>
+      <div><div class="r">Claims testing</div><div class="d">The same regression runs, by hand.</div></div>
+      <div><div class="r">Strategic &amp; finance ops</div><div class="d">Month-end packs rebuilt in Excel.</div></div>
+      <div><div class="r">Underwriting</div><div class="d">Submissions re-typed before anyone decides.</div></div>
+      <div><div class="r">Policy servicing</div><div class="d">Endorsements copied from email.</div></div>
+      <div><div class="r">Reinsurance</div><div class="d">Bordereaux built from claim extracts.</div></div>
+      <div><div class="r">Agency &amp; broker ops</div><div class="d">Quotes and follow-ups, one tab at a time.</div></div>
     </div>
+    <div class="beyond rise d3"><span class="k">Beyond insurance</span><span>Banking operations</span><span>Healthcare administration</span><span>Legal</span><span>Accounting</span><span>Customer support</span></div>
   </section>
 
-  <!-- 06 · three questions bridge -->
-  <section>
-    <div class="eyebrow rise">Before anything runs</div>
-    <h2 class="rise d1" style="font-size:clamp(48px,5.2vw,88px);">Three questions<br><em>every carrier asks.</em></h2>
-    <div class="opts q3 rise d2">
-      <div><div class="n">01</div><div class="t">Can our team install it ourselves?</div><div class="w">Yes. One package, a README and an acceptance test.</div></div>
-      <div><div class="n">02</div><div class="t">What happens to PII and PHI?</div><div class="w">Masked by our own model before any analysis.</div></div>
-      <div><div class="n">03</div><div class="t">Does anything leave our perimeter?</div><div class="w">Never to Silow. On your hardware, nothing leaves.</div></div>
-    </div>
-  </section>
-
-  <!-- 07 · Q1 deployment inside the perimeter -->
-  <section>
-    <div class="eyebrow rise">Question 01 <b>·</b> Install</div>
-    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">It runs inside your walls.<br><em>Your team installs it.</em></h2>
-    <div class="perimeter rise d2">
-      <span class="tag">Your perimeter</span>
-      <div class="flow">
-        <div class="node"><div class="k">01 · Workstations</div><div class="t">Silow recorder</div><div class="b">Company-managed machines or your VDI.</div></div>
-        <div class="arr">→</div>
-        <div class="node"><div class="k">02 · Your servers</div><div class="t">The Silow platform</div><div class="b">Ingest, encrypted storage, redaction, processing, reports — one container stack.</div></div>
-        <div class="arr">→</div>
-        <div class="node"><div class="k">03 · Your compute</div><div class="t">Your models</div><div class="b">On your GPUs or in your own cloud account.</div></div>
-      </div>
-      <div class="note">Screenshots and video <b>never reach Silow</b>. We don&rsquo;t access, receive or store your raw work data.</div>
-    </div>
-  </section>
-
-  <!-- 08 · Q1 what the infra team gets -->
-  <section>
-    <div class="sec-split infra">
-      <div>
-        <div class="eyebrow rise">Question 01 <b>·</b> For your infrastructure team</div>
-        <h2 class="rise d1">Self-hosted.<br><em>Documented. Tested.</em></h2>
-        <ul class="ticks rise d2">
-          <li>One Docker Compose package, deployed by your team</li>
-          <li>An install README written for infrastructure teams</li>
-          <li>SSO &amp; SAML through your identity provider</li>
-          <li>Audit logs: who accessed what, and when</li>
-        </ul>
-      </div>
-      <div class="term rise d3">
-        <div class="term-h"><span>Acceptance script</span><span>run after install</span></div>
-        <div class="term-r"><i>✓</i>Health</div>
-        <div class="term-r"><i>✓</i>Capture upload</div>
-        <div class="term-r"><i>✓</i>Redaction</div>
-        <div class="term-r"><i>✓</i>Screen → steps</div>
-        <div class="term-r"><i>✓</i>Steps → tasks</div>
-        <div class="term-r"><i>✓</i>Weekly reports</div>
-        <div class="term-f">Every stage checked, capture to report</div>
-      </div>
-    </div>
-    <div class="texture rise d3">Already running on-prem <b>·</b> at a 200-person US claims operation</div>
-  </section>
-
-  <!-- 09 · Q2 privacy pipeline -->
+  <!-- 05 · how it works -->
   <section class="tight">
-    <div class="eyebrow rise">Question 02 <b>·</b> PII &amp; PHI</div>
-    <h2 class="rise d1" style="font-size:clamp(44px,4.6vw,84px); max-width:none;">A screenshot goes in.<br><em>An anonymized pattern comes out.</em></h2>
-    <p class="body rise d2">No one watches a video of the workday. An automated pipeline does the work.</p>
-    <div class="pipe rise d2">
+    <div class="eyebrow rise">How it works</div>
+    <h2 class="rise d1" style="font-size:clamp(44px,4.6vw,84px); max-width:none;">From a screenshot<br><em>to an agent you approve.</em></h2>
+    <div class="pipe five rise d2">
       <div>
         <div class="pv scr"><div class="sb"><i></i><i></i><i></i><span>Claim WC-20418</span></div>
           <div class="fr"><span>Claimant</span><b>Dana Whitfield</b></div>
           <div class="fr"><span>Date of birth</span><b>04/12/1979</b></div>
           <div class="fr"><span>Diagnosis</span><b>Lumbar strain</b></div>
           <div class="fr"><span>Medical bill</span><b>$1,240.00</b></div></div>
-        <div class="n">01</div><div class="t">Capture</div><div class="b">The work surface, at intervals.</div>
+        <div class="n">01</div><div class="t">Capture</div><div class="b">The work screen, at intervals.</div>
       </div>
       <div>
         <div class="pv scr"><div class="sb"><i></i><i></i><i></i><span>Claim WC-•••••</span></div>
@@ -684,35 +643,43 @@
           <div class="fr"><span>Date of birth</span><b class="tok">DATE</b></div>
           <div class="fr"><span>Diagnosis</span><b class="tok">DIAGNOSIS</b></div>
           <div class="fr"><span>Medical bill</span><b>$1,240.00</b></div></div>
-        <div class="n">02</div><div class="t">Redact</div><div class="b">PII and PHI masked by our own model — before any analysis.</div>
+        <div class="n">02</div><div class="t">Redact</div><div class="b">PII &amp; PHI masked by our own model, before any analysis.</div>
       </div>
       <div>
         <div class="pv stp">
-          <div class="sr"><span>Open the claim</span><small>ClaimCenter</small><b>0:40</b></div>
-          <div class="sr"><span>Attach the medical bill</span><small>ClaimCenter</small><b>2:10</b></div>
-          <div class="sr"><span>Email the adjuster</span><small>Outlook</small><b>1:05</b></div>
+          <div class="sr"><span>Open claim</span><small>ClaimCenter</small><b>0:40</b></div>
+          <div class="sr"><span>Attach bill</span><small>ClaimCenter</small><b>2:10</b></div>
+          <div class="sr"><span>Email adjuster</span><small>Outlook</small><b>1:05</b></div>
           <div class="del">Raw screenshot · deleted</div></div>
-        <div class="n">03</div><div class="t">Extract</div><div class="b">Becomes process steps. The raw screenshot is deleted.</div>
+        <div class="n">03</div><div class="t">Extract</div><div class="b">Steps, tasks and processes. The raw screenshot is deleted.</div>
       </div>
       <div>
         <div class="pv rpt">
-          <div class="rh"><span>Claims intake · document handling</span></div>
-          <div class="rb"><b>44 h</b><small>per week, 10 people</small></div>
-          <div class="rt"><i style="width:22%"></i><i class="ai" style="width:78%"></i></div>
-          <div class="rl"><span><i></i>People</span><span><i class="ai"></i>Agent can take</span></div></div>
-        <div class="n">04</div><div class="t">Report</div><div class="b">Workflows and automation opportunities — not people.</div>
+          <div class="rh"><span>Claims intake · documents</span></div>
+          <div class="rb"><b>44 h</b><small>a week, 5 people</small></div>
+          <div class="rt"><i style="width:40%"></i><i class="ai" style="width:60%"></i></div>
+          <div class="rl"><span><i></i>People</span><span><i class="ai"></i>AI can take</span></div></div>
+        <div class="n">04</div><div class="t">Report &amp; plan</div><div class="b">Personal, team and company reports. A ranked plan.</div>
+      </div>
+      <div>
+        <div class="pv apv">
+          <div class="ah"><span>Agent · FNOL claim draft</span></div>
+          <div class="ar"><span>Claim draft ready</span><b>12 fields</b></div>
+          <div class="ar"><span>Needs a decision</span><b>coverage</b></div>
+          <div class="ab"><span class="ok">Approve</span><span>Edit</span></div></div>
+        <div class="n">05</div><div class="t">Agents</div><div class="b">Built from the real steps. A named person approves.</div>
       </div>
     </div>
     <div class="excap rise d3" style="text-align:center;">Illustration <b>·</b> fictional claim record</div>
   </section>
 
-  <!-- 10 · Q2 encrypted, what is kept -->
+  <!-- 06 · how it works: privacy -->
   <section>
     <div class="sec-split">
       <div>
-        <div class="eyebrow rise">Question 02 <b>·</b> Your data, your rules</div>
-        <h2 class="rise d1">Encrypted.<br><em>PII &amp; PHI stripped.</em></h2>
-        <p class="body rise d2">What remains is the shape of the work — not the contents of a claim file or a medical record.</p>
+        <div class="eyebrow rise">How it works <b>·</b> privacy</div>
+        <h2 class="rise d1">Encrypted.<br><em>PII &amp; PHI masked.</em></h2>
+        <p class="body rise d2">What remains is the shape of the work &mdash; not the contents of a claim file or a medical record.</p>
         <div class="safety rise d2">
           <div class="grid">
             <div class="item">Encrypted in transit and at rest</div>
@@ -741,21 +708,21 @@
     </div>
   </section>
 
-  <!-- 11 · Q3 where models run -->
+  <!-- 07 · how it works: where models run -->
   <section>
-    <div class="eyebrow rise">Question 03 <b>·</b> Your perimeter</div>
+    <div class="eyebrow rise">How it works <b>·</b> processing</div>
     <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px); max-width:none;">Nothing has to leave.<br><em>You choose where models run.</em></h2>
     <div class="opts modes rise d2">
       <div>
         <div class="n">01</div>
         <div class="t">Your own GPUs</div>
         <div class="ex">On-prem racks</div>
-        <div class="b">Buy the cards, rack them — then <b>you pay for electricity</b>. We size the hardware with your infrastructure team.</div>
+        <div class="b">Buy the cards, rack them &mdash; then <b>you pay for electricity</b>. We size the hardware with your infrastructure team.</div>
         <div class="w">Nothing leaves the building.</div>
       </div>
       <div>
         <div class="n">02</div>
-        <div class="t">Cloud GPUs in your account</div>
+        <div class="t">GPUs in your own cloud account</div>
         <div class="ex">AWS · Google Cloud · OVH</div>
         <div class="b">You pay for usage; <b>we deploy the models</b> or help your team do it.</div>
         <div class="w">Nothing leaves your cloud tenant.</div>
@@ -764,24 +731,77 @@
         <div class="n">03</div>
         <div class="t">Zero-data-retention provider</div>
         <div class="ex">OpenAI · Anthropic · Gemini · Fireworks · Baseten</div>
-        <div class="b">Your account, <b>zero data retention switched on</b> — a balance, or a contract for dedicated inference.</div>
-        <div class="w">Fastest start. Sent for processing, never retained.</div>
+        <div class="b">Your account, <b>zero data retention switched on</b> &mdash; a balance, or a contract for dedicated inference.</div>
+        <div class="w">Fastest start. Processed, never retained.</div>
       </div>
     </div>
   </section>
 
-  <!-- 12 · PHI proof -->
+  <!-- 08 · how it is installed: perimeter -->
   <section>
-    <div class="eyebrow rise">All three, in production <b>·</b> US insurance-claims operation</div>
-    <h2 class="rise d1">PHI every day.<br><em>In production.</em></h2>
-    <p class="body rise d2">Medical documents, daily. Silow runs <b>inside their infrastructure</b>, on their own model provider.</p>
-    <div class="stats rise d2" style="margin-top:46px;">
-      <div class="stat"><div class="stat-num" style="font-size:clamp(96px,9.4vw,168px);">200</div><div class="stat-label">people in the rollout — it <b>started with 10</b>.</div></div>
-      <div class="stat"><div class="stat-num" style="font-size:clamp(96px,9.4vw,168px);">100<small>%</small></div><div class="stat-label"><b>on-prem</b>, inside their own infrastructure.</div></div>
+    <div class="eyebrow rise">How it&rsquo;s installed</div>
+    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">It runs inside your walls.<br><em>Your team installs it.</em></h2>
+    <div class="perimeter rise d2">
+      <span class="tag">Your perimeter</span>
+      <div class="flow">
+        <div class="node"><div class="k">01 · Workstations</div><div class="t">Silow recorder</div><div class="b">Company-managed machines or your VDI.</div></div>
+        <div class="arr">→</div>
+        <div class="node"><div class="k">02 · Your servers</div><div class="t">The Silow platform</div><div class="b">Ingest, encrypted storage, redaction, processing, reports — one container stack.</div></div>
+        <div class="arr">→</div>
+        <div class="node"><div class="k">03 · Your compute</div><div class="t">Your models</div><div class="b">On your GPUs or in your own cloud account.</div></div>
+      </div>
+      <div class="note">Screenshots and video <b>never reach Silow</b>. We don&rsquo;t access, receive or store your raw work data.</div>
     </div>
   </section>
 
-  <!-- 13 · pricing -->
+  <!-- 09 · how it is installed: for the infra team -->
+  <section>
+    <div class="sec-split infra">
+      <div>
+        <div class="eyebrow rise">How it&rsquo;s installed <b>·</b> for your infrastructure team</div>
+        <h2 class="rise d1">Self-hosted.<br><em>Documented. Tested.</em></h2>
+        <ul class="ticks rise d2">
+          <li>One Docker Compose package, deployed by your team</li>
+          <li>An install README written for infrastructure teams</li>
+          <li>SSO &amp; SAML through your identity provider</li>
+          <li>Audit logs: who accessed what, and when</li>
+        </ul>
+      </div>
+      <div class="term rise d3">
+        <div class="term-h"><span>Acceptance script</span><span>run after install</span></div>
+        <div class="term-r"><i>✓</i>Health</div>
+        <div class="term-r"><i>✓</i>Capture upload</div>
+        <div class="term-r"><i>✓</i>Redaction</div>
+        <div class="term-r"><i>✓</i>Screen → steps</div>
+        <div class="term-r"><i>✓</i>Steps → tasks</div>
+        <div class="term-r"><i>✓</i>Weekly reports</div>
+        <div class="term-f">Every stage checked, capture to report</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · HIPAA case -->
+  <section>
+    <div class="sec-split case">
+      <div>
+        <div class="eyebrow rise">In production <b>·</b> US insurance-claims operation</div>
+        <h2 class="rise d1">PHI every day.<br><em>In production.</em></h2>
+        <p class="body rise d2">A US insurance-claims operation handling medical documents daily, in a <b>HIPAA-regulated environment</b>. Silow runs inside their infrastructure, on their own model provider.</p>
+        <ul class="ticks rise d2">
+          <li>Installed inside their own infrastructure</li>
+          <li>PII &amp; PHI redacted before any analysis</li>
+          <li>Processing on their own model provider</li>
+          <li>Measuring their claims workflow</li>
+        </ul>
+      </div>
+      <div class="case-stats rise d3">
+        <div class="cs"><div class="stat-num">20<span class="ar">→</span>200</div><div class="stat-label">people. We started together in <b>August</b> with 20.</div></div>
+        <div class="cs"><div class="stat-num">100<small>%</small></div><div class="stat-label"><b>on-prem</b>, inside their own infrastructure.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · pricing -->
   <section class="tight">
     <div class="eyebrow rise">Pricing</div>
     <h2 class="rise d1" style="font-size:clamp(48px,5.2vw,88px);">One license.<br><em>Processing at cost.</em></h2>
@@ -789,28 +809,28 @@
       <div class="card rise d2">
         <div class="pk">Silow license</div>
         <div class="pn">$49<small> / user / month</small></div>
-        <div class="pd">Recorder, platform, redaction, personal and team reports, the ranked plan, chat with your data. <b>Self-hosted in your infrastructure.</b></div>
+        <div class="pd">Recorder, platform, redaction, personal, team and company reports, the ranked plan, chat with your data. <b>Self-hosted in your infrastructure.</b></div>
       </div>
       <div class="card rise d3">
         <div class="pk">Processing · no markup</div>
         <div class="pn">$30–50<small> / user / month</small></div>
-        <div class="pd"><b>Paid directly to your provider</b> — inference API or cloud GPUs. The range depends on where models run. On your own GPUs, it&rsquo;s electricity.</div>
+        <div class="pd"><b>Paid directly to your provider</b> &mdash; inference API or cloud GPUs. The range depends on where models run. On your own GPUs, it&rsquo;s electricity.</div>
       </div>
     </div>
     <div class="pex rise d3"><span class="k">Example · 50 people, one month</span><span class="v">$2,450 license <i>+</i> ~$1,500–2,500 processing</span></div>
   </section>
 
-  <!-- 14 · finale: one month -->
+  <!-- 12 · questions -->
   <section class="scene-slide">
     <div class="scene" id="us-scene-b" aria-hidden="true"></div>
     <div class="scene-shade"></div>
     <div class="content">
-      <div class="eyebrow rise in">Next step</div>
-      <h2 class="rise in" style="font-size:clamp(56px,6vw,104px);">Start with one month.</h2>
-      <p class="body rise in d1">You choose the team. You choose how many people.</p>
+      <div class="eyebrow rise in">Thank you</div>
+      <h2 class="rise in" style="font-size:clamp(64px,7vw,124px);">Questions?</h2>
+      <p class="body rise in d1">Start with one month. <b>You choose the team and how many people.</b></p>
       <div class="month rise in d2">
         <div><div class="n">Week 1</div><div class="t">Installed, recording, first personal reports</div></div>
-        <div><div class="n">Week 2</div><div class="t">The team map and the ranked plan</div></div>
+        <div><div class="n">Week 2</div><div class="t">Team and company reports, the ranked plan</div></div>
         <div><div class="n">Weeks 3–4</div><div class="t">First agents scoped and approved by you</div></div>
       </div>
       <a class="btn rise in d3" href="https://cal.com/silow-ai/silow-demo">Book a 30-minute call →</a>
