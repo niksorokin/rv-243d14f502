@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Silow — for insurance operations</title><!-- rev:ins-v8b-202611081745 -->
+<title>Silow — for insurance operations</title><!-- rev:ins-v8c-202611081800 -->
 <style>
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Regular.otf") format("opentype"); font-weight:400; font-display:swap; }
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Medium.otf") format("opentype"); font-weight:500; font-display:swap; }
@@ -709,16 +709,11 @@
   </section>
 
   <!-- 08 · CTA -->
-  <section class="scene-slide">
-    <div class="scene" id="us-scene-b" aria-hidden="true"></div>
-    <div class="scene-shade"></div>
-    <div class="content">
-      <div class="eyebrow rise in">Next step</div>
-      <h2 class="rise in" style="font-size:clamp(64px,7vw,124px);">Let&rsquo;s start.</h2>
-      <p class="body rise in d1">Begin with one month. <b>You choose the team and how many people.</b></p>
-      <a class="btn rise in d3" href="https://cal.com/silow-ai/silow-demo">Book a 30-minute call →</a>
-      <div class="contacts rise in d3"><a href="mailto:nikita@silow.ai">nikita@silow.ai</a> · <a href="https://silow.ai">silow.ai</a></div>
-    </div>
+  <section>
+    <div class="eyebrow rise">Next step</div>
+    <h2 class="rise d1" style="font-size:clamp(64px,7vw,124px);">Let&rsquo;s <em>start.</em></h2>
+    <p class="body rise d2">Begin with one month. <b>You choose the team and how many people.</b></p>
+    <div class="texture rise d3"><a href="mailto:nikita@silow.ai" style="color:inherit;text-decoration:none;">nikita@silow.ai</a> <b>·</b> <a href="https://silow.ai" style="color:inherit;text-decoration:none;">silow.ai</a></div>
   </section>
 
 </main>
@@ -771,28 +766,6 @@
     const fr=document.getElementById('pf-frame'); if(!fr) return;
     new IntersectionObserver((es,o)=>{ if(es[0].isIntersecting){ fr.src=fr.dataset.src; o.disconnect(); } },{root:document.getElementById('deck'),rootMargin:'100% 0px'}).observe(fr.closest('section'));
     addEventListener('message',e=>{ const k=e.data&&e.data.silowDeckKey; if(!k) return; dispatchEvent(new KeyboardEvent('keydown',{key:k==='ArrowLeft'?'ArrowUp':k==='ArrowRight'?'ArrowDown':k})); });
-  })();
-</script>
-<!-- Unicorn Studio scenes (same animation as the main site) -->
-<script>
-  (function () {
-    const s = document.createElement('script');
-    s.src = './assets/unicornStudio.umd.js';
-    s.async = true;
-    s.onload = () => {
-      try {
-        if (!window.UnicornStudio) return;
-        ['us-scene-b'].forEach(id => {
-          window.UnicornStudio.addScene({
-            elementId: id,
-            filePath: './assets/blue-donut.json',
-            fps: 60, scale: 1, dpi: 1.5, lazyLoad: false, production: true,
-            interactivity: { mouse: { disableMobile: true } },
-          });
-        });
-      } catch (e) { /* static background stays */ }
-    };
-    document.head.appendChild(s);
   })();
 </script>
 
