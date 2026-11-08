@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Silow — for insurance operations</title><!-- rev:ins-v7-202611070254 -->
+<title>Silow — for insurance operations</title><!-- rev:ins-v8-202611081708 -->
 <style>
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Regular.otf") format("opentype"); font-weight:400; font-display:swap; }
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Medium.otf") format("opentype"); font-weight:500; font-display:swap; }
@@ -160,24 +160,6 @@
   .stat-label{ margin-top:18px; font-size:clamp(19px,1.55vw,24px); line-height:1.42; color:var(--mute); }
   .stat-label b{ color:var(--ink); font-weight:500; }
 
-  /* pricing pair — parallel hairline cards */
-  .price-row{ display:flex; gap:22px; justify-content:center; align-items:stretch; margin-top:54px; width:100%; max-width:1240px; }
-  .price-card{
-    flex:1 1 0; border:1px solid var(--line); border-radius:18px; background:#fff;
-    padding:42px 34px 38px; display:flex; flex-direction:column; align-items:center;
-  }
-  .price-card .pk{
-    font-family:"Suisse Intl Mono", ui-monospace, monospace; font-size:14px;
-    letter-spacing:.16em; text-transform:uppercase; color:var(--accent); white-space:nowrap;
-  }
-  .price-card .pn{
-    margin-top:24px; font-size:clamp(64px,5.2vw,100px); letter-spacing:-0.04em; line-height:.95; white-space:nowrap;
-  }
-  .price-card .pn small{ font-size:.42em; letter-spacing:-0.02em; color:var(--mute); }
-  .price-card .pd{ margin-top:22px; font-size:clamp(17px,1.3vw,20px); line-height:1.45; color:var(--mute); max-width:30ch; }
-  .price-card .pd b{ color:var(--ink); font-weight:500; }
-  .price-row.solo .price-card{ flex:0 1 auto; width:min(600px,100%); }
-
   .quote{ margin:0; max-width:1100px; font-size:clamp(38px, 4.4vw, 68px); font-weight:400; letter-spacing:-0.025em; line-height:1.12; }
   .quote-by{ margin-top:32px; font-family:"Suisse Intl Mono", ui-monospace, monospace; font-size:15px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); }
   .quote-by b{ color:var(--accent); font-weight:400; }
@@ -257,8 +239,6 @@
 
   @media (max-width:900px){
     .stats{ flex-direction:column; gap:44px; align-items:center; }
-    .price-row{ flex-direction:column; align-items:center; }
-    .price-row .price-card{ width:min(600px,100%); flex:none; }
     .split{ grid-template-columns:1fr; text-align:center; }
     .split .body{ margin-left:auto; margin-right:auto; }
     .ucs{ margin-left:auto; margin-right:auto; text-align:left; }
@@ -301,19 +281,6 @@
   .opts .w{ margin-top:auto; padding-top:20px; font-size:clamp(15px,1.15vw,17px); color:var(--ink-2); }
   .opts .w::before{ content:"→ "; color:var(--accent); }
 
-  .price2{ display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:50px; width:100%; max-width:1300px; text-align:left; }
-  .price2 .card{ border:1px solid var(--line); border-radius:18px; background:#fff; padding:36px 34px; }
-  .price2 .pk{ font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
-  .price2 .pn{ margin-top:20px; font-size:clamp(64px,5.6vw,104px); letter-spacing:-0.04em; line-height:.95; white-space:nowrap; }
-  .price2 .pn small{ font-size:.36em; letter-spacing:-0.01em; color:var(--mute); }
-  .price2 .pd{ margin-top:20px; font-size:clamp(16px,1.25vw,19px); line-height:1.5; color:var(--mute); }
-  .price2 .pd b{ color:var(--ink); font-weight:500; }
-  .rates{ margin-top:18px; width:100%; border-collapse:collapse; font-size:clamp(16px,1.25vw,19px); }
-  .rates td{ padding:11px 0; border-bottom:1px solid var(--line); color:var(--ink-2); }
-  .rates td:last-child{ text-align:right; font-family:"Suisse Intl Mono",ui-monospace,monospace; color:var(--ink); white-space:nowrap; padding-left:18px; }
-  .rates tr.total td{ border-bottom:none; padding-top:16px; font-weight:500; color:var(--ink); }
-  .rates tr.total td:last-child{ color:var(--accent); }
-  .rates .s{ display:block; font-size:.82em; color:var(--faint); margin-top:2px; }
 
   .faq.three{ grid-template-columns:repeat(3,1fr); max-width:1440px; }
   .faq.three > div{ padding:22px 24px; }
@@ -398,13 +365,9 @@
     .flow .arr{ transform:rotate(90deg); height:30px; }
     .sec-split{ grid-template-columns:1fr; }
     .opts{ grid-template-columns:1fr; }
-    .price2{ grid-template-columns:1fr; }
     .faq, .faq.three{ grid-template-columns:1fr; }
     .roles{ grid-template-columns:1fr 1fr; }
     .eyebrow{ flex-wrap:wrap; justify-content:center; text-align:center; line-height:1.6; letter-spacing:.12em; font-size:13px; }
-    .price2 .pn{ font-size:56px; white-space:normal; }
-    .price2 .card{ padding:28px 22px; }
-    .rates td:last-child{ white-space:normal; font-size:14px; }
   }
 
   /* ===== v6 ===== */
@@ -504,12 +467,6 @@
   .opts.modes .w{ font-weight:500; color:var(--ink); font-size:clamp(17px,1.3vw,20px); }
   .opts.modes .ex{ text-transform:none; letter-spacing:.02em; font-size:14px; }
 
-  /* pricing example */
-  .price2 .card{ display:flex; flex-direction:column; }
-  .pex{ margin-top:22px; width:100%; max-width:1300px; display:flex; justify-content:space-between; align-items:center; gap:24px; border:1px solid var(--line); border-radius:18px; padding:24px 34px; background:var(--paper-2); text-align:left; }
-  .pex .k{ font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); white-space:nowrap; }
-  .pex .v{ font-size:clamp(22px,2vw,32px); letter-spacing:-0.02em; color:var(--ink); }
-  .pex .v i{ font-style:normal; color:var(--faint); padding:0 .2em; }
 
   @media (max-width:900px){
     section.tight{ padding-top:9vh; }
@@ -523,8 +480,6 @@
     .opts.q3 > div{ min-height:0; }
     .sec-split.infra{ grid-template-columns:1fr; }
     .pipe{ grid-template-columns:1fr; }
-    .pex{ flex-direction:column; align-items:flex-start; padding:20px 22px; }
-    .pex .k{ white-space:normal; }
     .pf-foot{ flex-direction:column; gap:8px; }
   }
 
@@ -563,6 +518,40 @@
     .beyond{ flex-direction:column; gap:10px; }
     .beyond span{ border-left:0; }
   }
+
+  /* ===== v8 ===== */
+  /* how it works: guarantees strip under the pipeline */
+  .guard{ margin-top:3.2vh; display:flex; flex-wrap:wrap; justify-content:center; gap:10px 0; font-size:clamp(18px,1.35vw,23px); letter-spacing:-0.01em; color:var(--ink); }
+  .guard span{ padding:0 clamp(16px,1.6vw,30px); border-left:1px solid var(--line-2); line-height:1.15; }
+  .guard span:first-child{ border-left:0; }
+  section.tight .guard + .excap{ margin-top:2.2vh; }
+
+  /* deployment: two options side by side */
+  .modes2{ margin-top:3.6vh; display:grid; grid-template-columns:1fr 1fr; gap:22px; width:100%; max-width:1440px; text-align:left; }
+  .modes2 .mcol{ border:1px solid var(--line-2); border-radius:18px; background:#fff; padding:clamp(24px,3vh,34px) clamp(26px,2.2vw,38px); display:flex; flex-direction:column; }
+  .modes2 .mcol.own{ border:1.5px dashed var(--accent); }
+  .modes2 .mk{ font-family:"Suisse Intl Mono",ui-monospace,monospace; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+  .modes2 .mk b{ font-weight:400; color:var(--faint); }
+  .modes2 .mt{ margin-top:12px; font-size:clamp(26px,2.3vw,40px); font-weight:500; letter-spacing:-0.02em; line-height:1.1; }
+  .modes2 ul{ list-style:none; margin:clamp(16px,2.2vh,26px) 0 0; padding:0; display:flex; flex-direction:column; gap:clamp(10px,1.4vh,16px); }
+  .modes2 li{ position:relative; padding-left:20px; font-size:clamp(18px,1.4vw,24px); line-height:1.4; color:var(--mute); }
+  .modes2 li::before{ content:""; position:absolute; left:0; top:.62em; width:6px; height:6px; border-radius:50%; background:var(--accent); }
+  .modes2 li b{ color:var(--ink); font-weight:500; }
+  .modes2 .mw{ margin-top:auto; padding-top:clamp(16px,2.2vh,24px); font-size:clamp(18px,1.35vw,23px); font-weight:500; color:var(--ink); }
+  .modes2 .mw::before{ content:"→ "; color:var(--accent); }
+  .mbridge{ margin-top:2.6vh; font-size:clamp(18px,1.35vw,23px); letter-spacing:-0.01em; color:var(--mute); }
+  .mbridge b{ color:var(--accent); font-weight:400; padding:0 .3em; }
+
+  /* case slide without the ticks list */
+  .sec-split.case .body{ max-width:620px; }
+
+  @media (max-width:900px){
+    .guard{ flex-direction:column; gap:10px; }
+    .guard span{ border-left:0; }
+    .modes2{ grid-template-columns:1fr; }
+    .mbridge{ line-height:1.6; }
+    .btn{ padding:17px 30px; font-size:20px; white-space:nowrap; }
+  }
 </style>
 </head>
 <body>
@@ -580,11 +569,11 @@
     <div class="stream-band rise in" aria-hidden="true"><canvas id="stream-canvas"></canvas></div>
     <div class="eyebrow rise in d1">Silow <b>·</b> for insurance operations</div>
     <h1 class="rise in d2" style="font-size:clamp(54px,5.4vw,96px); max-width:none;">See how work really happens.<br><em>And where AI can help.</em></h1>
-    <p class="body rise in d3">Silow shows what&rsquo;s happening for <b>every employee, every team and the whole company</b> &mdash; and where AI can take work off people&rsquo;s plates. <b>Installed and run inside your infrastructure.</b></p>
+    <p class="body rise in d3">For <b>every employee, every team and the whole company.</b></p>
     <div class="scroll-hint">↓</div>
   </section>
 
-  <!-- 02 · how we do it: the recorder -->
+  <!-- 02 · how: the recorder -->
   <section class="tight">
     <div class="eyebrow rise">How we do it <b>·</b> the app</div>
     <h2 class="rise d1" style="font-size:clamp(56px,6vw,104px);">A tiny recorder.<br><em>Every app, every task.</em></h2>
@@ -621,10 +610,9 @@
       <div><div class="r">Reinsurance</div><div class="d">Bordereaux built from claim extracts.</div></div>
       <div><div class="r">Agency &amp; broker ops</div><div class="d">Quotes and follow-ups, one tab at a time.</div></div>
     </div>
-    <div class="beyond rise d3"><span class="k">Beyond insurance</span><span>Banking operations</span><span>Healthcare administration</span><span>Legal</span><span>Accounting</span><span>Customer support</span></div>
   </section>
 
-  <!-- 05 · how it works -->
+  <!-- 05 · how it works (one slide, incl. redaction + encryption) -->
   <section class="tight">
     <div class="eyebrow rise">How it works</div>
     <h2 class="rise d1" style="font-size:clamp(44px,4.6vw,84px); max-width:none;">From a screenshot<br><em>to an agent you approve.</em></h2>
@@ -651,7 +639,7 @@
           <div class="sr"><span>Attach bill</span><small>ClaimCenter</small><b>2:10</b></div>
           <div class="sr"><span>Email adjuster</span><small>Outlook</small><b>1:05</b></div>
           <div class="del">Raw screenshot · deleted</div></div>
-        <div class="n">03</div><div class="t">Extract</div><div class="b">Steps, tasks and processes. The raw screenshot is deleted.</div>
+        <div class="n">03</div><div class="t">Extract</div><div class="b">Steps, tasks and processes. Not the screen.</div>
       </div>
       <div>
         <div class="pv rpt">
@@ -670,169 +658,64 @@
         <div class="n">05</div><div class="t">Agents</div><div class="b">Built from the real steps. A named person approves.</div>
       </div>
     </div>
+    <div class="guard rise d3"><span>Encrypted in transit and at rest</span><span>No keystrokes</span><span>No message content</span><span>No individual scoring</span></div>
     <div class="excap rise d3" style="text-align:center;">Illustration <b>·</b> fictional claim record</div>
   </section>
 
-  <!-- 06 · how it works: privacy -->
-  <section>
-    <div class="sec-split">
-      <div>
-        <div class="eyebrow rise">How it works <b>·</b> privacy</div>
-        <h2 class="rise d1">Encrypted.<br><em>PII &amp; PHI masked.</em></h2>
-        <p class="body rise d2">What remains is the shape of the work &mdash; not the contents of a claim file or a medical record.</p>
-        <div class="safety rise d2">
-          <div class="grid">
-            <div class="item">Encrypted in transit and at rest</div>
-            <div class="item">PII &amp; PHI masked before analysis</div>
-            <div class="item">Raw screenshot deleted after redaction</div>
-            <div class="item">No keystroke logging</div>
-            <div class="item">No private message content</div>
-            <div class="item">No individual scoring</div>
-          </div>
-          <div class="foot">About the work <b>·</b> not the worker</div>
-        </div>
-      </div>
-      <figure class="keep rise d3">
-        <div class="kcard">
-          <div class="kh"><span>What Silow keeps</span><span class="kt">one process step</span></div>
-          <div class="kr"><span>Team</span><b>Claims intake</b></div>
-          <div class="kr"><span>App</span><b>ClaimCenter</b></div>
-          <div class="kr"><span>Step</span><b>Attach the medical bill</b></div>
-          <div class="kr"><span>Time</span><b>2 min 10 s</b></div>
-          <div class="kr"><span>Claimant</span><b class="tok">NAME</b></div>
-          <div class="kr"><span>Diagnosis</span><b class="tok">DIAGNOSIS</b></div>
-          <div class="kr"><span>Screenshot</span><b class="gone">Deleted after redaction</b></div>
-        </div>
-        <figcaption class="texture" style="margin-top:18px;text-align:left;">Illustration <b>·</b> fictional record</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- 07 · how it works: where models run -->
-  <section>
-    <div class="eyebrow rise">How it works <b>·</b> processing</div>
-    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px); max-width:none;">Nothing has to leave.<br><em>You choose where models run.</em></h2>
-    <div class="opts modes rise d2">
-      <div>
-        <div class="n">01</div>
-        <div class="t">Your own GPUs</div>
-        <div class="ex">On-prem racks</div>
-        <div class="b">Buy the cards, rack them &mdash; then <b>you pay for electricity</b>. We size the hardware with your infrastructure team.</div>
-        <div class="w">Nothing leaves the building.</div>
-      </div>
-      <div>
-        <div class="n">02</div>
-        <div class="t">GPUs in your own cloud account</div>
-        <div class="ex">AWS · Google Cloud · OVH</div>
-        <div class="b">You pay for usage; <b>we deploy the models</b> or help your team do it.</div>
-        <div class="w">Nothing leaves your cloud tenant.</div>
-      </div>
-      <div>
-        <div class="n">03</div>
-        <div class="t">Zero-data-retention provider</div>
-        <div class="ex">OpenAI · Anthropic · Gemini · Fireworks · Baseten</div>
-        <div class="b">Your account, <b>zero data retention switched on</b> &mdash; a balance, or a contract for dedicated inference.</div>
-        <div class="w">Fastest start. Processed, never retained.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 08 · how it is installed: perimeter -->
-  <section>
-    <div class="eyebrow rise">How it&rsquo;s installed</div>
-    <h2 class="rise d1" style="font-size:clamp(44px,4.8vw,80px);">It runs inside your walls.<br><em>Your team installs it.</em></h2>
-    <div class="perimeter rise d2">
-      <span class="tag">Your perimeter</span>
-      <div class="flow">
-        <div class="node"><div class="k">01 · Workstations</div><div class="t">Silow recorder</div><div class="b">Company-managed machines or your VDI.</div></div>
-        <div class="arr">→</div>
-        <div class="node"><div class="k">02 · Your servers</div><div class="t">The Silow platform</div><div class="b">Ingest, encrypted storage, redaction, processing, reports — one container stack.</div></div>
-        <div class="arr">→</div>
-        <div class="node"><div class="k">03 · Your compute</div><div class="t">Your models</div><div class="b">On your GPUs or in your own cloud account.</div></div>
-      </div>
-      <div class="note">Screenshots and video <b>never reach Silow</b>. We don&rsquo;t access, receive or store your raw work data.</div>
-    </div>
-  </section>
-
-  <!-- 09 · how it is installed: for the infra team -->
-  <section>
-    <div class="sec-split infra">
-      <div>
-        <div class="eyebrow rise">How it&rsquo;s installed <b>·</b> for your infrastructure team</div>
-        <h2 class="rise d1">Self-hosted.<br><em>Documented. Tested.</em></h2>
-        <ul class="ticks rise d2">
-          <li>One Docker Compose package, deployed by your team</li>
-          <li>An install README written for infrastructure teams</li>
-          <li>SSO &amp; SAML through your identity provider</li>
-          <li>Audit logs: who accessed what, and when</li>
+  <!-- 06 · how it is deployed: two options -->
+  <section class="tight">
+    <div class="eyebrow rise">How it&rsquo;s deployed</div>
+    <h2 class="rise d1" style="font-size:clamp(44px,4.6vw,80px); max-width:none;">Two ways to run it.<br><em>Our servers or yours.</em></h2>
+    <div class="modes2 rise d2">
+      <div class="mcol">
+        <div class="mk">01 <b>·</b> Silow-hosted</div>
+        <div class="mt">Fastest start</div>
+        <ul>
+          <li>Install the recorder and go. <b>No infrastructure work</b> on your side.</li>
+          <li>Redaction runs on our servers. Raw captures are <b>deleted within 48&nbsp;hours</b>; only derived patterns are kept.</li>
+          <li>Silow is your data processor under a <b>DPA</b>.</li>
+          <li>Subprocessors: a major cloud provider (ISO 27001 / 27017 / 27018) and model inference with <b>zero data retention</b>, no training on your data.</li>
         </ul>
+        <div class="mw">For a first team that doesn&rsquo;t handle PHI.</div>
       </div>
-      <div class="term rise d3">
-        <div class="term-h"><span>Acceptance script</span><span>run after install</span></div>
-        <div class="term-r"><i>✓</i>Health</div>
-        <div class="term-r"><i>✓</i>Capture upload</div>
-        <div class="term-r"><i>✓</i>Redaction</div>
-        <div class="term-r"><i>✓</i>Screen → steps</div>
-        <div class="term-r"><i>✓</i>Steps → tasks</div>
-        <div class="term-r"><i>✓</i>Weekly reports</div>
-        <div class="term-f">Every stage checked, capture to report</div>
+      <div class="mcol own">
+        <div class="mk">02 <b>·</b> On your servers</div>
+        <div class="mt">Everything inside your perimeter</div>
+        <ul>
+          <li>One <b>Docker Compose</b> package, an install README, and an acceptance script that checks every stage.</li>
+          <li><b>SSO / SAML</b> and audit logs.</li>
+          <li>Models on <b>your GPUs</b>, your cloud account, or a zero-data-retention provider you choose.</li>
+          <li>Screenshots and video <b>never reach Silow</b>.</li>
+        </ul>
+        <div class="mw">For PHI. The mode in our HIPAA case.</div>
       </div>
     </div>
+    <div class="mbridge rise d3">Start hosted, move to your servers later <b>·</b> same recorder, same reports</div>
   </section>
 
-  <!-- 10 · HIPAA case -->
+  <!-- 07 · HIPAA case -->
   <section>
     <div class="sec-split case">
       <div>
         <div class="eyebrow rise">In production <b>·</b> US insurance-claims operation</div>
         <h2 class="rise d1">PHI every day.<br><em>In production.</em></h2>
-        <p class="body rise d2">A US insurance-claims operation handling medical documents daily, in a <b>HIPAA-regulated environment</b>. Silow runs inside their infrastructure, on their own model provider.</p>
-        <ul class="ticks rise d2">
-          <li>Installed inside their own infrastructure</li>
-          <li>PII &amp; PHI redacted before any analysis</li>
-          <li>Processing on their own model provider</li>
-          <li>Measuring their claims workflow</li>
-        </ul>
+        <p class="body rise d2">A US insurance-claims operation handling medical documents daily, in a <b>HIPAA-regulated environment</b>. Silow maps their claims workflow.</p>
       </div>
       <div class="case-stats rise d3">
         <div class="cs"><div class="stat-num">20<span class="ar">→</span>200</div><div class="stat-label">people. We started together in <b>August</b> with 20.</div></div>
-        <div class="cs"><div class="stat-num">100<small>%</small></div><div class="stat-label"><b>on-prem</b>, inside their own infrastructure.</div></div>
+        <div class="cs"><div class="stat-num">100<small>%</small></div><div class="stat-label"><b>on-prem</b>, on their own model provider.</div></div>
       </div>
     </div>
   </section>
 
-  <!-- 11 · pricing -->
-  <section class="tight">
-    <div class="eyebrow rise">Pricing</div>
-    <h2 class="rise d1" style="font-size:clamp(48px,5.2vw,88px);">One license.<br><em>Processing at cost.</em></h2>
-    <div class="price2">
-      <div class="card rise d2">
-        <div class="pk">Silow license</div>
-        <div class="pn">$49<small> / user / month</small></div>
-        <div class="pd">Recorder, platform, redaction, personal, team and company reports, the ranked plan, chat with your data. <b>Self-hosted in your infrastructure.</b></div>
-      </div>
-      <div class="card rise d3">
-        <div class="pk">Processing · no markup</div>
-        <div class="pn">$30–50<small> / user / month</small></div>
-        <div class="pd"><b>Paid directly to your provider</b> &mdash; inference API or cloud GPUs. The range depends on where models run. On your own GPUs, it&rsquo;s electricity.</div>
-      </div>
-    </div>
-    <div class="pex rise d3"><span class="k">Example · 50 people, one month</span><span class="v">$2,450 license <i>+</i> ~$1,500–2,500 processing</span></div>
-  </section>
-
-  <!-- 12 · questions -->
+  <!-- 08 · CTA -->
   <section class="scene-slide">
     <div class="scene" id="us-scene-b" aria-hidden="true"></div>
     <div class="scene-shade"></div>
     <div class="content">
-      <div class="eyebrow rise in">Thank you</div>
-      <h2 class="rise in" style="font-size:clamp(64px,7vw,124px);">Questions?</h2>
+      <div class="eyebrow rise in">Next step</div>
+      <h2 class="rise in" style="font-size:clamp(64px,7vw,124px);">Let&rsquo;s start.</h2>
       <p class="body rise in d1">Start with one month. <b>You choose the team and how many people.</b></p>
-      <div class="month rise in d2">
-        <div><div class="n">Week 1</div><div class="t">Installed, recording, first personal reports</div></div>
-        <div><div class="n">Week 2</div><div class="t">Team and company reports, the ranked plan</div></div>
-        <div><div class="n">Weeks 3–4</div><div class="t">First agents scoped and approved by you</div></div>
-      </div>
       <a class="btn rise in d3" href="https://cal.com/silow-ai/silow-demo">Book a 30-minute call →</a>
       <div class="contacts rise in d3"><a href="mailto:nikita@silow.ai">nikita@silow.ai</a> · <a href="https://silow.ai">silow.ai</a></div>
     </div>
