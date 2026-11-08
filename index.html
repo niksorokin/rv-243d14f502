@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Silow — for insurance operations</title><!-- rev:ins-v8c-202611081800 -->
+<title>Silow — for insurance operations</title><!-- rev:ins-v8d-202611081830 -->
 <style>
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Regular.otf") format("opentype"); font-weight:400; font-display:swap; }
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Medium.otf") format("opentype"); font-weight:500; font-display:swap; }
@@ -505,6 +505,10 @@
   .sec-split.case h2{ font-size:clamp(44px,4.6vw,78px); }
   .sec-split.case .ticks{ margin-top:30px; gap:14px; }
   .case-stats{ display:flex; flex-direction:column; border-top:1px solid var(--line); }
+  .case-stats .cs.hip{ border-top:0; padding-top:0; }
+  .hip-k{ margin-top:6px; font-size:clamp(40px,3.6vw,64px); font-weight:600; letter-spacing:-0.025em; line-height:1.05; }
+  .case-stats .cs.hip .stat-label{ margin-top:14px; }
+  .hip-foot{ padding-top:clamp(22px,3vh,36px); font-size:clamp(24px,2vw,34px); font-weight:600; letter-spacing:-0.015em; line-height:1.25; color:var(--accent); }
   .case-stats .cs{ padding:clamp(22px,3vh,36px) 0; border-bottom:1px solid var(--line); }
   .case-stats .stat-num{ font-size:clamp(88px,8.4vw,152px); white-space:nowrap; }
   .case-stats .stat-num .ar{ color:var(--accent); font-size:.55em; padding:0 .12em; vertical-align:.16em; }
@@ -697,13 +701,17 @@
   <section>
     <div class="sec-split case">
       <div>
-        <div class="eyebrow rise">Already done <b>·</b> US insurance-claims operation</div>
-        <h2 class="rise d1">HIPAA? <em>Already solved.</em></h2>
-        <p class="body rise d2">A US claims operation with medical records on every screen. Silow runs there <b>under HIPAA, fully on their servers</b> — and maps their claims workflow.</p>
+        <div class="eyebrow rise">Deployed in a customer environment</div>
+        <h2 class="rise d1">HIPAA compliance?<br><em>Solved.</em></h2>
+        <p class="body rise d2">Silow maps workflows involving medical records. It runs <b>entirely on the customer&rsquo;s servers</b>, supporting the customer&rsquo;s HIPAA compliance requirements.</p>
       </div>
       <div class="case-stats rise d3">
-        <div class="cs"><div class="stat-num">20<span class="ar">→</span>200</div><div class="stat-label">people. We started together in <b>August</b> with 20.</div></div>
-        <div class="cs"><div class="stat-num">100<small>%</small></div><div class="stat-label"><b>on-prem</b>, on their own model provider.</div></div>
+        <div class="cs hip">
+          <div class="stat-num">100<small>%</small></div>
+          <div class="hip-k">On-premises.</div>
+          <div class="stat-label">With the customer&rsquo;s chosen model provider.</div>
+        </div>
+        <div class="hip-foot">Secure deployment.<br>Your infrastructure. Your control.</div>
       </div>
     </div>
   </section>
