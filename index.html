@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Silow — for insurance operations</title><!-- rev:ins-v8-202611081715 -->
+<title>Silow — for insurance operations</title><!-- rev:ins-v8-202611081725 -->
 <style>
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Regular.otf") format("opentype"); font-weight:400; font-display:swap; }
   @font-face { font-family:"Suisse Intl"; src:url("./fonts/SuisseIntl-Medium.otf") format("opentype"); font-weight:500; font-display:swap; }
@@ -751,7 +751,11 @@
   deck.addEventListener('scroll', syncChrome, { passive:true });
   syncChrome();
 
-  const go = i => deck.scrollTo({ top: slides[Math.max(0, Math.min(i, slides.length-1))].offsetTop, behavior:'smooth' });
+  let goT = null;
+  const go = i => { const s = slides[Math.max(0, Math.min(i, slides.length-1))];
+    deck.scrollTo({ top: s.offsetTop, behavior:'smooth' });
+    clearTimeout(goT); goT = setTimeout(() => { if (Math.abs(deck.scrollTop - s.offsetTop) > 4) deck.scrollTo({ top: s.offsetTop, behavior:'instant' }); }, 1100); };
+  ['wheel','pointerdown'].forEach(ev => deck.addEventListener(ev, () => clearTimeout(goT), { passive:true }));
   addEventListener('keydown', e => {
     const i = cur();
     if (['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); go(i+1); }
